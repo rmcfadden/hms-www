@@ -1,0 +1,16 @@
+create user 'admin'@'localhost' identified by '';
+grant all privileges on *.* to 'admin'@'localhost' with grant option;
+
+create user 'mmh'@'localhost' identified by '';
+grant all privileges on *.* to 'mmh'@'localhost' with grant option;
+
+create user 'mmh_dev'@'localhost' identified by '';
+grant all privileges on *.* to 'mmh_dev'@'localhost' with grant option;
+
+
+create database mmh;
+create database mmh_dev;
+create database mmh_tests;
+create database mmh_sandbox;
+
+flush privileges;

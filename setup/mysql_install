@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MYSQLPASSWORD=""
+
+sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password $MYSQLPASSWORD"
+sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $MYSQLPASSWORD"
+sudo apt-get -y install mysql-server
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+mysql -f -u root -p < $DIR/mysql_create
