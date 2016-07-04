@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
     "start": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
-    "test": "mocha"
+    "test": "mocha --recursive"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -22,6 +22,7 @@
     "sequelize": "^3.23.4",
     "sequelize-cli": "^2.4.0",
     "serve-favicon": "~2.3.0",
+    "should": "^9.0.2",
     "sqlite3": "^3.1.4",
     "tedious": "^1.14.0"
   }
