@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
-    "start": "sequelize db:migrate && sequelize db:seed:all && node bin/www"
+    "start": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
+    "test": "mocha"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -13,6 +14,7 @@
     "ejs": "~2.4.1",
     "express": "~4.13.4",
     "less-middleware": "1.0.x",
+    "mocha": "^2.5.3",
     "morgan": "~1.7.0",
     "mysql": "^2.11.1",
     "pg": "^6.0.1",
