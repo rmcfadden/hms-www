@@ -1,14 +1,14 @@
 sudo: required
+services:
+  - mysql
 dist: trusty
 language: node_js
 node_js:
   - "5.0.0"
 
-services:
-  - mysql
-
 before_install:
-  - setup/mysql_create
+  - cp setup/mysql-passwords.sample setup/mysql-passwords
+  - setup/mysql_create  
   
 install:
   - npm install
