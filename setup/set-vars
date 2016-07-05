@@ -1,8 +1,0 @@
-#!/bin/bash
-
-export mysql_root_password=""
-export mysql_admin_password=""
-export mysql_mmh_password=""
-export mysql_mmh_dev_password=""
-export mysql_mmh_test_password=""
-export mysql_mmh_sandbox_password=""

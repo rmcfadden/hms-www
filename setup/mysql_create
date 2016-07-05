@@ -1,21 +1,16 @@
-create database mmh;
-create database mmh_dev;
-create database mmh_test;
-create database mmh_sandbox;
+#!/bin/bash
 
-create user 'admin'@'%' identified by '${mysql_admin_password}';
-grant all privileges on *.* to 'admin'@'%' with grant option;
+while read -r line; do declare  $line; done < setup/mysql-passwords
 
-create user 'mmh'@'%' identified by '${mysql_mmh_password}';
-grant all privileges on mmh.* to 'mmh'@'%' with grant option;
 
-create user 'mmh_dev'@'%' identified by '${mysql_mmh_dev_password}';
-grant all privileges on mmh_dev.* to 'mmh_dev'@'%' with grant option;
+sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
+    -e "s/\${mysql_mmh_password}/$mysql_mmh_password/" \
+    -e "s/\${mysql_mmh_dev_password}/$mysql_mmh_dev_password/" \
+    -e "s/\${mysql_mmh_test_password}/$mysql_mmh_test_password/" \
+setup/mysql_create_sql | mysql -u root -p$mysql_root_password
 
-create user 'mmh_tests'@'%' identified by '${mysql_mmh_tests_password}';
-grant all privileges on mmh_tests.* to 'mmh_test'@'%' with grant option;
-
-create user 'mmh_sandbox'@'%' identified by '${mysql_mmh_sandbox_password}';
-grant all privileges on mmh_sandbox.* to 'mmh_sandbox'@'%' with grant option;
-
-flush privileges;
+sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
+    -e "s/\${mysql_mmh_password}/$mysql_mmh_password/" \
+    -e "s/\${mysql_mmh_dev_password}/$mysql_mmh_dev_password/" \
+    -e "s/\${mysql_mmh_test_password}/$mysql_mmh_test_password/" \
+config/config.json.example > config/config.json

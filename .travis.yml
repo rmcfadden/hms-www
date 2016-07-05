@@ -4,11 +4,15 @@ language: node_js
 node_js:
   - "5.0.0"
 
+services:
+  - mysql
+
 before_install:
-  - setup/install
+  - setup/mysql_create
   
 install:
   - npm install
+  - npm run-script migrate
 
 script:
   - npm test

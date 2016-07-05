@@ -1,0 +1,17 @@
+create database mmh;
+create database mmh_dev;
+create database mmh_test;
+
+create user 'admin'@'%' identified by '${mysql_admin_password}';
+grant all privileges on *.* to 'admin'@'%' with grant option;
+
+create user 'mmh'@'%' identified by '${mysql_mmh_password}';
+grant all privileges on mmh.* to 'mmh'@'%' with grant option;
+
+create user 'mmh_dev'@'%' identified by '${mysql_mmh_dev_password}';
+grant all privileges on mmh_dev.* to 'mmh_dev'@'%' with grant option;
+
+create user 'mmh_test'@'%' identified by '${mysql_mmh_test_password}';
+grant all privileges on mmh_test.* to 'mmh_test'@'%' with grant option;
+
+flush privileges;

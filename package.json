@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
     "start": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
+    "migrate": "sequelize db:migrate && sequelize db:seed:all",
+    "migrate-down": "sequelize db:migrate:undo:all",
     "test": "mocha --recursive"
   },
   "dependencies": {
