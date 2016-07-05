@@ -8,8 +8,8 @@ node_js:
 
 before_install:
   - cp config/config.json.travis config/config.json
-  - mysql -e "create database mmh_dev;" -uroot
-  - mysql -e "create database mmh_test;" -uroot
+  - mysql -e "create database mmh_dev;" -uroot -h "127.0.0.1"
+  - mysql -e "create database mmh_test;" -uroot -h "127.0.0.1"
 
 install:
   - npm install
