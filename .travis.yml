@@ -7,9 +7,10 @@ node_js:
   - "5.0.0"
 
 before_install:
-  - cp setup/mysql-passwords.sample setup/mysql-passwords
-  - setup/mysql_create  
-  
+  - cp config/config.json.travis config/config.json
+  - mysql -e "create database mmh_dev;" -uroot
+  - mysql -e "create database mmh_test;" -uroot
+
 install:
   - npm install
   - npm run-script migrate
