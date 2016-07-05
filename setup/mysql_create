@@ -1,16 +1,21 @@
-create user 'admin'@'localhost' identified by '';
-grant all privileges on *.* to 'admin'@'localhost' with grant option;
-
-create user 'mmh'@'localhost' identified by '';
-grant all privileges on *.* to 'mmh'@'localhost' with grant option;
-
-create user 'mmh_dev'@'localhost' identified by '';
-grant all privileges on *.* to 'mmh_dev'@'localhost' with grant option;
-
-
 create database mmh;
 create database mmh_dev;
-create database mmh_tests;
+create database mmh_test;
 create database mmh_sandbox;
+
+create user 'admin'@'%' identified by '${mysql_admin_password}';
+grant all privileges on *.* to 'admin'@'%' with grant option;
+
+create user 'mmh'@'%' identified by '${mysql_mmh_password}';
+grant all privileges on mmh.* to 'mmh'@'%' with grant option;
+
+create user 'mmh_dev'@'%' identified by '${mysql_mmh_dev_password}';
+grant all privileges on mmh_dev.* to 'mmh_dev'@'%' with grant option;
+
+create user 'mmh_tests'@'%' identified by '${mysql_mmh_tests_password}';
+grant all privileges on mmh_tests.* to 'mmh_test'@'%' with grant option;
+
+create user 'mmh_sandbox'@'%' identified by '${mysql_mmh_sandbox_password}';
+grant all privileges on mmh_sandbox.* to 'mmh_sandbox'@'%' with grant option;
 
 flush privileges;
