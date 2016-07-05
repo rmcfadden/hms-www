@@ -21,4 +21,3 @@ sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
     -e "s/\${mysql_mmh_test_password}/$mysql_mmh_test_password/" \
     -e "s/\${mysql_mmh_sandbox_password}/$mysql_mmh_sandbox_password/" \
 config/config.json.example > config/config.json
-
