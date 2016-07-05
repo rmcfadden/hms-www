@@ -10,10 +10,12 @@ before_install:
   - cp config/config.json.travis config/config.json
 
 install:
-  - mysql -e "create database mmh_dev;" -u root -h "127.0.0.1"
-  - mysql -e "create database mmh_test;" -u root -h "127.0.0.1"
   - npm install
   - npm run-script migrate
+
+before_script:
+  - mysql -e "create database mmh_dev;" -u root -h "127.0.0.1"
+  - mysql -e "create database mmh_test;" -u root -h "127.0.0.1"
 
 script:
   - npm test
