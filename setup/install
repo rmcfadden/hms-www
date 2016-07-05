@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password $mysql_root_password"
-sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $mysql_root_password"
-sudo apt-get -y install mysql-server
+debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password $mysql_root_password"
+debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $mysql_root_password"
+apt-get -y install mysql-server
 #mysql -u root -p$mysql_root_password --version
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
