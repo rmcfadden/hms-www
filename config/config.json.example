@@ -1,23 +1,24 @@
 {
   "development": {
-    "username": "travis",
+    "username": "root",
     "password": "",
     "database": "mmh_dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "travis",
+    "username": "root",
     "password": "",
     "database": "mmh_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "travis",
+    "username": "root",
     "password": "",
     "database": "mmh",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  }
+  },
+  "sessionSecret" : "YOUR_SECRET"
 }
