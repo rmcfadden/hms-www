@@ -13,6 +13,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      is_visible: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
       created: {
         type: Sequelize.DATE,
         allowNull: false
@@ -21,6 +26,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
+    }).then(function(){
+      queryInterface.addIndex(
+        'regions',
+        ['is_visible']
+      );
     }).then(function(){
       return queryInterface.addIndex(
         'regions',
@@ -31,6 +41,10 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('countries');
+    queryInterface.removeIndex('regions',['name']).then(function(){
+      queryInterface.removeIndex('regions',['is_visible']).then(function(){
+        return queryInterface.dropTable('regions');
+      });
+    }); 
   }
 };

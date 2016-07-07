@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('roles', {
+    return queryInterface.createTable('organizations', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,7 +23,7 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'roles',
+        'organizations',
         ['name'],
         {indicesType: 'UNIQUE'}
       );
@@ -31,8 +31,8 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeIndex('roles',['name']).then(function(){
-      return queryInterface.dropTable('roles');
+    queryInterface.removeIndex('organizations',['name']).then(function(){
+      return queryInterface.dropTable('organizations');
     });
   }
 };

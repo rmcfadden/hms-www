@@ -29,6 +29,11 @@ module.exports = {
         defaultValue: true,
         type: Sequelize.BOOLEAN
       },
+      is_subscribed: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
       created: {
         allowNull: false,
         type: Sequelize.DATE
@@ -38,20 +43,24 @@ module.exports = {
         type: Sequelize.DATE
       }
     }).then(function(){
-      return queryInterface.addIndex(
+      queryInterface.addIndex(
         'users',
         ['username'],
         {indicesType: 'UNIQUE'}
-      );
-    }).then(function(){
-      return queryInterface.addIndex(
-        'users',
-        ['email'],
-        {indicesType: 'UNIQUE'}
-      );
+      ).then(function(){
+        return queryInterface.addIndex(
+          'users',
+          ['email'],
+          {indicesType: 'UNIQUE'}
+        );
+      });
     });
   },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('users');
+  down: function (queryInterface, Sequelize) {
+    queryInterface.removeIndex('users', ['username']).then(function(){
+      queryInterface.removeIndex('users', ['email']).then(function(){
+        return queryInterface.dropTable('users');
+      });
+    });
   }
 };

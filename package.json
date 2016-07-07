@@ -7,6 +7,7 @@
     "start": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
     "migrate": "sequelize db:migrate && sequelize db:seed:all",
     "migrate-undo": "sequelize db:migrate:undo",
+    "migrate-undo-all": "sequelize db:migrate:undo:all",
     "new-migrate": "sequelize migration:create",
     "test": "mocha --recursive"
   },
