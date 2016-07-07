@@ -23,7 +23,8 @@ before_script:
 script:
 - npm run-script migrate
 - npm test
+
 deploy:
   provider: gae
-  keyfile: client-secret.json.enc
+  keyfile: client-secret.json
   project: mmh-www
