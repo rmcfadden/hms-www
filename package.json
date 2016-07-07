@@ -6,7 +6,8 @@
     "dev": "node bin/www",
     "start": "sequelize db:migrate && sequelize db:seed:all && node bin/www",
     "migrate": "sequelize db:migrate && sequelize db:seed:all",
-    "migrate-down": "sequelize db:migrate:undo:all",
+    "migrate-undo": "sequelize db:migrate:undo",
+    "new-migrate": "sequelize migration:create",
     "test": "mocha --recursive"
   },
   "dependencies": {
