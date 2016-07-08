@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT
       },
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
+      },      
       username: {
         type: Sequelize.STRING,
         allowNull: false
@@ -48,19 +53,21 @@ module.exports = {
         ['username'],
         {indicesType: 'UNIQUE'}
       ).then(function(){
-        return queryInterface.addIndex(
+        queryInterface.addIndex(
           'users',
           ['email'],
           {indicesType: 'UNIQUE'}
-        );
+        ).then(function(){
+          return queryInterface.addIndex(
+            'users',
+            ['uuid'],
+            {indicesType: 'UNIQUE'}
+          );
+        })
       });
     });
   },
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeIndex('users', ['username']).then(function(){
-      queryInterface.removeIndex('users', ['email']).then(function(){
-        return queryInterface.dropTable('users');
-      });
-    });
+    return queryInterface.dropTable('users');
   }
 };

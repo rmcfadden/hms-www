@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT
       },
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
+      }, 
       address_line1: {
         type: Sequelize.STRING,
         allowNull: false
@@ -48,6 +53,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    }).then(function(){
+      return queryInterface.addIndex(
+        'addresses',
+        ['uuid'],
+        {indicesType: 'UNIQUE'}
+      );
     });
   },
   down: function (queryInterface, Sequelize) {

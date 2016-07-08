@@ -8,17 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT
       },
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false
-      },
-      country_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'countries',
-            key: 'id'
-        }
       },
       address_id: {
         type: Sequelize.BIGINT,
@@ -32,14 +29,16 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      phone_number: {
-        type: Sequelize.STRING(64),
-        allowNull: false
+      average_rating: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
-      url: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
+      ratings_count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },      
       is_visible: {
         allowNull: false,
         defaultValue: true,
@@ -54,15 +53,19 @@ module.exports = {
         type: Sequelize.DATE
       }
     }).then(function(){
-      return queryInterface.addIndex(
+      queryInterface.addIndex(
         'venues',
         ['name']
-      );
-    });
+      ).then(function(){
+        return queryInterface.addIndex(
+          'venues',
+          ['uuid'],
+          {indicesType: 'UNIQUE'}
+        );
+      })
+    })
   },
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeIndex('venues', ['name']).then(function(){
-      return queryInterface.dropTable('venues');
-    });
+    return queryInterface.dropTable('venues');
   }
 };

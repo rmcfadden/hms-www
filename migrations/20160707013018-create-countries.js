@@ -9,6 +9,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true        
       },
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false
@@ -35,26 +40,31 @@ module.exports = {
         allowNull: false
       }
     }).then(function(){
-      return queryInterface.addIndex(
-        'countries',
-        ['name'],
-        {indicesType: 'UNIQUE'}
-      );
-    }).then(function(){
       queryInterface.addIndex(
         'countries',
-        ['iso_code2'],
+        ['name'],
         {indicesType: 'UNIQUE'}
       ).then(function(){
         queryInterface.addIndex(
           'countries',
-          ['iso_code3'],
+          ['iso_code2'],
           {indicesType: 'UNIQUE'}
         ).then(function(){
-          return queryInterface.addIndex(
+          queryInterface.addIndex(
             'countries',
-            ['is_visible']
-          );
+            ['iso_code3'],
+            {indicesType: 'UNIQUE'}
+          ).then(function(){
+            queryInterface.addIndex(
+              'countries',
+              ['is_visible']
+            ).then(function(){
+              return queryInterface.addIndex(
+                'countries',
+                ['uuid']
+              );
+            })
+          })
         })
       })
     });
@@ -65,8 +75,10 @@ module.exports = {
       queryInterface.removeIndex('countries',['iso_code2']).then(function(){
         queryInterface.removeIndex('countries',['iso_code3']).then(function(){
          queryInterface.removeIndex('countries',['is_visible']).then(function(){
-           return queryInterface.dropTable('countries');
-         })
+           queryInterface.removeIndex('countries',['uuid']).then(function(){
+             return queryInterface.dropTable('countries');
+           })
+          })
         })
       })
     }); 
