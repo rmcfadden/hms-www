@@ -14,15 +14,19 @@ module.exports = {
         allowNull: false
       }, 
       address_line1: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(128),
         allowNull: false
       },
       address_line2: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(128),
         allowNull: false
       },
       city: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(64),
+        allowNull: false
+      },
+      province: {
+        type: Sequelize.STRING(64),
         allowNull: false
       },
       postal_code: {
@@ -34,14 +38,6 @@ module.exports = {
         allowNull: false,
         references: {
             model: 'countries',
-            key: 'id'
-        }
-      },
-      region_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'regions',
             key: 'id'
         }
       },

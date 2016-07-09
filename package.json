@@ -9,6 +9,7 @@
     "migrate-undo": "sequelize db:seed:all && sequelize db:migrate:undo",
     "migrate-undo-all": "sequelize db:seed:undo:all && sequelize db:migrate:undo:all",
     "new-migrate": "sequelize migration:create",
+    "new-seed": "sequelize seed:create",
     "test": "mocha --recursive"
   },
   "dependencies": {

@@ -9,11 +9,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true        
       },
-      uuid: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false
-      },
       name: {
         type: Sequelize.STRING,
         allowNull: false
@@ -22,7 +17,11 @@ module.exports = {
         type: Sequelize.STRING(2),
         allowNull: false
       },
-      iso_code3: {
+      fips: {
+        type: Sequelize.STRING(2),
+        allowNull: false
+      },
+      tld: {
         type: Sequelize.STRING(3),
         allowNull: false
       },
@@ -47,23 +46,16 @@ module.exports = {
       ).then(function(){
         queryInterface.addIndex(
           'countries',
-          ['iso_code2'],
-          {indicesType: 'UNIQUE'}
+          ['iso_code2']
         ).then(function(){
           queryInterface.addIndex(
             'countries',
-            ['iso_code3'],
-            {indicesType: 'UNIQUE'}
+            ['fips']
           ).then(function(){
-            queryInterface.addIndex(
+            return queryInterface.addIndex(
               'countries',
               ['is_visible']
-            ).then(function(){
-              return queryInterface.addIndex(
-                'countries',
-                ['uuid']
-              );
-            })
+            );
           })
         })
       })
