@@ -7,7 +7,7 @@ sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
     -e "s/\${mysql_mmh_password}/$mysql_mmh_password/" \
     -e "s/\${mysql_mmh_dev_password}/$mysql_mmh_dev_password/" \
     -e "s/\${mysql_mmh_test_password}/$mysql_mmh_test_password/" \
-setup/mysql_create_sql | mysql -h 127.0.0.1 -u root -p$mysql_root_password
+setup/mysql_create_sql | mysql -f -h 127.0.0.1 -u root -p$mysql_root_password
 
 sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
     -e "s/\${mysql_mmh_password}/$mysql_mmh_password/" \

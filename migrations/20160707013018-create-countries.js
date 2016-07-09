@@ -71,16 +71,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeIndex('countries',['name']).then(function(){
-      queryInterface.removeIndex('countries',['iso_code2']).then(function(){
-        queryInterface.removeIndex('countries',['iso_code3']).then(function(){
-         queryInterface.removeIndex('countries',['is_visible']).then(function(){
-           queryInterface.removeIndex('countries',['uuid']).then(function(){
-             return queryInterface.dropTable('countries');
-           })
-          })
-        })
-      })
-    }); 
+    return queryInterface.dropTable('countries');
   }
 };

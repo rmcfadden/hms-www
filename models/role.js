@@ -1,11 +1,12 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var userType = sequelize.define('role', {
+  var role = sequelize.define('role', {
+    id: { primaryKey: true, type: DataTypes.INTEGER, autoIncrement: true },
     name: DataTypes.STRING
   }, {
     updatedAt: 'updated',
     createdAt: 'created'
   });
-  return userType;
+  return role;
 };
