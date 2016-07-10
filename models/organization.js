@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var venue = sequelize.define('venue', {
+  var organization = sequelize.define('organization', {
     name: DataTypes.STRING
   }, {
     updatedAt: 'updated',
     createdAt: 'created'
   });
-  return venue;
+  return organization;
 };

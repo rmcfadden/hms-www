@@ -32,3 +32,5 @@ npm-debug.log
 # ignore configs and password files
 config/config.json
 setup/mysql-passwords
+
+.vscode

@@ -17,6 +17,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      organization_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'organizations',
+            key: 'id'
+        }
+      },
       address_id: {
         type: Sequelize.BIGINT,
         allowNull: false,

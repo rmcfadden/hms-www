@@ -96,7 +96,6 @@ it('should return a valid role', function (done) {
   });
 });
 
-
 describe('find role with name blog_editor', function () {
 it('should return a valid role', function (done) {
   models.role.findOne({ where: { name: 'blog_editor' }
@@ -107,6 +106,15 @@ it('should return a valid role', function (done) {
       role.created.should.be.greaterThan(0);
       role.updated.should.be.greaterThan(0);
 
+      done();
+    });
+  });
+});
+
+describe('find all', function () {
+it('should return a valid list of roles', function (done) {
+  models.role.findAll().then(function(roles) {
+      roles.length.should.equal(7);
       done();
     });
   });

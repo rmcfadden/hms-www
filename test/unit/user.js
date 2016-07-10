@@ -9,19 +9,18 @@ describe('create user', function () {
     var email = randomstring.generate() + "@test.com";
     var username = "john" + randomstring.generate();
     models.user.create({
-          username: username,
-          email: email,
-          password: "secret"
-      }).then(function(user) {
+      username: username,
+      email: email,
+      password: "secret"
+    }).then(function(user) {
+      user.id.should.be.greaterThan(0);
+      user.username.should.equal(username);
+      user.email.should.equal(email);
+      user.password.should.equal("secret");
+      user.created.should.be.greaterThan(0);
+      user.updated.should.be.greaterThan(0);
 
-        user.id.should.be.greaterThan(0);
-        user.username.should.equal(username);
-        user.email.should.equal(email);
-        user.password.should.equal("secret");
-
-        done();
-      }).catch(function(error) {
-        console.log(error);
+      done();
     });
   });
 });
