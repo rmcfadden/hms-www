@@ -10,13 +10,12 @@ describe('create organization', function () {
     models.organization.create({
           name: organizationName,
       }).then(function(organization) {
-
         organization.id.should.be.greaterThan(0);
         organization.name.should.equal(organizationName);
 
         organization.destroy().then(function(result){
           result.id.should.be.greaterThan(0);
-        done();
+          done();
       });
     })
   });
