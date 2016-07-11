@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('venue_reviews', {
+    queryInterface.createTable('venue_images', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,12 +21,8 @@ module.exports = {
             key: 'id'
         }
       },
-      text: {
+      description: {
         type: Sequelize.TEXT,
-        allowNull: false
-      },
-      rating: {
-        type: Sequelize.INTEGER,
         allowNull: false
       },
       created: {
@@ -39,13 +35,13 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'venue_reviews',
+        'venue_images',
         ['uuid'],
         {indicesType: 'UNIQUE'}
       );
     });
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('venue_reviews');
+    return queryInterface.dropTable('venue_images');
   }
 };

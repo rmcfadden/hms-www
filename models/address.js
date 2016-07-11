@@ -34,8 +34,7 @@ module.exports = function(sequelize, DataTypes) {
           model: 'countries',
           key: 'id'
       }
-    },
-  
+    }  
 }, {
     updatedAt: 'updated',
     createdAt: 'created'
