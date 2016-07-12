@@ -13,6 +13,7 @@
     "test": "mocha --recursive"
   },
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
@@ -34,6 +35,7 @@
     "serve-favicon": "~2.3.0",
     "should": "^9.0.2",
     "sqlite3": "^3.1.4",
+    "sync": "^0.2.5",
     "tedious": "^1.14.0"
   }
 }

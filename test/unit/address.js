@@ -6,9 +6,7 @@ var randomstring = require("randomstring");
 
 describe('create address', function () {
   it('should return a valid address', function (done) {
-    
     models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
-      
       models.address.create({
         address_line1: 'testing address1',
         address_line2: 'testing address2',

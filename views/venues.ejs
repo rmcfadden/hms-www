@@ -1,11 +1,26 @@
 <% include header.ejs %>
 
+<div class="container .text-center">
+
+<% var venuesPerRow = 4; %>
   <% for(var i=0; i < venues.length; i++) { %>
-    <li>
-      <a href='venue/<%= venue[i].id %>'>
-          <%= venues[i].name %>
-      </a>
-    </li>
+    <% if((i % venuesPerRow) == 0) { %>
+    <div class="row">
+    <% } %>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3">
+        <a href='venue/<%= venues[i].id %>'>
+            <%= venues[i].name %>
+        </a>
+      </div>
+    <% if((i % (venuesPerRow)) === (venuesPerRow - 1)) { %>
+    </div> <!-- row -->
+    <% } %>
   <% } %>
 
+</div>
+
+
 <% include footer.ejs %>
+
+
+
