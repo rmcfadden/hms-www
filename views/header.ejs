@@ -1,34 +1,146 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-    <div class="vertical-spacer-medium"></div>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>Mr and Mrs Honeymooon.com!</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="/assets/css/headers/header-v8.css">
+	<link rel="stylesheet" href="/assets/css/footers/footer-v8.css">
+
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="/assets/plugins/animate.css">
+	<link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/plugins/login-signup-modal-window/css/style.css">
+	<link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
+	<link rel="stylesheet" href="/assets/plugins/fancybox/source/jquery.fancybox.css">
+	<link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="/assets/css/theme-colors/purple.css" id="style_color">
+	<link rel="stylesheet" href="/assets/css/theme-skins/dark.css">
+
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+
+<body class="header-fixed header-fixed-space-v2">
+	<div class="wrapper">
+		<!--=== Header v8 ===-->
+		<div class="header-v8 header-sticky">
+			<!-- Topbar  -->
+			<div class="important-background blog-topbar">
+				<div class="topbar-search-block">
+					<div class="container">
+						<form action="">
+							<input type="text" class="form-control" placeholder="Search">
+							<div class="search-close"><i class="icon-close"></i></div>
+						</form>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8 col-xs-8">
+							<div class="topbar-toggler"><span class="fa fa-angle-down"></span></div>
+							<ul class="topbar-list topbar-menu">
+								<li class="cd-log_reg hidden-sm hidden-md hidden-lg"><strong><a class="cd-signin" href="javascript:void(0);">Login</a></strong></li>
+								<li class="cd-log_reg hidden-sm hidden-md hidden-lg"><strong><a class="cd-signup" href="javascript:void(0);">Register</a></strong></li>
+							</ul>
+						</div>
+						<div class="col-sm-4 col-xs-4 clearfix">
+							<!--<i class="fa fa-search search-btn pull-right"></i> -->
+							<ul class="topbar-list topbar-log_reg pull-right visible-sm-block visible-md-block visible-lg-block">
+								<li class="cd-log_reg home"><a class="cd-signin" href="javascript:void(0);">Login</a></li>
+								<li class="cd-log_reg"><a class="cd-signup" href="javascript:void(0);">Register</a></li>
+							</ul>
+						</div>
+					</div><!--/end row-->
+				</div><!--/end container-->
+			</div>
+			<!-- End Topbar -->
+
+			<!-- Navbar -->
+			<div class="navbar mega-menu" role="navigation">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="res-container">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+
+						<div class="navbar-brand">
+							<a href="index.html">
+								<button type="button" class="btn-u btn-sm">
+				                MR AND MRS HONEYMOON
+            			        </button>
+							</a>
+						</div>
+					</div><!--/end responsive container-->
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-responsive-collapse">
+						<div class="res-container">
+							<ul class="nav navbar-nav">
+								<!-- Home -->
+								<li class="active">
+									<a href="/" class="dropdown-toggle" data-toggle="dropdown">
+										Home
+									</a>
+								</li>
+								<!-- End Home -->
+
+								<!-- Start Destinations -->								
+                <li class="dropdown">
+									<a href="/destinations/">
+										Destinations
+									</a>
+								</li>
+								<!-- End Destinations -->
+
+                <!-- Start Destinations-Reviews -->								
+                <li class="dropdown">
+									<a href="/destination-reviews/">
+										Reviews
+									</a>
+								</li>
+								<!-- End Destinations-Reviews -->
+
+                <!-- Start Destinations-Reviews -->								
+                <li class="dropdown">
+									<a href="/blog/">
+								        Blog
+									</a>
+								</li>
+								<!-- End Destinations-Reviews -->
+
+							
+							</ul>
+						</div><!--/responsive container-->
+					</div><!--/navbar-collapse-->
+				</div><!--/end contaoner-->
+			</div>
+			<!-- End Navbar -->
+		</div>
+		<!--=== End Header v8 ===-->
 

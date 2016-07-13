@@ -46,8 +46,8 @@ app.use(require('./routes/users'));
 app.use(require('./routes/signup'));
 app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
-app.use(require('./routes/venues'));
-app.use(require('./routes/venue'));
+app.use(require('./routes/destinations'));
+app.use(require('./routes/destination'));
 
 
 // catch 404 and forward to error handler

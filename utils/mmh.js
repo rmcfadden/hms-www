@@ -17,10 +17,10 @@ function addTestVenues(num){
     num = 25;
   }
 
-  console.log('Adding ' + num + ' test venues')
+  console.log('Adding ' + num + ' test destinations')
 
   getCounties().then(function(countries){
-    var venueCount = 0;
+    var destinationCount = 0;
     for(var i=0;i < num; i++){
       async.waterfall([
         function createOrganization(next){
@@ -41,22 +41,22 @@ function addTestVenues(num){
             next(null, country_id, organization_id, address.id)
           });        
         },
-        function createVenue(country_id, organization_id, address_id, next){
-          var venueName = "venue " + randomstring.generate();
-          models.venue.create(
+        function createDestination(country_id, organization_id, address_id, next){
+          var destinationName = "destination " + randomstring.generate();
+          models.destination.create(
           {
-              name: venueName,
+              name: destinationName,
               organization_id: organization_id,
               address_id: address_id,
               description: 'bla, bla'
-          }).then(function(venue){
+          }).then(function(destination){
             
             next()
           });
         }
         
       ],function(error, result){
-        if(++venueCount == num){
+        if(++destinationCount == num){
           process.exit();
         }
       });
@@ -101,15 +101,15 @@ function createTestAddress(country_id){
 function createTestVenue(address_id, organization_id){
   return new Promise(function(resolve, reject){
     
-    var venueName = "venue " + randomstring.generate();
-    models.venue.create(
+    var destinationName = "destination " + randomstring.generate();
+    models.destination.create(
       {
-        name: venueName,
+        name: destinationName,
         organization_id: organization_id,
         address_id: address_id,
         description: 'bla, bla'
-      }).then(function(venue){
-      resolve(venue);
+      }).then(function(destination){
+      resolve(destination);
     }).catch(function(error){
       reject(Error);
     });
