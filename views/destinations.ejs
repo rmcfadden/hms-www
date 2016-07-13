@@ -1,26 +1,31 @@
-<% include header.ejs %>
+<% include partials/header.ejs %>
 
-<div class="container .text-center">
+    
+<div class="container text-center">
 
-<% var destinationsPerRow = 4; %>
-  <% for(var i=0; i < destinations.length; i++) { %>
-    <% if((i % destinationsPerRow) == 0) { %>
-    <div class="row margin-bottom-40">
-    <% } %>
-      <div class="col-md-3 col-sm-6 md-margin-bottom-40">
-        <a href='destination/<%= destinations[i].id %>'>
-            <%= destinations[i].name %>
-        </a>
-      </div>
-    <% if((i % (destinationsPerRow)) === (destinationsPerRow - 1)) { %>
-    </div> <!-- row -->
-    <% } %>
-  <% } %>
+<% var destinationsPerRow = 3;%>
+<% for(var i=0; i < destinations.length; i++) { %>
+<% if((i % destinationsPerRow) == 0) { %>
+  <div class="row margin-bottom-20 row-<%- i.toString(); %>">
+<% } %>
 
+<div class="col-md-4">
+  <% include partials/destination-thumbnail.ejs %>
 </div>
 
+<% if((i % (destinationsPerRow)) === (destinationsPerRow - 1)) { %>
+  </div> <!-- row -->
+<% } %>
+<% } %>
 
-<% include footer.ejs %>
+<!-- add last closing row if one was not provided -->
+<% if((destinations.length -1 % (destinationsPerRow)) !== (destinationsPerRow - 1)) { %>
+  </div> <!-- row added or closinig -->
+<% } %>
+
+</div> <!-- container -->
+
+<% include partials/footer.ejs %>
 
 
 
