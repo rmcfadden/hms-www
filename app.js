@@ -12,6 +12,9 @@ var config = require('./config/config.json');
 
 var app = express();
 
+// Add shared functoins for ejs templates
+require('./modules/ejs-shared.js')(app);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,6 +51,8 @@ app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
 app.use(require('./routes/destinations'));
 app.use(require('./routes/destination'));
+
+//app.locals.
 
 
 // catch 404 and forward to error handler

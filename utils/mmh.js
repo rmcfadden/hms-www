@@ -84,64 +84,10 @@ function addTestVenues(num){
 
 
 
-
-
 function getCounties(){
   return new Promise(function(resolve, reject){
     models.country.findAll({}).then(function(countries){
       resolve(countries);
-    }).catch(function(error){
-      reject(Error);
-    });
-  });
-}
-
-
-function createTestAddress(country_id){
-  return new Promise(function(resolve, reject){
-    models.address.create(
-      {
-        address_line1: 'testing address1',
-        address_line2: 'testing address2',
-        city: 'Santa Barbara',
-        province: 'California',
-        postal_code: '93105',
-        country_id: country_id
-      }).then(function(address){
-      resolve(address);
-    }).catch(function(error){
-      reject(Error);
-    });
-  });
-}
-
-
-function createTestVenue(address_id, organization_id){
-  return new Promise(function(resolve, reject){
-    
-    var destinationName = "destination " + randomstring.generate();
-    models.destination.create(
-      {
-        name: destinationName,
-        organization_id: organization_id,
-        address_id: address_id,
-        description: 'bla, bla'
-      }).then(function(destination){
-      resolve(destination);
-    }).catch(function(error){
-      reject(Error);
-    });
-  });
-}
-
-
-function createTestOrganization(){
-  return new Promise(function(resolve, reject){
-    var organizationName = "organization" + randomstring.generate();
-    models.organization.create({
-        name: organizationName
-      }).then(function(organization){
-      resolve(organization);
     }).catch(function(error){
       reject(Error);
     });

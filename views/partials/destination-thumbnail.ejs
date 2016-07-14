@@ -2,7 +2,7 @@
   <img class="img-responsive" src="/assets/img/samples/destination-image-sample1.jpeg" alt="" />
   <div class="caption">
     <h3><%= destination.name %></h3>
-    <p><%= destination.description %></p>
+    <p><%= truncateWithEllipses(destination.description, 25); %></p>
     <div class="object-raiting" style="text-align:center">
       <ul class="list-inline star-vote">
         <li><i class="g-color-default fa fa-star"></i></li>

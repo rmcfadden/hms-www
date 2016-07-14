@@ -54,7 +54,7 @@ module.exports = {
         allowNull: false
       },
       average_rating: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 0
       },

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_images', {
+    queryInterface.createTable('destination_medias', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -35,13 +35,13 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_images',
+        'destination_medias',
         ['uuid'],
         {indicesType: 'UNIQUE'}
       );
     });
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_images');
+    return queryInterface.dropTable('destination_medias');
   }
 };
