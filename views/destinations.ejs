@@ -5,6 +5,7 @@
 
 <% var destinationsPerRow = 3;%>
 <% for(var i=0; i < destinations.length; i++) { %>
+<% var destination = destinations[0]; %>
 <% if((i % destinationsPerRow) == 0) { %>
   <div class="row margin-bottom-20 row-<%- i.toString(); %>">
 <% } %>

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node bin/www",
-    "start": "node bin/www",
+    "start": "sequelize db:migrate; node bin/www",
     "migrate": "sequelize db:migrate",
     "migrate-undo": "sequelize db:migrate:undo",
     "migrate-undo-all": "sequelize db:migrate:undo:all",
