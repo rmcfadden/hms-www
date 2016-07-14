@@ -15,13 +15,23 @@ describe('create destination', function () {
             next(null,country.id);
         });
       },
-      function createOrganization(country_id, next){
-        var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
-          next(null, country_id, organization.id);
+      function createUser(country_id, next){
+        var email = randomstring.generate() + "@test.com";
+        var username = "john" + randomstring.generate();
+
+        models.user.create({ username: username,
+          email: email,
+          password: "secret" }).then(function(user){
+          next(null, user.id, country_id);
         });
       },
-      function createAddress(country_id, organization_id, next){
+      function createOrganization(user_id,country_id, next){
+        var organizationName = "organization - " + randomstring.generate();
+        models.organization.create({ name: organizationName}).then(function(organization){
+          next(null, user_id,country_id, organization.id);
+        });
+      },
+      function createAddress(user_id,country_id, organization_id, next){
         models.address.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
@@ -30,19 +40,21 @@ describe('create destination', function () {
           postal_code: '93105',
           country_id: country_id
         }).then(function(address) {
-          next(null, country_id, organization_id, address.id)
+          next(null, user_id, country_id, organization_id, address.id)
         });        
       },
-      function createdestination(country_id, organization_id, address_id, next){
+      function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate();
         models.destination.create(
         {
+            user_id: user_id,
+            country_id: country_id,
             name: destinationName,
             organization_id: organization_id,
             address_id: address_id,
             description: 'bla, bla'
         }).then(function(destination){
-          
+
           destination.id.should.be.greaterThan(0);
           destination.uuid.should.not.be.null();
           destination.name.should.be.equal(destinationName);

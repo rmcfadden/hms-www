@@ -9,7 +9,7 @@ var randomstring = require("randomstring");
 var async = require('async');
 addTestVenues();
 
-  console.log('Node Environment =' + process.env.NODE_ENV)
+console.log('Node Environment =' + process.env.NODE_ENV)
 
 
 function addTestVenues(num){
@@ -27,9 +27,19 @@ function addTestVenues(num){
           var organizationName = "organization - " + randomstring.generate();
           models.organization.create({ name: organizationName}).then(function(organization){
             next(null, countries[Math.floor(Math.random() * countries.length)].id, organization.id);
+          })
+        },
+        function createUser(country_id, organization_id, next){
+          var email = randomstring.generate() + "@test.com";
+          var username = "john" + randomstring.generate();
+
+          models.user.create({ username: username,
+            email: email,
+            password: "secret" }).then(function(user){
+            next(null, user.id, country_id, organization_id);
           });
         },
-        function createAddress(country_id, organization_id, next){
+        function createAddress(user_id, country_id, organization_id, next){
           models.address.create({
             address_line1: 'testing address1',
             address_line2: 'testing address2',
@@ -38,29 +48,37 @@ function addTestVenues(num){
             postal_code: '93105',
             country_id: country_id
           }).then(function(address) {
-            next(null, country_id, organization_id, address.id)
+            next(null, user_id, country_id, organization_id, address.id)
           });        
         },
-        function createDestination(country_id, organization_id, address_id, next){
-          var destinationName = "destination " + randomstring.generate();
+        function createDestination(user_id,country_id, organization_id, address_id, next){
+          var destinationName = "destination " + randomstring.generate(2);
           models.destination.create(
           {
               name: destinationName,
               organization_id: organization_id,
+              country_id: country_id,
+              user_id: user_id,
               address_id: address_id,
               description: 'bla, bla'
-          }).then(function(destination){
-            
+          }).then(function(destination){            
             next()
           });
-        }
-        
+        }        
       ],function(error, result){
+
+        if(error){
+          console.log('An error has occurred: ' + error );
+        }
+
         if(++destinationCount == num){
           process.exit();
         }
       });
     }
+  }).catch(function(error){
+    console.log('an error has occurred listng the countries ' + error);
+    process.exit();
   });
 }
 

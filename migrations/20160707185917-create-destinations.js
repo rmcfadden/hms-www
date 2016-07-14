@@ -25,6 +25,22 @@ module.exports = {
             key: 'id'
         }
       },
+      user_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
+      },
+      country_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'countries',
+            key: 'id'
+        }
+      },
       address_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
@@ -63,7 +79,7 @@ module.exports = {
     }).then(function(){
       queryInterface.addIndex(
         'destinations',
-        ['name']
+        ['country_id','name']
       ).then(function(){
         return queryInterface.addIndex(
           'destinations',

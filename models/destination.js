@@ -19,6 +19,23 @@ module.exports = function(sequelize, DataTypes) {
             key: 'id'
         }
       },
+      user_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
+      },
+      country_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'countries',
+            key: 'id'
+        }
+      },
+
       address_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
