@@ -35,7 +35,9 @@ function addTestVenues(num){
 
           models.user.create({ username: username,
             email: email,
-            password: "secret" }).then(function(user){
+            password: "secret",
+            password_salt : "213"
+            }).then(function(user){
             next(null, user.id, country_id, organization_id);
           });
         },

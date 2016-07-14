@@ -1,28 +1,27 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_medias', {
+    queryInterface.createTable('facebook_users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT
       },
-      uuid: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false
-      }, 
-      destination_id: {
+      user_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-            model: 'destinations',
+            model: 'users',
             key: 'id'
         }
       },
-      description: {
-        type: Sequelize.TEXT,
+      facebook_user_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false
+      },
+      username: {
+        type: Sequelize.STRING,
         allowNull: false
       },
       created: {
@@ -35,13 +34,12 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_medias',
-        ['uuid'],
-        {indicesType: 'UNIQUE'}
+        'facebook_users',
+        ['user_id']
       );
-    });
+    })
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_medias');
+    return queryInterface.dropTable('facebook_users');
   }
 };

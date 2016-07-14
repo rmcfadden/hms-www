@@ -39,6 +39,11 @@ module.exports = {
         defaultValue: true,
         type: Sequelize.BOOLEAN
       },
+      is_subscribed_to_partners: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
       created: {
         allowNull: false,
         type: Sequelize.DATE

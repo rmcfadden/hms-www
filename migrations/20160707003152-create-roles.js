@@ -31,8 +31,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeIndex('roles',['name']).then(function(){
-      return queryInterface.dropTable('roles');
-    });
+    return queryInterface.dropTable('roles');
   }
 };

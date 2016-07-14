@@ -21,7 +21,9 @@ describe('create destination', function () {
 
         models.user.create({ username: username,
           email: email,
-          password: "secret" }).then(function(user){
+          password: "secret",
+          password_salt: "123"
+         }).then(function(user){
           next(null, user.id, country_id);
         });
       },

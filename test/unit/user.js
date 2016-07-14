@@ -11,12 +11,15 @@ describe('create user', function () {
     models.user.create({
       username: username,
       email: email,
-      password: "secret"
+      password: "secret",
+      password_salt: "123"
     }).then(function(user) {
       user.id.should.be.greaterThan(0);
       user.username.should.equal(username);
       user.email.should.equal(email);
       user.password.should.equal("secret");
+      user.password_salt.should.equal("123");
+
       user.created.should.be.greaterThan(0);
       user.updated.should.be.greaterThan(0);
 
