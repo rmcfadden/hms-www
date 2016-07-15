@@ -9,8 +9,7 @@ Mr and Mrs Honeymoon developer
 git clone https://github.com/rmcfadden/mmh-www.git
 ```
 2. Install NodeJs and dependencies
-  * Enter mmh-www/setup
-  * run
+  * Enter mmh-www/setup and run
 ```
 ./install
 ```
