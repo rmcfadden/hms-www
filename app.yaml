@@ -1,4 +1,7 @@
 # [START app_yaml]
 runtime: nodejs
 vm: true
+
+beta_settings:
+ cloud_sql_instances: mmh-www:us-central1:mmh2
 # [END app_yaml]

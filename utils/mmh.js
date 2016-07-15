@@ -7,12 +7,12 @@ var Promise = require('promise');
 var randomstring = require("randomstring");
 
 var async = require('async');
-addTestVenues();
+addTestDestinations();
 
 console.log('Node Environment =' + process.env.NODE_ENV)
 
 
-function addTestVenues(num){
+function addTestDestinations(num){
   if(!num){
     num = 25;
   }
