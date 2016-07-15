@@ -40,14 +40,19 @@ The official Mr and Mrs Honeymoon developer information page.
  ```
  ./mysql_create
  ``` 
-
+ * NOTE: that config/config.json should be populated with passwords which should current mysql passwords.  Use mysql client to verify and adjust if necessary.
 6. Update migrate and test
  ```
  sudo npm install
  npm run-script migrate
  npm test
- 
  ```
+ 
+7. Run and test in http://localhost:8080/
+ ```
+ npm start
+ ```
+
 
 # Development best practices
 * Create feature branches that reference Trello cards.
