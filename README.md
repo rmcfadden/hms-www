@@ -42,7 +42,12 @@ The official Mr and Mrs Honeymoon developer information page.
  ``` 
 
 6. Update migrate and test
+ ```
+ sudo npm install
+ npm run-script migrate
+ npm test
  
+ ```
 
 # Development best practices
 * Create feature branches that reference Trello cards.
