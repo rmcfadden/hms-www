@@ -7,14 +7,24 @@ Mr and Mrs Honeymoon developer
 1. Clone project from github
 ```
 git clone https://github.com/rmcfadden/mmh-www.git
-
 ```
 2. Inatall NodeJs and dependencies
 * Enter mmh-www/setup
 *  run
 ```
 ./install
-
 ```
 * makes sure node -version returns a valid version:
-* 
+```
+sudo node --version
+v4.2.6
+```
+
+3. Install Mysql (if not already installed)
+
+# Development best practices
+1. Create feature branches that reference Trello cards.
+2. Write lot's of tests
+3. Test layout on mobile/tablet/desktop
+4. Use Unify controls:
+
