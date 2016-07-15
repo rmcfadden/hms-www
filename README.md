@@ -1,5 +1,4 @@
-# mmh-www
-The official Mr and Mrs Honeymoon developer information page.
+# The official Mr and Mrs Honeymoon project
 
 [![Build Status](https://travis-ci.org/rmcfadden/mmh-www.svg?branch=master)](https://travis-ci.org/rmcfadden/mmh-www)
 
