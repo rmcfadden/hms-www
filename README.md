@@ -1,9 +1,9 @@
 # mmh-www
-Mr and Mrs Honeymoon developer
+The official Mr and Mrs Honeymoon developer information page.
 
 [![Build Status](https://travis-ci.org/rmcfadden/mmh-www.svg?branch=master)](https://travis-ci.org/rmcfadden/mmh-www)
 
-#Developer Install on Ubuntu (Beta)
+#One time developer install on Ubuntu (Beta)
 1. Clone project from github
  ```
  git clone https://github.com/rmcfadden/mmh-www.git
@@ -25,6 +25,23 @@ Mr and Mrs Honeymoon developer
  ```
  ./mysql_install
  ``` 
+
+4. Create mmh databases and logins (note this may need to be done manaully if done before)
+ * create passwords file from setup/ 
+ ```
+ cp  mysql-passwords.sample mysql-passwords
+ ``` 
+ * edit passwords file and change passwords to whatever you want
+ ```
+ nano mysql-passwords
+ ``` 
+
+ * run mysql_create
+ ```
+ ./mysql_create
+ ``` 
+
+6. Update migrate and test
  
 
 # Development best practices
