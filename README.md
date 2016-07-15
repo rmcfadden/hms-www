@@ -54,8 +54,14 @@
 
 
 # Development best practices
+* Practive DRY (don't repeat yourself) coding.
 * Create feature branches that reference Trello cards.
 * Write tests
-* Test layout on mobile/tablet/desktop
-* Use Unify controls:
+* Test layout on mobile/tablet/desktop (will figure out e2e later)
+* Use Unify controls: http://htmlstream.com/preview/unify-v1.9.5/shortcode_typo_general.html
+* Create sequelize migrations.  Make sure they migrate up and down all the way everytime:
+ ```
+ npm run-script migrate
+ npm run-script migrate-undo-all
+ ```
 
