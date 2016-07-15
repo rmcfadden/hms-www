@@ -47,8 +47,9 @@
  npm test
  ```
  
-7. Run and test in http://localhost:8080/
+7. Add test data and run and test in http://localhost:8080/
  ```
+ ./utils/mmh.js --add-test-data 
  npm start
  ```
 
@@ -56,12 +57,14 @@
 # Development best practices
 * Practive DRY (don't repeat yourself) coding.
 * Create feature branches that reference Trello cards.
-* Write tests
+* Write tests.  Aspire for 100% code coverage.  Make sure tests pass:
+ ```
+ npm test
+ ```
 * Test layout on mobile/tablet/desktop (will figure out e2e later)
 * Use Unify controls: http://htmlstream.com/preview/unify-v1.9.5/shortcode_typo_general.html
-* Create sequelize migrations.  Make sure they migrate up and down all the way everytime:
- ```
- npm run-script migrate
- npm run-script migrate-undo-all
- ```
-
+* Create sequelize migrations.  Make sure they migrate up and down all the way everytime.
+```
+npm run-script migrate
+npm run-script migrate-undo-all
+```
