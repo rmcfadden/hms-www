@@ -10,9 +10,9 @@ git clone https://github.com/rmcfadden/mmh-www.git
 ```
 2. Install NodeJs and dependencies
   * Enter mmh-www/setup and run
-```
-./install
-```
+ ```
+ ./install
+ ```
   * makes sure node -version returns a valid version:
 ```
 sudo node --version
