@@ -3,5 +3,5 @@ runtime: nodejs
 vm: true
 
 beta_settings:
- cloud_sql_instances: mmh-www:us-central1:mmh2
+ cloud_sql_instances: hms-www:us-central1:hms2
 # [END app_yaml]

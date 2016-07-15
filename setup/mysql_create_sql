@@ -1,17 +1,17 @@
-create database mmh;
-create database mmh_dev;
-create database mmh_test;
+create database hms;
+create database hms_dev;
+create database hms_test;
 
 create user 'admin'@'%' identified by '${mysql_admin_password}';
 grant all privileges on *.* to 'admin'@'%' with grant option;
 
-create user 'mmh'@'%' identified by '${mysql_mmh_password}';
-grant all privileges on mmh.* to 'mmh'@'%' with grant option;
+create user 'hms'@'%' identified by '${mysql_hms_password}';
+grant all privileges on hms.* to 'hms'@'%' with grant option;
 
-create user 'mmh_dev'@'%' identified by '${mysql_mmh_dev_password}';
-grant all privileges on mmh_dev.* to 'mmh_dev'@'%' with grant option;
+create user 'hms_dev'@'%' identified by '${mysql_hms_dev_password}';
+grant all privileges on hms_dev.* to 'hms_dev'@'%' with grant option;
 
-create user 'mmh_test'@'%' identified by '${mysql_mmh_test_password}';
-grant all privileges on mmh_test.* to 'mmh_test'@'%' with grant option;
+create user 'hms_test'@'%' identified by '${mysql_hms_test_password}';
+grant all privileges on hms_test.* to 'hms_test'@'%' with grant option;
 
 flush privileges;

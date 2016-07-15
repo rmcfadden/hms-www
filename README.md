@@ -1,14 +1,14 @@
 # The official Mr and Mrs Honeymoon project
 
-[![Build Status](https://travis-ci.org/rmcfadden/mmh-www.svg?branch=master)](https://travis-ci.org/rmcfadden/mmh-www)
+[![Build Status](https://travis-ci.org/rmcfadden/hms-www.svg?branch=master)](https://travis-ci.org/rmcfadden/hms-www)
 
 #One time developer install on Ubuntu (Beta)
 1. Clone project from github
  ```
- git clone https://github.com/rmcfadden/mmh-www.git
+ git clone https://github.com/rmcfadden/hms-www.git
  ```
 2. Install NodeJs and dependencies
-  * Enter mmh-www/setup and run
+  * Enter hms-www/setup and run
  ```
  ./install
  ```
@@ -25,7 +25,7 @@
  ./mysql_install
  ``` 
 
-4. Create mmh databases and logins (note this may need to be done manaully if done before)
+4. Create hms databases and logins (note this may need to be done manaully if done before)
  * create passwords file from setup/ 
  ```
  cp  mysql-passwords.sample mysql-passwords
@@ -49,7 +49,7 @@
  
 7. Add test data and run and test in http://localhost:8080/
  ```
- ./utils/mmh.js --add-test-data 
+ ./utils/hms.js --add-test-data 
  npm start
  ```
 

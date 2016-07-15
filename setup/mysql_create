@@ -4,13 +4,13 @@ while read -r line; do declare  $line; done < mysql-passwords
 
 
 sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
-    -e "s/\${mysql_mmh_password}/$mysql_mmh_password/" \
-    -e "s/\${mysql_mmh_dev_password}/$mysql_mmh_dev_password/" \
-    -e "s/\${mysql_mmh_test_password}/$mysql_mmh_test_password/" \
+    -e "s/\${mysql_hms_password}/$mysql_hms_password/" \
+    -e "s/\${mysql_hms_dev_password}/$mysql_hms_dev_password/" \
+    -e "s/\${mysql_hms_test_password}/$mysql_hms_test_password/" \
 mysql_create_sql | mysql -f -h 127.0.0.1 -u root -p$mysql_root_password
 
 sed -e "s/\${mysql_admin_password}/$mysql_admin_password/" \
-    -e "s/\${mysql_mmh_password}/$mysql_mmh_password/" \
-    -e "s/\${mysql_mmh_dev_password}/$mysql_mmh_dev_password/" \
-    -e "s/\${mysql_mmh_test_password}/$mysql_mmh_test_password/" \
+    -e "s/\${mysql_hms_password}/$mysql_hms_password/" \
+    -e "s/\${mysql_hms_dev_password}/$mysql_hms_dev_password/" \
+    -e "s/\${mysql_hms_test_password}/$mysql_hms_test_password/" \
 ../config/config.json.example > ../config/config.json

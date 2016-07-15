@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "",
-    "database": "mmh_dev",
+    "database": "hms_dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "",
-    "database": "mmh_test",
+    "database": "hms_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "",
-    "database": "mmh",
+    "database": "hms",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

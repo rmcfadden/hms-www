@@ -18,8 +18,8 @@ before_install:
 install:
 - npm install
 before_script:
-- mysql -e "create database mmh_dev;" -u root
-- mysql -e "create database mmh_test;" -u root
+- mysql -e "create database hms_dev;" -u root
+- mysql -e "create database hms_test;" -u root
 script:
 - npm run-script migrate
 - npm test
@@ -27,4 +27,4 @@ script:
 #deploy:
 #  provider: gae
 #  keyfile: client-secret.json
-#  project: mmh-www
+#  project: hms-www
