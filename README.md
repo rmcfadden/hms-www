@@ -54,7 +54,7 @@
  ```
 
 # Development best practices
-* Practive DRY (don't repeat yourself) coding.
+* Practice DRY (don't repeat yourself) coding.
 * Create feature branches that reference Trello cards.
 * Write tests.  Aspire for 100% code coverage.  Make sure tests pass:
  ```
