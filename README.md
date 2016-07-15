@@ -1,4 +1,4 @@
-# The official Mr and Mrs Honeymoon project
+# The official Honeymoon Style project
 
 [![Build Status](https://travis-ci.org/rmcfadden/hms-www.svg?branch=master)](https://travis-ci.org/rmcfadden/hms-www)
 
@@ -53,7 +53,6 @@
  npm start
  ```
 
-
 # Development best practices
 * Practive DRY (don't repeat yourself) coding.
 * Create feature branches that reference Trello cards.
@@ -68,3 +67,4 @@
 npm run-script migrate
 npm run-script migrate-undo-all
 ```
+* Avoid callback hell by using aysnc.waterfal or promises (link to come)
