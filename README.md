@@ -56,6 +56,7 @@
 # Development best practices
 * Practice DRY (don't repeat yourself) coding.
 * Create feature branches that reference Trello cards.
+* Verify CI builds here: https://travis-ci.org/rmcfadden/hms-www
 * Write tests.  Aspire for 100% code coverage.  Make sure tests pass:
  ```
  npm test
