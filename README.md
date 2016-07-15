@@ -21,6 +21,12 @@ Mr and Mrs Honeymoon developer
 
 3. Install Mysql (if not already installed)
 
+ * from setup/ run
+ ```
+ ./mysql_install
+ ``` 
+ 
+
 # Development best practices
 * Create feature branches that reference Trello cards.
 * Write tests
