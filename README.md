@@ -39,7 +39,7 @@
  ```
  ./mysql_create
  ``` 
- * NOTE: that config/config.json should be populated with passwords which should current mysql passwords.  Use mysql client to verify and adjust if necessary.
+ * NOTE: that config/config.json should be populated with the current mysql passwords.  Use mysql client to verify and adjust if necessary.
 6. Update migrate and test
  ```
  sudo npm install
