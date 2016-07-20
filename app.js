@@ -47,6 +47,7 @@ app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
 app.use(require('./routes/destinations'));
 app.use(require('./routes/destination'));
+app.use(require('./routes/countries'));
 
 //app.locals.
 
@@ -81,6 +82,19 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+var testPort = 3001;
+var testServer =  null;
+app.startTestServer = function(){
+  testServer = this.listen(testPort, function () {
+  var port = testServer.address().port;
+  console.log('App listening at port %s', testPort);
+  });
+}
+
+app.closeTestServer = function(){
+  testServer.close();
+}
 
 
 module.exports = app;
