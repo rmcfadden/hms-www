@@ -52,6 +52,14 @@
  ./utils/hms.js --add-test-data 
  npm start
  ```
+ 
+ # Current tech stack
+ * NodeJs for server side development
+ * MySQL for relational database
+ * Express for MVC
+ * Sequelize for ORM
+ * Mocha for testing
+ * 
 
 # Development best practices
 * Practice DRY (don't repeat yourself) coding.
@@ -68,4 +76,4 @@
 npm run-script migrate
 npm run-script migrate-undo-all
 ```
-* Avoid callback hell by using aysnc.waterfal or promises (link to come)
+* Avoid callback hell by using [aysnc.waterfall](https://www.npmjs.com/package/async-waterfall) or [promises](https://howtonode.org/promises)
