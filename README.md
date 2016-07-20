@@ -53,14 +53,14 @@
  npm start
  ```
  
- # Current tech stack
- * NodeJs for server side development
- * MySQL for relational database
- * Express for MVC
- * Sequelize for ORM
- * Mocha for testing
- * Supertest for HTTP testing
- * Passport for authentication
+# Current tech stack
+* NodeJs for server side development
+* MySQL for relational database
+* Express for MVC
+* Sequelize for ORM
+* Mocha for testing
+* Supertest for HTTP testing
+* Passport for authentication
 
 # Development best practices
 * Practice DRY (don't repeat yourself) coding.
