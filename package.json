@@ -37,5 +37,8 @@
     "sqlite3": "^3.1.4",
     "sync": "^0.2.5",
     "tedious": "^1.14.0"
+  },
+  "devDependencies": {
+    "supertest": "^1.2.0"
   }
 }
