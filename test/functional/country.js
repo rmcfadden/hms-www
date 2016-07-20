@@ -6,11 +6,12 @@ describe('GET /api/countries', function(){
   it('respond with valid json', function(done){
     request(app)
       .get('/api/countries')
+      .expect(200)
       .expect('Content-Type', 'application/json; charset=utf-8')
-      .expect(function(res) {
-        console.log('RSEPONSE');
-        console.log(res);
-      })
-      .expect(200, done);
+      .end(function(err, res) {
+        if (err) return done(err);
+        res.body.length.should.equal(266);
+        done();
+      });
   })
 })

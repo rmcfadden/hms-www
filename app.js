@@ -8,7 +8,8 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var config = require('./config/config.json');
-
+var LocalStrategy = require('passport-local').Strategy;
+var models  = require('./models')
 
 var app = express();
 
@@ -23,6 +24,23 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+
+// start login strategy
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    console.log('MADE IT HERE!! B!');
+    models.user.findOne({ where : { username: username }}).then(function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
+
+// end login strategy
+
+
 var sessionInfo = {
   secret:  config.sessionSecret,
   resave: false,
@@ -32,7 +50,7 @@ var sessionInfo = {
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -49,7 +67,25 @@ app.use(require('./routes/destinations'));
 app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
 
-//app.locals.
+
+
+app.post('/api/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+
+    console.log(err);
+    console.log(user);
+    console.log(info);
+
+    if (err) { return next(err); }
+    // Redirect if it fails
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      // Redirect if it succeeds
+      return res.redirect('/users/' + user.username);
+    });
+  })(req, res, next);
+});
 
 
 // catch 404 and forward to error handler
