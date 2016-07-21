@@ -18,13 +18,13 @@ router.post('/api/login', function(req, res, next) {
 
     var invalidUsernameOrPassword = 'Invalid username or password';
 
-    if (err) { res.status(401); return res.send({ success : false, message : 'an erro has occurred'  }); }
+    if (err) { res.status(401); return res.send({ success : false, message : 'an error has occurred'  }); }
     if (!user) { res.status(401); return res.send({ success : false, message : invalidUsernameOrPassword }); }
 
     req.logIn(user, function(err) {
       if (err) { return next(err); }
 
-      return res.redirect('/users/' + user.username);
+      return return res.send({ success : true, sessionKey: 'todo'});
     });
   })(req, res, next);
 });
