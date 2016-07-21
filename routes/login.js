@@ -23,8 +23,7 @@ router.post('/api/login', function(req, res, next) {
 
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-
-      return return res.send({ success : true, sessionKey: 'todo'});
+      return res.send({ success : true, sessionKey: 'todo'});
     });
   })(req, res, next);
 });
