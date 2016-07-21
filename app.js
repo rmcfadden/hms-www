@@ -15,6 +15,9 @@ var app = express();
 // Add shared functoins for ejs templates
 require('./modules/ejs-shared.js')(app);
 
+// Add passport strategies
+require('./modules/passport-strategies.js')(passport);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +25,7 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 
 var sessionInfo = {
   secret:  config.sessionSecret,
@@ -32,7 +36,7 @@ var sessionInfo = {
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -47,8 +51,9 @@ app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
 app.use(require('./routes/destinations'));
 app.use(require('./routes/destination'));
+app.use(require('./routes/countries'));
 
-//app.locals.
+
 
 
 // catch 404 and forward to error handler
@@ -81,6 +86,19 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+var testPort = 3001;
+var testServer =  null;
+app.startTestServer = function(){
+  testServer = this.listen(testPort, function () {
+  var port = testServer.address().port;
+  console.log('App listening at port %s', testPort);
+  });
+}
+
+app.closeTestServer = function(){
+  testServer.close();
+}
 
 
 module.exports = app;
