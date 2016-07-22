@@ -64,7 +64,7 @@
 
 # Development best practices
 * Practice DRY (don't repeat yourself) coding.
-* Create feature branches that reference Trello cards. [More info]((http://stackoverflow.com/questions/2765421/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too).   Use this [plugin](http://goo.gl/yKfjV) to show card numbers and reference these numbers in commits.
+* Create feature branches that reference Trello cards. [More info](http://stackoverflow.com/questions/2765421/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too).   Use this [plugin](http://goo.gl/yKfjV) to show card numbers and reference these numbers in commits.
 * Verify CI builds here: https://travis-ci.org/rmcfadden/hms-www
 * Write tests.  Aspire for 100% code coverage.  Make sure tests pass:
  ```
