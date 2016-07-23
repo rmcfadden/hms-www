@@ -1,7 +1,7 @@
 # The official Honeymoon Style project
 
 [![Build Status](https://travis-ci.org/rmcfadden/hms-www.svg?branch=master)](https://travis-ci.org/rmcfadden/hms-www)
-[![Coverage Status](https://coveralls.io/repos/github/rmcfadden/hms-www/badge.svg)](https://coveralls.io/github/rmcfadden/hms-www)
+[![Coverage Status](https://coveralls.io/repos/github/rmcfadden/hms-www/badge.svg)](https://coveralls.io/github/rmcfadden/hms-www?branch=master)
 
 #One time developer install on Ubuntu (Beta)
 1. Clone project from github
