@@ -18,7 +18,7 @@ router.post('/api/login', function(req, res, next) {
     if (err) { res.status(401); return res.send({ success : false, message : 'an error has occurred'  }); }
     if (!user) { res.status(401); return res.send({ success : false, message : invalidUsernameOrPassword }); }
 
-    return res.send({ success : true, sessionKey: 'todo'});
+    return res.send({ success : true, token: user.session.token});
 
   })(req, res, next);
 });

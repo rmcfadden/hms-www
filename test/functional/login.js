@@ -83,6 +83,7 @@ describe('POST /api/login with a valid username and valid password', function(){
     }).catch(function(err){
       should.fail();
     });
+    done();
   });
 
   it('respond with a 200 code and a true status ', function(done){ 
@@ -95,7 +96,7 @@ describe('POST /api/login with a valid username and valid password', function(){
         if (err) return done(err);
 
         res.body.success.should.be.true();
-        res.body.sessionKey.should.not.be.null();
+        res.body.token.should.not.be.null();
 
         done();
       });    
