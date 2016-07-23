@@ -10,11 +10,11 @@
     "migrate-undo-all": "sequelize db:migrate:undo:all",
     "new-migrate": "sequelize migration:create",
     "new-seed": "sequelize seed:create",
-    "test": "mocha --recursive"
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- --recursive",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",
-    "bcrypt": "^0.8.7",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
@@ -39,7 +39,10 @@
     "should": "^9.0.2",
     "sqlite3": "^3.1.4",
     "sync": "^0.2.5",
-    "tedious": "^1.14.0"
+    "tedious": "^1.14.0",
+    "bcryptjs": "~2.3.0",
+    "istanbul": "~0.4.4",
+    "coveralls": "~2.11.11"
   },
   "devDependencies": {
     "supertest": "^1.2.0"

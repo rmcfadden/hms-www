@@ -2,7 +2,7 @@
 
 var models  = require('../models');
 var randomstring = require("randomstring");
-var bcrypt  = require('bcrypt');
+var bcrypt  = require('bcryptjs');
 var Promise = require('promise');
 
 var usersProvider  = function(){
@@ -13,7 +13,6 @@ var usersProvider  = function(){
       if(!user.email) { reject('email field cannot be empty'); return; }
       if(!user.username) { reject('username field cannot be empty'); return; }
       if(!user.password) { reject('password field cannot be empty'); return; }
-
 
       var salt =  proxy.generateSalt();
       var hashedPassword = proxy.hashPassword(user.password, salt);
@@ -35,8 +34,18 @@ var usersProvider  = function(){
     return bcrypt.genSaltSync(10);
   }
 
+  this.verifyPassword = function(user, plainTextPassword){
+    var hashedPassword = this.hashPassword(plainTextPassword, user.password_salt);
+    return (user.password === hashedPassword);
+  }
+
+
   this.hashPassword = function(password, salt){
     return bcrypt.hashSync(password, salt)
+  }
+
+  this.remove = function(user){
+    return user.destroy();
   }
 }
 
