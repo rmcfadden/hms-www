@@ -39,7 +39,6 @@ var usersProvider  = function(){
     return (user.password === hashedPassword);
   }
 
-
   this.hashPassword = function(password, salt){
     return bcrypt.hashSync(password, salt)
   }

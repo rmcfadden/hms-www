@@ -1,8 +1,10 @@
 var LocalStrategy = require('passport-local').Strategy;
 var models  = require('../models');
 var usersProvider  = require('../modules/users-provider');
-
 var usersProv = new usersProvider(); 
+
+var sessionsProvider  = require('../modules/sessions-provider');
+var sessionsProv = new sessionsProvider(); 
 
 module.exports = function(passport){
   passport.use(new LocalStrategy(
@@ -11,10 +13,16 @@ module.exports = function(passport){
  
         if (!user) { return done(null, false); }
         if (!usersProv.verifyPassword(user, password)) { return done(null, false); }
-        
-        return done(null, user);
+
+        // create a new sesion
+        sessionsProv.create(user).then(function(session){
+          user.session = session;
+          return done(null, user)
+        }).catch(function(err){
+          return done(err);
+        });
       }).catch(function(err){
-        if (err) { return done(err); }
+        return done(err);
       });
     }
   ));

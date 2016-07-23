@@ -42,7 +42,9 @@
     "tedious": "^1.14.0",
     "bcryptjs": "~2.3.0",
     "istanbul": "~0.4.4",
-    "coveralls": "~2.11.11"
+    "coveralls": "~2.11.11",
+    "crypto": "0.0.3",
+    "moment": "~2.14.1"
   },
   "devDependencies": {
     "supertest": "^1.2.0"
