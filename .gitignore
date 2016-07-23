@@ -34,3 +34,5 @@ config/config.json
 setup/mysql-passwords
 
 .vscode
+
+.coveralls.yml
