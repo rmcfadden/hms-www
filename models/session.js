@@ -8,6 +8,14 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.BIGINT
     },
+    user_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+          model: 'users',
+          key: 'id'
+      }
+    },
     uuid: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -17,14 +25,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    user_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-          model: 'users',
-          key: 'id'
-      }
-    },
     start: {
       allowNull: false,
       type: DataTypes.DATE
@@ -33,11 +33,20 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       type: DataTypes.DATE
     }, 
-    is_expried: {
+    last_activity_date: {
       allowNull: false,
-      defaultValue: true,
+      type: DataTypes.DATE
+    },
+    hit_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },        
+    is_expired: {
+      allowNull: false,
+      defaultValue: false,
       type: DataTypes.BOOLEAN
-    }, 
+    }
   }, {
     updatedAt: 'updated',
     createdAt: 'created'

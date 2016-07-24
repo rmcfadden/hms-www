@@ -78,11 +78,15 @@ describe('POST /api/login with a valid username and valid password', function(){
     });
   });
   afterEach(function(done) {
+
+   // TODO: usersProv removes child rows
+    /*
     usersProv.remove(tempUser).then(function(result){
       done(); 
     }).catch(function(err){
       should.fail();
     });
+    */
     done();
   });
 

@@ -1,3 +1,5 @@
+'use strict';
+
 var LocalStrategy = require('passport-local').Strategy;
 var models  = require('../models');
 var usersProvider  = require('../modules/users-provider');
@@ -9,8 +11,7 @@ var sessionsProv = new sessionsProvider();
 module.exports = function(passport){
   passport.use(new LocalStrategy(
     function(username, password, done) {
-      models.user.findOne({ where : { username: username }}).then(function (user) {
- 
+      models.user.findOne({ where : { username: username }}).then(function (user) { 
         if (!user) { return done(null, false); }
         if (!usersProv.verifyPassword(user, password)) { return done(null, false); }
 
@@ -28,6 +29,10 @@ module.exports = function(passport){
   ));
 
   passport.serializeUser(function(user, done) {
+
+console.log('USERID');
+console.log(user);
+
     done(null, user.id);
   });
 

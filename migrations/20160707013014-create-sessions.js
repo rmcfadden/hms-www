@@ -13,6 +13,14 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
+      user_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
+      },
       token: {
         type: Sequelize.STRING,
         allowNull: false
@@ -25,17 +33,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }, 
-      user_id: {
-        type: Sequelize.BIGINT,
+      last_activity_date: {
         allowNull: false,
-        references: {
-            model: 'users',
-            key: 'id'
-        }
+        type: Sequelize.DATE
       },
-      is_expried: {
+      hit_count: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: 1,
+      },        
+      is_expired: {
+        allowNull: false,
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       created: {
@@ -51,9 +60,21 @@ module.exports = {
         'sessions',
         ['user_id']
       ).then(function(){
-        return queryInterface.addIndex(
+        queryInterface.addIndex(
           'sessions',
           ['uuid'],
+          {indicesType: 'UNIQUE'}
+        );
+      }).then(function(){
+        queryInterface.addIndex(
+          'sessions',
+          ['token'],
+          {indicesType: 'UNIQUE'}
+        );
+      }).then(function(){
+        return queryInterface.addIndex(
+          'sessions',
+          ['last_activity_date'],
           {indicesType: 'UNIQUE'}
         );
       })

@@ -16,27 +16,26 @@ var sessionsProvider  = function(){
 
       var token = proxy.generateToken();
 
-      var sessionHours = 24;
-
+      var sessionHours = 24;  // TODO: move to config
       models.session.create({
         user_id: user.id,
         token : token,
         start:  moment(),
-        end:  moment().add(24, 'hours')
+        end:  moment().add(24, 'hours'),
+        last_activity_date:  moment()
       }).then(function(session) {
         resolve(session);
       }).catch(function(err){
         reject(err);
       });
     });
- }
+  }
  
-this.generateToken = function() {
-  var sha = crypto.createHash('sha256');
-  sha.update(Math.random().toString());
-  return sha.digest('hex');
-}
-
+  this.generateToken = function() {
+    var sha = crypto.createHash('sha256');
+    sha.update(Math.random().toString());
+    return sha.digest('hex');
+  }
 };
 
 module.exports = sessionsProvider;
