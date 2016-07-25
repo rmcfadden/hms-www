@@ -15,15 +15,20 @@
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",
+    "bcryptjs": "~2.3.0",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
+    "coveralls": "~2.11.11",
+    "crypto": "0.0.3",
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "express": "~4.13.4",
     "express-session": "^1.14.0",
     "install": "^0.8.1",
+    "istanbul": "~0.4.4",
     "less-middleware": "1.0.x",
     "mocha": "^2.5.3",
+    "moment": "~2.14.1",
     "morgan": "~1.7.0",
     "mysql": "^2.11.1",
     "npm": "^3.10.5",
@@ -40,11 +45,8 @@
     "sqlite3": "^3.1.4",
     "sync": "^0.2.5",
     "tedious": "^1.14.0",
-    "bcryptjs": "~2.3.0",
-    "istanbul": "~0.4.4",
-    "coveralls": "~2.11.11",
-    "crypto": "0.0.3",
-    "moment": "~2.14.1"
+    "underscore": "^1.8.3",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "supertest": "^1.2.0"
