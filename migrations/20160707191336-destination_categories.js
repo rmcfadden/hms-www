@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_reviews', {
+    queryInterface.createTable('destination_categories', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,7 +12,15 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
-      }, 
+      },
+      destination_category_type_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'destination_category_types',
+            key: 'id'
+        }
+      },
       destination_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
@@ -20,22 +28,6 @@ module.exports = {
             model: 'destinations',
             key: 'id'
         }
-      },
-      title: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      text: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      overall_rating: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
-      service_rating: {
-        type: Sequelize.FLOAT,
-        allowNull: false
       },
       created: {
         allowNull: false,
@@ -47,13 +39,13 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_reviews',
+        'destination_categories',
         ['uuid'],
         {indicesType: 'UNIQUE'}
       );
     });
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_reviews');
+    return queryInterface.dropTable('destination_categories');
   }
 };
