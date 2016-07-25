@@ -69,10 +69,17 @@
 1. Migrations
  * Migrations go in /migrations/
  * We can edit existing models before our first release.  This will make things cleaner.  Obviously, this will not apply after our first live production release.
- * Runing migrate undo-all (see below) before pulling a changes will make it easier if the migrations have changed.  If this doesn't work you have to drop the database and migrate up.
+ * Runing migrate undo-all (see below) before pulling a changes will make it easier if the migrations have changed.  If this doesn't work you have to drop the database and migrate again.
  ```
  npm run migrate-undo-all
  ```
+ * How to recreate dev database:
+ ```
+ drop database hms_dev;
+ create database hms_dev;
+ grant all privileges on hms_dev.* to 'hms_dev'@'%' with grant option;
+ ```
+ 
 2. Models
  * They go in /models/
  * They should have same fields as migrations.
