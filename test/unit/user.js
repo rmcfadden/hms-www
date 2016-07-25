@@ -119,3 +119,12 @@ describe('delete user', function () {
   });
 });
 
+describe('find all', function () {
+it('should return a valid list of users', function (done) {
+  models.user.findAll().then(function(users) {
+      users.length.should.be.greaterThan(0);
+      done();
+    });
+  });
+});
+
