@@ -62,11 +62,12 @@ describe('delete user', function () {
       
       models.user.destroy({ where : { id : user.id} })
       .then(function(status) {
-	done();
+
       });
       done();
     });    
   });
 });
+
 
 
