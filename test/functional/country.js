@@ -14,4 +14,4 @@ describe('GET /api/countries', function(){
         done();
       });
   })
-})
+});
