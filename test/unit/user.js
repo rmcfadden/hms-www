@@ -27,3 +27,18 @@ describe('create user', function () {
     });
   });
 });
+
+describe('update user', function () {
+  it('should update a email id', function (done) {
+    var email = 'test' + randomstring.generate() + "@test.com";
+    console.log(email);
+    models.user.update(
+      { email: email }, /* set attributes' value */
+      { where: { username: 'johnNtOPTZR9EKn12JQs5lwYQTzqTWMEjj9s' }} /* where criteria */
+    ).then(function(user) {    
+      done();
+    })
+  });
+});
+
+
