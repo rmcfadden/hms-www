@@ -128,3 +128,20 @@ it('should return a valid list of users', function (done) {
   });
 });
 
+
+describe('find user with id 1', function () {
+it('should return a valid user', function (done) {
+  models.user.findOne({ where: { id: 1 }
+    }).then(function(user) {
+
+      user.id.should.be.greaterThan(0);
+      user.password.should.equal("secret");
+      user.password_salt.should.equal("123");
+
+      user.created.should.be.greaterThan(0);
+      user.updated.should.be.greaterThan(0);
+
+      done();
+    });
+  });
+});
