@@ -10,7 +10,20 @@ var usersProv = new usersProvider();
 
 var testUtils = {};
 
-testUtils.addTestDestinations = function(num){
+testUtils.ensureDestinationCount = function (num, callback){
+  var proxyThis = this;
+  models.destination.count().then(function(c){
+    if(c < num){
+      return proxyThis.addTestDestinations(num, callback);
+    }
+    else{
+      return callback(null,[]);
+    }
+  });
+}
+
+
+testUtils.addTestDestinations = function(num, callback){
   if(!num){
     num = 25;
   }
@@ -73,15 +86,18 @@ testUtils.addTestDestinations = function(num){
       ],function(error, result){
         if(error){
           console.log('An error has occurred: ' + error );
+          return callback(error);
         }
+        
         if(++destinationCount == num){
-          process.exit();
+          return callback(null, result);          
         }
+
       });
     }
   }).catch(function(error){
     console.log('an error has occurred listng the countries ' + error);
-    process.exit();
+    callback(error);
   });
 }
 
