@@ -30,7 +30,7 @@ describe('create user', function () {
 });
 
 describe('update user', function () {
-  it('should update a email id', function (done) {
+  it('should update a users data', function (done) {
     async.waterfall([
       function createUser(next){
         var email = randomstring.generate() + "@test.com";
@@ -54,9 +54,9 @@ describe('update user', function () {
       },
       function updateUser(username, next){
         var email = 'test' + randomstring.generate() + "@test.com";
-
+	console.log(email + '--' + username);
         models.user.update(
-          { email: email }, /* set attributes' value */
+          { email: email, password : 'secretUpdated', password_salt : '456', is_enabled : 2, is_subscribed: 2, is_subscribed_to_partners: 2 }, /* set attributes' value */
           { where: { username: username }} /* where criteria */
         ).then(function(user) {   
           next(null, username, email);
@@ -67,8 +67,11 @@ describe('update user', function () {
 	  user.id.should.be.greaterThan(0);
           user.username.should.equal(username);
           user.email.should.equal(email);
-          user.password.should.equal("secret");
-          user.password_salt.should.equal("123");
+          user.password.should.equal("secretUpdated");
+	  user.password_salt.should.equal("456");
+	  user.is_enabled.should.equal(2);
+	  user.is_subscribed.should.equal(2);
+	  user.is_subscribed_to_partners.should.equal(2);
 
           user.created.should.be.greaterThan(0);
           user.updated.should.be.greaterThan(0);
@@ -120,8 +123,26 @@ describe('delete user', function () {
 });
 
 describe('find all', function () {
-it('should return a valid list of users', function (done) {
-  models.user.findAll().then(function(users) {
+  before(function(){
+    var email = randomstring.generate() + "@abc.com";
+    var username = "Tim" + randomstring.generate();
+      models.user.create({
+	username: username,
+	email: email,
+	password: "secret",
+	password_salt: "123"
+      }).then(function(user) {
+	user.id.should.be.greaterThan(0);
+	user.username.should.equal(username);
+	user.email.should.equal(email);
+	user.password.should.equal("secret");
+	user.password_salt.should.equal("123");
+        user.created.should.be.greaterThan(0);
+	user.updated.should.be.greaterThan(0);
+      });
+  })
+  it('should return a valid list of users', function (done) {
+    models.user.findAll().then(function(users) {
       users.length.should.be.greaterThan(0);
       done();
     });
@@ -133,11 +154,7 @@ describe('find user with id 1', function () {
 it('should return a valid user', function (done) {
   models.user.findOne({ where: { id: 1 }
     }).then(function(user) {
-
       user.id.should.be.greaterThan(0);
-      user.password.should.equal("secret");
-      user.password_salt.should.equal("123");
-
       user.created.should.be.greaterThan(0);
       user.updated.should.be.greaterThan(0);
 
