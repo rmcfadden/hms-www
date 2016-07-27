@@ -65,7 +65,8 @@ module.exports = function(sequelize, DataTypes) {
       }
     }, {
     updatedAt: 'updated',
-    createdAt: 'created'
+    createdAt: 'created',
+    underscored: true
   });
   return destination;
 };
