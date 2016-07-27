@@ -18,7 +18,7 @@ describe('GET /api/destinations', function(){
     });
   });
 
-  it('should return 12 destinations with count above 10', function(done){
+  it('should return 12 destinations with count above 11', function(done){
     request(app)
       .get('/api/destinations')
       .expect(200)
@@ -48,6 +48,12 @@ describe('GET /api/destinations?offset=2&limit=5', function(){
         res.body.count.should.be.above(5);
         res.body.rows.length.should.be.equal(5);
    
+        // validate that country data is present
+        res.body.rows[0].country.id.should.be.greaterThan(0);
+        res.body.rows[0].country.iso_code2.should.not.be.null();
+        res.body.rows[0].country.fips.should.not.be.null();
+        res.body.rows[0].country.name.should.not.be.null();
+
         done();
       });
   })
