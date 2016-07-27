@@ -6,15 +6,25 @@ var request = require('supertest'),
 
 describe('GET /api/destinations', function(){
   before(function(done) {
-    testUtils.addTestDestinations(12);
-    done();
+    this.timeout(15000);
+
+    testUtils.ensureDestinationCount(12, function(err, result){
+      if(err){
+        should.fail();
+      }
+      else{
+        done();
+      }
+    });
   });
-  it('should return 12 destinations with count above 10', function(done){
+
+  it('should return 12 destinations with count above 11', function(done){
     request(app)
       .get('/api/destinations')
       .expect(200)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .end(function(err, res) {
+
         if (err) return done(err);
  
         res.body.count.should.be.above(11);
@@ -38,6 +48,12 @@ describe('GET /api/destinations?offset=2&limit=5', function(){
         res.body.count.should.be.above(5);
         res.body.rows.length.should.be.equal(5);
    
+        // validate that country data is present
+        res.body.rows[0].country.id.should.be.greaterThan(0);
+        res.body.rows[0].country.iso_code2.should.not.be.null();
+        res.body.rows[0].country.fips.should.not.be.null();
+        res.body.rows[0].country.name.should.not.be.null();
+
         done();
       });
   })

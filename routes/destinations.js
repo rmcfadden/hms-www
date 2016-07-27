@@ -5,6 +5,7 @@ var url = require('url');
 
 var defaultLimit = 12;
 
+models.destination.belongsTo(models.country);
 
 router.use(function getLimitOffset(req, res, next){
   var url_parts = url.parse(req.url, true);
@@ -18,14 +19,14 @@ router.use(function getLimitOffset(req, res, next){
 });
 
 router.get('/destinations', function(req, res, next) {  
-  models.destination.findAndCountAll({ offset: req.paging.offset, limit: req.paging.limit}).then(function(destinations){
+  models.destination.findAndCountAll({ include: [models.country], offset: req.paging.offset, limit: req.paging.limit}).then(function(destinations){
     res.render('destinations', { destinations : destinations.rows });
   });
 });
 
 
 router.get('/api/destinations', function(req, res, next) {
-  models.destination.findAndCountAll({ offset: req.paging.offset, limit: req.paging.limit}).then(function(destinations){
+  models.destination.findAndCountAll({ include: [models.country], offset: req.paging.offset, limit: req.paging.limit}).then(function(destinations){
     res.setHeader('Content-Type', 'application/json');
     res.json(destinations);
     res.end();
