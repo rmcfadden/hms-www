@@ -17,7 +17,7 @@ testUtils.ensureDestinationCount = function (num, callback){
       return proxyThis.addTestDestinations(num, callback);
     }
     else{
-      return callback(null,[]);
+      return callback(null);
     }
   });
 }
@@ -77,20 +77,24 @@ testUtils.addTestDestinations = function(num, callback){
               user_id: user_id,
               address_id: address_id,
               description: 'bla, bla'
-          }).then(function(destination){            
-            next()
+          }).then(function(destination){    
+            next(null);
           }).catch(function(err){
             next(err);
           });
         }        
-      ],function(error, result){
+      ],function(error){
         if(error){
           console.log('An error has occurred: ' + error );
-          return callback(error);
+          if(callback){
+            return callback(error);
+          }
         }
         
         if(++destinationCount == num){
-          return callback(null, result);          
+          if(callback){
+            return callback(null);
+          }
         }
 
       });
@@ -103,7 +107,22 @@ testUtils.addTestDestinations = function(num, callback){
 
 function getCounties(){
   return new Promise(function(resolve, reject){
-    models.country.findAll({}).then(function(countries){
+    models.country.findAll({where : { $or: [
+        {
+          name: {
+            $eq: 'United States'
+          }
+        },{
+          name: {
+            $eq: 'Australia'
+          }
+        },{
+          name: {
+            $eq: 'Bahamas'
+          }
+        }
+      ]}      
+    }).then(function(countries){
       resolve(countries);
     }).catch(function(error){
       reject(Error);
