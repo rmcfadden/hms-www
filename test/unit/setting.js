@@ -124,7 +124,7 @@ describe('delete settings', function () {
        function createSetting(category_id, next){
          var name = "Setting " + randomstring.generate({ length: 3, charset: 'numeric' });
          var value = randomstring.generate();
-             models.settings.create({
+            models.settings.create({
            setting_category_id: category_id,
            name: name,
            value: value
@@ -150,5 +150,62 @@ describe('delete settings', function () {
     ],function(error, result){
      done();
     });    
+  });
+});
+
+describe('Find all settings', function () {
+  before(function(){
+    async.waterfall([
+       function createSettingCategory(next){
+          var name = randomstring.generate() + "-setting";
+          models.setting_categories.create({      
+            name: name
+          }).then(function(setting_categories) {
+            setting_categories.id.should.be.greaterThan(0);
+            setting_categories.name.should.equal(name);
+            setting_categories.created.should.be.greaterThan(0);
+            setting_categories.updated.should.be.greaterThan(0);
+            next(null, setting_categories.id);
+          });  
+       },
+       function createSetting(category_id, next){
+         var name = "Setting " + randomstring.generate({ length: 3, charset: 'numeric' });
+         var value = randomstring.generate();
+            models.settings.create({
+           setting_category_id: category_id,
+           name: name,
+           value: value
+         }).then(function(settings) {
+           settings.id.should.be.greaterThan(0);
+           settings.setting_category_id.should.equal(category_id);
+           settings.name.should.be.equal(name);
+           settings.value.should.be.equal(value);
+           settings.created.should.be.greaterThan(0);
+           settings.updated.should.be.greaterThan(0);
+           next(null, settings.id);
+         });
+      }
+    ],function(error, result){
+     done();
+    });   
+  })
+  it('should return a valid list of settings', function (done) {
+    models.settings.findAll().then(function(settings) {
+      settings.length.should.be.greaterThan(0);
+      done();
+    });
+  });
+});
+
+
+describe('find settings with id 1', function () {
+it('should return a valid settings record', function (done) {
+  models.settings.findOne({ where: { id: 1 }
+    }).then(function(settings) {
+      settings.id.should.be.greaterThan(0);
+      settings.created.should.be.greaterThan(0);
+      settings.updated.should.be.greaterThan(0);
+      done();
+    });
   });
 });
