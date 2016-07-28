@@ -24,7 +24,9 @@ script:
 - npm run-script migrate
 - npm test
 
-after_success: 'npm run coveralls'
+after_success:
+- 'npm run coverage'
+- 'npm run coveralls'
 
 #deploy:
 #  provider: gae

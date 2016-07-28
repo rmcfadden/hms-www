@@ -10,7 +10,8 @@
     "migrate-undo-all": "sequelize db:migrate:undo:all",
     "new-migrate": "sequelize migration:create",
     "new-seed": "sequelize seed:create",
-    "test": "./node_modules/istanbul/lib/cli.js test ./node_modules/.bin/_mocha -- --recursive",
+    "test": "mocha --recursive",
+    "coverage": "./node_modules/istanbul/lib/cli.js test ./node_modules/.bin/_mocha -- --recursive",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "dependencies": {
@@ -49,6 +50,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "mocha-lcov-reporter": "^1.2.0",
     "supertest": "^1.2.0"
   }
 }
