@@ -76,7 +76,7 @@ testUtils.addTestDestinations = function(num, callback){
               country_id: country_id,
               user_id: user_id,
               address_id: address_id,
-              description: 'bla, bla'
+              description: 'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.'
           }).then(function(destination){    
             next(null);
           }).catch(function(err){
