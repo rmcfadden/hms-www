@@ -2,6 +2,8 @@
 
 var models  = require('../../models');
 var should  = require('should');
+var randomstring = require("randomstring");
+var async = require('async');
 
 describe('find with name United States', function () {
 it('should return a valid country', function (done) {
@@ -43,9 +45,133 @@ describe('find all', function () {
 it('should return a valid list of countries', function (done) {
   models.country.findAll().then(function(countries) {
 
-      countries.length.should.equal(266);
+      countries.length.should.be.greaterThan(0);
 
       done();
     });
+  });
+});
+
+describe('create country', function () {
+  it('should return a valid country', function (done) {
+    var countryName = "country" + randomstring.generate();
+    var code = randomstring.generate({ length: 2, charset: 'alphabet'});
+    var iso = code.toUpperCase();
+    var fips = code.toUpperCase();
+    var tld = '.' + code.toLowerCase();
+    models.country.create({
+          name: countryName,
+          iso_code2: iso,
+          fips: fips,
+          tld: tld,
+          is_visible: 1
+      }).then(function(country) {
+        country.id.should.greaterThan(0);
+        country.name.should.equal(countryName);
+        country.iso_code2.should.equal(iso);
+        country.fips.should.equal(fips);
+        country.tld.should.equal(tld);
+        country.created.should.be.greaterThan(0);
+        country.updated.should.be.greaterThan(0);
+        done();
+      });
+  });
+});
+
+describe('Edit country', function () {
+  it('should update a country record', function (done) {
+    async.waterfall([
+      function createcountry(next){
+      	var countryName = "country" + randomstring.generate();
+        var code = randomstring.generate({ length: 2, charset: 'alphabet'});
+        var iso = code.toUpperCase();
+        var fips = code.toUpperCase();
+        var tld = '.' + code.toLowerCase();
+        models.country.create({
+              name: countryName,
+              iso_code2: iso,
+              fips: fips,
+              tld: tld,
+              is_visible: 1
+          }).then(function(country) {
+            country.id.should.greaterThan(0);
+            country.name.should.equal(countryName);
+            country.iso_code2.should.equal(iso);
+            country.fips.should.equal(fips);
+            country.tld.should.equal(tld);
+            country.created.should.be.greaterThan(0);
+            country.updated.should.be.greaterThan(0);
+            next(null, country.id);
+          });
+      },
+      function updatecountry(country_id, next){
+	      var countryName = "Updated" + randomstring.generate();
+        var code = randomstring.generate({ length: 2, charset: 'alphabet'});
+        var iso = code.toUpperCase();
+        var fips = code.toUpperCase();
+        var tld = '.' + code.toLowerCase();
+        models.country.update({      
+          name: countryName,
+          iso_code2: iso,
+          fips: fips,
+          tld: tld,
+          is_visible: 1
+        },
+        { where: { id : country_id }}).then(function(country) {
+		      next(null, country_id );
+        });       
+      },
+      function findcountry(country_id, next){
+        models.country.find({where : { id : country_id }}).then(function(country){
+          country.id.should.greaterThan(0);
+          country.created.should.be.greaterThan(0);
+          country.updated.should.be.greaterThan(0);
+          done();
+        });
+      }
+    ], function(error, result) {
+	  done();
+    });    
+  });
+});
+
+describe('Delete country', function () {
+  it('should delete a country', function (done) {
+     async.waterfall([
+       function createcountry(next){
+      	var countryName = "country" + randomstring.generate();
+        var code = randomstring.generate({ length: 2, charset: 'alphabet'});
+        var iso = code.toUpperCase();
+        var fips = code.toUpperCase();
+        var tld = '.' + code.toLowerCase();
+        models.country.create({
+              name: countryName,
+              iso_code2: iso,
+              fips: fips,
+              tld: tld,
+              is_visible: 1
+          }).then(function(country) {
+            country.id.should.greaterThan(0);
+            country.name.should.equal(countryName);
+            country.iso_code2.should.equal(iso);
+            country.fips.should.equal(fips);
+            country.tld.should.equal(tld);
+            country.created.should.be.greaterThan(0);
+            country.updated.should.be.greaterThan(0);
+            next(null, country.id);
+          });
+      },
+       function deletecountry(country_id){
+         models.country.destroy({ where : { id : country_id} })
+         .then(function(status) {
+	          models.country.findAll({where : { id : country_id }}).then(function(country){
+              country.length.should.equal(0);
+	            done();
+	          });
+          });
+      }
+    ],function(error, result){
+      done();
+    });    
   });
 });
