@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 var models  = require('../models')
 var url = require('url');
+var config = require('../config/config.json');
 
-var defaultLimit = 12;
+var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
+
+var destinationsProvider = require('../modules/destinations-provider');
+var destinationsProv = new destinationsProvider();
 
 models.destination.belongsTo(models.country);
 
@@ -13,30 +17,39 @@ router.use(function getLimitOffset(req, res, next){
 
   req.paging = {};
   req.paging.offset =  query.offset ? parseInt(query.offset) : 0;
-  req.paging.limit =  query.limit ? parseInt(query.limit) : defaultLimit;
+  req.paging.limit =  query.limit ? parseInt(query.limit) : pageSize;
 
   next();
 });
 
-router.get('/destinations', function(req, res, next) {  
-  models.destination.findAndCountAll({ include: [models.country], offset: req.paging.offset, limit: req.paging.limit}).then(function(destinations){
+router.get('/destinations/', function(req, res, next) {  
+  destinationsProv.findAll({ paging : req.paging}).then(function(destinations){
+    res.render('destinations', { destinations : destinations.rows });
+  });
+});
+
+router.get('/destinations/country/:iso_code2', function(req, res, next) {  
+  destinationsProv.findAllByIsoCode2(req.params.iso_code2, {  paging : req.paging}).then(function(destinations){
     res.render('destinations', { destinations : destinations.rows });
   });
 });
 
 
 router.get('/api/destinations', function(req, res, next) {
-  models.destination.findAndCountAll({ include: [models.country], offset: req.paging.offset, limit: req.paging.limit}).then(function(destinations){
+  destinationsProv.findAll({ paging : req.paging}).then(function(destinations){
     res.setHeader('Content-Type', 'application/json');
     res.json(destinations);
     res.end();
   });
 });
 
-
-function sequelizePager()
-{
-}
+router.get('/api/destinations/country/:iso_code2', function(req, res, next) {
+  destinationsProv.findAllByIsoCode2(req.params.iso_code2, {  paging : req.paging}).then(function(destinations){
+    res.setHeader('Content-Type', 'application/json');
+    res.json(destinations);
+    res.end();
+  });
+});
 
 
 module.exports = router;

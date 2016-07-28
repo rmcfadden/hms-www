@@ -8,8 +8,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var config = require('./config/config.json');
-
-
+var pjson = require('./package.json');
 var app = express();
 
 // Add shared functoins for ejs templates
@@ -54,6 +53,7 @@ app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
 
 
+app.locals.version = pjson.version;
 
 
 // catch 404 and forward to error handler

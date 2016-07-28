@@ -5,6 +5,9 @@
     background: #9b6bcc;
 }
 
+.interactive-slider-v2 h1{
+  font-size: 50px; 
+}
 
 /*Interactive Slider v2
 ------------------------------------*/
@@ -48,3 +51,4 @@
     background-position: center center;
     background-size: cover;  
 }
+

@@ -3,9 +3,11 @@
 
 var testUtils  = require('../modules/test-utils');
 
-console.log(testUtils);
 
 console.log('Node Environment =' + process.env.NODE_ENV)
-testUtils.addTestDestinations();
+
+testUtils.addTestDestinations(10, function(error){
+  process.exit();
+});
 
 
