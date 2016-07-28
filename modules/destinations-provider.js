@@ -17,6 +17,9 @@ var destinationsProvider  = function(){
     return models.destination.findAndCountAll({  include: [ {"model" : models.country, where: { 'iso_code2': isoCode2 }}], offset: options.paging.offset, limit: options.paging.limit});  
   }
 
+  this.findOneByIsoCode2AndName = function(isoCode2, name,  options){
+    return models.destination.findOne({ where: { 'name': name }, include: [ {"model" : models.country, where: { 'iso_code2': isoCode2 }}]}); 
+  }
 };
 
 module.exports = destinationsProvider;
