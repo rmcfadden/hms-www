@@ -38,7 +38,12 @@ describe('Create settings', function () {
 		 });
       }
     ],function(error, result){
-     done();
+     if(!error){
+      done();
+     }
+     else{
+      should.fail();
+     }
     });    
   });
 });
@@ -100,7 +105,12 @@ describe('Update settings', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+      done();
+     }
+     else{
+      should.fail();
+     }
     });    
   });
 });
@@ -148,13 +158,18 @@ describe('delete settings', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+      done();
+     }
+     else{
+      should.fail();
+     }
     });    
   });
 });
 
 describe('Find all settings', function () {
-  before(function(){
+  before(function(done){
     async.waterfall([
        function createSettingCategory(next){
           var name = randomstring.generate() + "-setting";
@@ -186,7 +201,12 @@ describe('Find all settings', function () {
          });
       }
     ],function(error, result){
-     done();
+     if(!error){
+      done();
+     }
+     else{
+      should.fail();
+     }
     });   
   })
   it('should return a valid list of settings', function (done) {

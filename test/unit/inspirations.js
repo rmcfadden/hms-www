@@ -68,7 +68,11 @@ describe('Edit inspirations', function () {
         });
       }
     ], function(error, result) {
-	  done();
+	  if(!error) {
+		done();  
+	  } else {
+		should.fail();  
+	  }
     });    
   });
 });
@@ -103,13 +107,17 @@ describe('Delete inspiration', function () {
           });
       }
     ],function(error, result){
-      done();
+     if(!error) {
+		done();  
+	  } else {
+		should.fail();  
+	  }
     });    
   });
 });
 
 describe('find all', function () {
-  before(function(){
+  before(function(done){
     var name = randomstring.generate() + "-inspiration";
     var title = 'title' + randomstring.generate({ length: 3, charset: 'numeric' });
     models.inspirations.create({      

@@ -21,8 +21,6 @@ describe('Create destination_attribute_categories', function () {
          });  
        },
        function createCategory(category_type_id){
-         console.log(category_type_id);
-         
          var name = "Cat " + randomstring.generate({ length: 3, charset: 'numeric' });
          console.log(name);
          models.destination_attribute_categories.create({
@@ -38,7 +36,11 @@ describe('Create destination_attribute_categories', function () {
          });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       done();
+     } else {
+      should.fail();	 
+     }
     });    
   });
 });
@@ -95,7 +97,11 @@ describe('Update destination_attribute_categories', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       done();
+     } else {
+      should.fail();	 
+     }
     });    
   });
 });
@@ -140,13 +146,17 @@ describe('delete destination_attribute_categories', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       done();
+     } else {
+      should.fail();	 
+     }
     });    
   });
 });
 
 describe('Find all destination_attribute_categories', function () {
-  before(function(){
+  before(function(done){
     async.waterfall([
        function createdestinationAttributeCategoryTypes(next){
           var name = "Type-" + randomstring.generate();
@@ -176,7 +186,11 @@ describe('Find all destination_attribute_categories', function () {
          });
       },
     ],function(error, result){
-     done();
+     if(!error){
+       done();
+     } else {
+      should.fail();	 
+     }
     });   
   })
   it('should return a valid list of destination_attribute_categories', function (done) {

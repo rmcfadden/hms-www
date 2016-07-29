@@ -73,7 +73,11 @@ describe('create destination', function () {
       }
       
     ],function(error, result){
-      done();
+      if(!error){
+       done();
+     } else {
+      should.fail(); 
+     }
     });
   });
 });
@@ -168,7 +172,11 @@ describe('update destination', function () {
         });
       }      
     ],function(error, result){
-      done();
+      if(!error){
+       done();
+     } else {
+      should.fail(); 
+     }
     });
   });
 });
@@ -247,13 +255,17 @@ describe('delete destination', function () {
           });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       done();
+     } else {
+      should.fail(); 
+     }
     });    
   });
 });
 
 describe('find all', function () {
-  before(function(){
+  before(function(done){
     async.waterfall([
        function getCountry(next){
         models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
@@ -312,13 +324,18 @@ describe('find all', function () {
  
           destination.created.should.be.greaterThan(0);
           destination.updated.should.be.greaterThan(0);          
-          next();
+          next()
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       
+       done();
+     } else {
+      should.fail(); 
+     }
     }); 
-  })
+  });
   it('should return a valid list of destinations', function (done) {
     models.destination.findAll().then(function(destinations) {
       destinations.length.should.be.greaterThan(0);

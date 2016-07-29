@@ -96,7 +96,12 @@ describe('update address', function () {
         });
       }
     ],function(error, result){
+      if(!error){
       done();
+     }
+     else{
+      should.fail();
+     }
     });    
   });
 });
@@ -131,23 +136,28 @@ describe('delete address', function () {
 	      });
 	    });
       },
-     function deleteAddress(address_id){
+     function deleteAddress(address_id, next){
          models.address.destroy({ where : { id : address_id} })
           .then(function(status) {
 	          models.address.findAll({where : { id : address_id }}).then(function(addresses){
               addresses.length.should.equal(0);
-	            done();
+	            next()
 	          });
           });
       }
     ],function(error, result){
-     done();
+     if(!error){
+      done();
+     }
+     else{
+      should.fail();
+     }
     });    
   });
 });
 
 describe('find all', function () {
-  before(function(){
+  before(function(done){
     models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
       models.address.create({
         address_line1: 'testing address1',

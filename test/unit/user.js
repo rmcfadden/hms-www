@@ -68,10 +68,10 @@ describe('update user', function () {
           user.username.should.equal(username);
           user.email.should.equal(email);
           user.password.should.equal("secretUpdated");
-	  user.password_salt.should.equal("456");
-	  user.is_enabled.should.equal(2);
-	  user.is_subscribed.should.equal(2);
-	  user.is_subscribed_to_partners.should.equal(2);
+          user.password_salt.should.equal("456");
+          user.is_enabled.should.equal(2);
+          user.is_subscribed.should.equal(2);
+          user.is_subscribed_to_partners.should.equal(2);
 
           user.created.should.be.greaterThan(0);
           user.updated.should.be.greaterThan(0);
@@ -79,7 +79,11 @@ describe('update user', function () {
         });
       }
     ],function(error, result){
-      done();
+      if(!error){
+       done(); 
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });
@@ -117,7 +121,11 @@ describe('delete user', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       done(); 
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });
@@ -127,18 +135,18 @@ describe('find all', function () {
     var email = randomstring.generate() + "@abc.com";
     var username = "Tim" + randomstring.generate();
       models.user.create({
-	username: username,
-	email: email,
-	password: "secret",
-	password_salt: "123"
+      username: username,
+      email: email,
+      password: "secret",
+      password_salt: "123"
       }).then(function(user) {
-	user.id.should.be.greaterThan(0);
-	user.username.should.equal(username);
-	user.email.should.equal(email);
-	user.password.should.equal("secret");
-	user.password_salt.should.equal("123");
-        user.created.should.be.greaterThan(0);
-	user.updated.should.be.greaterThan(0);
+      user.id.should.be.greaterThan(0);
+      user.username.should.equal(username);
+      user.email.should.equal(email);
+      user.password.should.equal("secret");
+      user.password_salt.should.equal("123");
+      user.created.should.be.greaterThan(0);
+	    user.updated.should.be.greaterThan(0);
       });
   })
   it('should return a valid list of users', function (done) {
