@@ -54,7 +54,11 @@ describe('Edit tags', function () {
         });
       }
     ], function(error, result) {
-	done();
+	    if(!error){
+        done();
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });
@@ -84,7 +88,11 @@ describe('Delete Tag', function () {
           });
       }
     ],function(error, result){
-      done();
+      if(!error){
+        done();
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });

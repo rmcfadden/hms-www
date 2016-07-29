@@ -56,7 +56,11 @@ describe('Edit organization', function () {
         });
       }
     ], function(error, result) {
-	  done();
+	    if(!error){
+       done(); 
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });
@@ -92,7 +96,7 @@ describe('Delete organization', function () {
 });
 
 describe('find all', function () {
-  before(function(){
+  before(function(done){
     var name = randomstring.generate() + "-organization";
     models.organization.create({      
       name: name,

@@ -55,7 +55,11 @@ describe('Edit Setting Category', function () {
 		});
       }
     ], function(error, result) {
-	done();
+	    if(!error){
+       done(); 
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });
@@ -85,7 +89,11 @@ describe('Delete Setting Category', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+       done(); 
+      } else {
+       should.fail(); 
+      }
     });    
   });
 });

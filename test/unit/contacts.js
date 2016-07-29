@@ -54,7 +54,11 @@ describe('Create contact', function () {
          });
       }
     ],function(error, result){
-     done();
+     if(!error){
+        done(); 
+     } else {
+      should.fail(); 
+     }
     });    
   });
 });
@@ -139,7 +143,11 @@ describe('Update contacts', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+        done(); 
+     } else {
+      should.fail(); 
+     }
     });    
   });
 });
@@ -201,7 +209,11 @@ describe('delete contacts', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+        done(); 
+     } else {
+      should.fail(); 
+     }
     });    
   });
 });
@@ -261,7 +273,11 @@ describe('Find all contacts', function () {
         });
       }
     ],function(error, result){
-     done();
+     if(!error){
+        done(); 
+     } else {
+      should.fail(); 
+     }
     });    
   });
 });
