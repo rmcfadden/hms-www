@@ -1,14 +1,33 @@
 <% include partials/header.ejs %>
 
-<!-- Start thumbnail photo -->
-<div class="container">
-  <div class="row">
-      <div class="col-md-12" style="padding:0px">
-        <img class="img-responsive" src="/assets/img/samples/destination-image-sample<%=((destination.id ? destination.id : 1)  % 3) + 1%>.jpeg" alt="" />
+<div class="margin-bottom-20"></div>
+
+<div class="container center-block">
+  
+  <!-- Start thumbnail photo -->
+  <div class="row margin-bottom-20">
+    <div class="col-md-12">
+        <img width="100%" class="img-responsive" src="/assets/img/samples/destination-image-sample<%=((destination.id ? destination.id : 1)  % 3) + 1%>.jpeg" alt="" />
     </div>
   </div>
-</div>
-<!-- End thumbnail photo -->
+  <!-- End thumbnail photo -->
+
+
+  <% include partials/destination-media-thumbnails.ejs %>
+
+  <div class="margin-bottom-40"></div>
+
+  <div class="heading heading-v1 margin-bottom-40">
+    <h2>More about The most awesome hotel ever</h2>
+    <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
+    </p>
+  </div>
+
+
+</div> <!-- container -->
 
 
 <% include partials/footer.ejs %>

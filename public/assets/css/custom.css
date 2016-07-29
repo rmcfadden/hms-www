@@ -52,3 +52,21 @@
     background-size: cover;  
 }
 
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.heading h2 {
+    padding: 0px 12px;
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 30px !important;
+}
+
+.heading h2::before, .heading h2::after {
+    width: 40%
+}
