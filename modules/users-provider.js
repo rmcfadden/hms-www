@@ -5,6 +5,9 @@ var randomstring = require("randomstring");
 var bcrypt  = require('bcryptjs');
 var Promise = require('promise');
 
+var rolesProvider  = require('../modules/roles-provider');
+var rolesProv = new rolesProvider(); 
+
 var usersProvider  = function(){
   this.create = function(user){
     var proxy = this;
@@ -22,6 +25,12 @@ var usersProvider  = function(){
         email: user.email,
         password: hashedPassword,
         password_salt: salt
+      }).then(function(newUser) {
+        if(user.roles){
+          return proxy.addRolesToUser(newUser, user.roles);
+        }else{
+          return newUser;
+        }
       }).then(function(user) {
         resolve(user);
       }).catch(function(err){
@@ -41,6 +50,10 @@ var usersProvider  = function(){
 
   this.hashPassword = function(password, salt){
     return bcrypt.hashSync(password, salt)
+  }
+
+  this.addRolesToUser = function(user, roles){
+    return rolesProv.addRolesToUser(user, roles); 
   }
 
   this.remove = function(user){
