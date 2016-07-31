@@ -4,6 +4,7 @@ var models  = require('../models');
 
 var rolesProvider  = function(){
   this.findAll = function(){
+    // TODO: cache this
     return models.role.findAll();
   }
 
