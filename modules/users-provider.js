@@ -8,6 +8,9 @@ var Promise = require('promise');
 var rolesProvider  = require('../modules/roles-provider');
 var rolesProv = new rolesProvider(); 
 
+var organizationsProvider  = require('../modules/organizations-provider');
+var organizationsProv = new organizationsProvider(); 
+
 var usersProvider  = function(){
   this.create = function(user){
     var proxy = this;
@@ -31,7 +34,14 @@ var usersProvider  = function(){
         }else{
           return newUser;
         }
-      }).then(function(user) {
+      }).then(function(newUser) {
+        if(user.organizations){
+          return proxy.addOrganizationsToUser(newUser, user.organizations);
+        }else{
+          return newUser;
+        }
+      })
+      .then(function(user) {
         resolve(user);
       }).catch(function(err){
         reject(err);
@@ -54,6 +64,10 @@ var usersProvider  = function(){
 
   this.addRolesToUser = function(user, roles){
     return rolesProv.addRolesToUser(user, roles); 
+  }
+
+  this.addOrganizationsToUser = function(user, organizations){
+    return organizationsProv.addOrganizationsToUser(user, organizations); 
   }
 
   this.remove = function(user){
