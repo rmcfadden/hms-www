@@ -1,6 +1,8 @@
 'use strict';
 
 var models  = require('../models');
+var Promise = require('promise');
+var async  = require('async');
 
 var organizationsProvider  = function(){
   this.findAll = function(){
@@ -39,19 +41,22 @@ var organizationsProvider  = function(){
 
         user.organizations = [];
 
-        let organizationRequests = mappedOrganizations.map((organization) => {
-          return new Promise((resolve) => {
-            models.users_organizations.create({ user_id: user.id, organization_id: organization.id })
-            .then(function(user_organization){
-                user.organizations.push({ name : organization.name, organization_id: organization.id, user_id: user.id});
-                return resolve(user);
-            }).catch(function(error){
-              return reject(error);
-            });
+        async.forEach(mappedOrganizations, function (organization, callback){ 
+          models.users_organizations.create({ user_id: user.id, organization_id: organization.id }).then(function(user_organization){            
+            user.organizations.push({ name : organization.name, organization_id: user_organization.id, user_id: user.id});
+            callback();
+          }).catch(function(error){
+              return callback(error);
           });
-        });
+        }, function(err) {
+          if(err){
+            return reject(err);
+          }
+          else{
+            return resolve(user);
+          }
+        }); 
 
-        Promise.all(organizationRequests).then(() => resolve(user));
 
       }).catch(function(error){
         return reject(error);
