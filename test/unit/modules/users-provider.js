@@ -71,8 +71,7 @@ describe('create with roles and organizations', function () {
       organizations : [ organizationName1,organizationName2]
     };
 
-    usersProv.create(newUser).then(function(user){   
-      
+    usersProv.create(newUser).then(function(user){      
       user.id.should.be.greaterThan(0);
       user.username.should.equal(username);
       user.email.should.equal(email);
