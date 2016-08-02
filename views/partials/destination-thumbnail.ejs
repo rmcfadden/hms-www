@@ -1,5 +1,5 @@
 <div class="thumbnail" onclick="location.href='<%=createDestinationLink(destination)%>';" style="cursor:pointer;">
-  <img class="img-responsive" src="/assets/img/samples/destination-image-sample<%= (destination.id % 3) + 1%>.jpeg" alt="" />
+  <img class="img-responsive" src="/assets/img/samples/destination-image-sample<%= (destination.id % 5) + 1%>.jpeg" alt="" />
   <div class="caption">
     <h3><%= truncateWithEllipses(destination.name, 30); %></h3>
     <p><%= truncateWithEllipses(destination.description, 40); %></p>

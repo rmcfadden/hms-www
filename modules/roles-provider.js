@@ -1,6 +1,9 @@
 'use strict';
 
 var models  = require('../models');
+var async  = require('async');
+var Promise = require('promise');
+
 
 var rolesProvider  = function(){
   this.findAll = function(){
@@ -39,19 +42,21 @@ var rolesProvider  = function(){
 
         user.roles = [];
 
-        let roleRequests = mappedRoles.map((role) => {
-          return new Promise((resolve) => {
-            models.users_roles.create({ user_id: user.id, role_id: role.id })
-            .then(function(user_role){
-                user.roles.push({ name : role.name, role_id: role.id, user_id: user.id});
-                return resolve(user);
-            }).catch(function(error){
-              return reject(error);
-            });
+        async.forEach(mappedRoles, function (role, callback){ 
+          models.users_roles.create({ user_id: user.id, role_id: role.id }).then(function(user_role){            
+            user.roles.push({ name : role.name, role_id: role.id, user_id: user.id});
+            callback();
+          }).catch(function(error){
+              return callback(error);
           });
-        });
-
-        Promise.all(roleRequests).then(() => resolve(user));
+        }, function(err) {
+          if(err){
+            return reject(err);
+          }
+          else{
+            return resolve(user);
+          }
+        }); 
 
       }).catch(function(error){
         return reject(error);

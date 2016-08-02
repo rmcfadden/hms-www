@@ -71,8 +71,7 @@ describe('create with roles and organizations', function () {
       organizations : [ organizationName1,organizationName2]
     };
 
-    usersProv.create(newUser).then(function(user){   
-      
+    usersProv.create(newUser).then(function(user){      
       user.id.should.be.greaterThan(0);
       user.username.should.equal(username);
       user.email.should.equal(email);
@@ -94,11 +93,11 @@ describe('create with roles and organizations', function () {
       usersProv.verifyPassword(user, "secret123").should.be.true();
 
       // verify the ogranization
-      user.organizations[0].name.should.equal(organizationName1);
+      user.organizations[0].name.should.match(new RegExp('(^' + organizationName1 + '$)|(^' + organizationName2 + '$)','g'));
       user.organizations[0].organization_id.should.be.greaterThan(0);
       user.organizations[0].user_id.should.equal(user.id);
 
-      user.organizations[1].name.should.equal(organizationName2);
+      user.organizations[1].name.should.match(new RegExp('(^' + organizationName1 + '$)|(^' + organizationName2 + '$)','g'));
       user.organizations[1].organization_id.should.be.greaterThan(0);
       user.organizations[1].user_id.should.equal(user.id);
 

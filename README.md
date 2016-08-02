@@ -51,7 +51,7 @@
  
 7. Add test data and run and test in http://localhost:8080/
  ```
- ./utils/hms.js --add-test-data 
+ ./utils/cli.js add-test-data 
  npm start
  ```
  
@@ -86,11 +86,29 @@
  * All fields should be covered by unit tests.
 
 3. Routes
+ * Rote logic should not be to complex.  If there's too much code, create some modules.
+ * Javascript references can be passed through the scripts variable.  See destination.ejs for examples.
 4. Views
+  
 5. Modules
  * All helper/util classes, or classes that don't fit into the MVC categories, above should go in /modules/.
  * If you find yourself duplicating code (cutting and pasting), why not normalize your code and create a module here (DRY)?
  * Some modules may become candidate for npm packages.
+
+6. Client side-
+ * Do not modify the template code.  Place your .css in custom.css or a stylesheet relevant to the specific view
+
+7. The CLI
+
+ * Example of how to add a user with some roles
+ ```
+ cli.js add-user --username user1 --password '123' --email 'asdfsadf@gmail.com1' --roles 'admin,editor'
+ ```
+ * How to add test data
+ ```
+ cli.js add-test-data 
+ ```
+
 
 # Development best practices
 * Practice DRY (don't repeat yourself) coding.
