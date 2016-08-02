@@ -53,7 +53,7 @@ app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
 
 
-app.locals.version = pjson.version;
+app.locals.app_version = pjson.version;
 
 
 // catch 404 and forward to error handler
@@ -99,6 +99,9 @@ app.startTestServer = function(){
 app.closeTestServer = function(){
   testServer.close();
 }
+
+// place app locals here
+app.locals.scripts  = [];
 
 
 module.exports = app;
