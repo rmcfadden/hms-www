@@ -2,6 +2,7 @@
 'use strict';
 
 var program = require('commander');
+var colors = require('colors');
 
 console.log('Node Environment =' + process.env.NODE_ENV);
 
@@ -61,6 +62,11 @@ program
    });
 
 program.parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+    program.outputHelp();
+}
+
 
 function argumentError(argName){
   console.log();
