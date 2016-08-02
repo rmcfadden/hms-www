@@ -7,36 +7,46 @@ console.log('Node Environment =' + process.env.NODE_ENV);
 
 program
   .command('add-user')
-  .option('-u, --username', 'Username [required]')
-  .option('-e, --email', 'Email [required]')
-  .option('-p, --password', 'Password [required]')
-  .option('-r, --roles', 'Roles')
-  .option('-o, --organizations', 'Organizations')
-  .action(function() {
+  .option('-u, --username <username>', 'Username [required]')
+  .option('-e, --email <email>', 'Email [required]')
+  .option('-p, --password <password>', 'Password [required]')
+  .option('-r, --roles <roles>', 'Roles')
+  .option('-o, --organizations <organizations>', 'Organizations')
+  .action(function(cmd) {
     var usersProvider  = require('../modules/users-provider');
     var usersProv = new usersProvider();    
     
-    console.log(program);
-
     if (!cmd.username){
       argumentError('username');
     }
 
-    if (!program.email){
+    if (!cmd.email){
       argumentError('email');
     }
 
-    if (!program.password){
+    if (!cmd.password){
       argumentError('password');
     }
 
     var user = {
-      username: program.username,
-      email: program.email,
-      password: program.password,
+      username: cmd.username,
+      email: cmd.email,
+      password: cmd.password,
     }
 
-    usersProv.create(user, function(newUser){
+    if (cmd.roles){
+      user.roles = cmd.roles.split(",");
+    }
+
+    if (cmd.organizations){
+      user.organizations = cmd.organizations.split(",");
+    }
+
+    usersProv.create(user).then(function(newUser){
+      console.log('Successfully added username with id: ' + newUser.id);
+      process.exit();
+    }).catch(function(err){
+      console.log('Error adding user: ' + err);
       process.exit();
     });
    });
