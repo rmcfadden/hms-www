@@ -100,9 +100,9 @@
 
 7. The CLI
 
- * Example of how to add a user
+ * Example of how to add a user with some roles
  ```
- cli.js add-user --username rmcfadden1 --password '123' --email 'ryanpmcfadden@gmail.com1' --roles 'admin,editor'
+ cli.js add-user --username user1 --password '123' --email 'asdfsadf@gmail.com1' --roles 'admin,editor'
  ```
  * How to add test data
  ```
