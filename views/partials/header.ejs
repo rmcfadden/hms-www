@@ -39,7 +39,7 @@
 	<link rel="stylesheet" href="/assets/css/theme-skins/dark.css">
 
 	<!-- CSS Customization -->
-	<link rel="stylesheet" href="/assets/css/custom.css?app_version=<%=version%>">
+	<link rel="stylesheet" href="/assets/css/custom.css?app_version=<%=app_version%>">
 
 	<!-- jQuery -->
 	<script type="text/javascript">
@@ -50,7 +50,11 @@
     ].join(''));
 	</script>
 
-	<script src="/assets/js/shared.js?app_version=<%=version%>" type='text/javascript'></script>
+	<script src="/assets/js/shared.js?app_version=<%=app_version%>" type='text/javascript'></script>
+
+	<% for (var i in scripts) { %>
+	<script type="text/javascript" src="<%= scripts[i] %>"></script>
+	<% } %>
 
 </head>
 
