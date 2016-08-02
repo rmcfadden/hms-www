@@ -20,5 +20,6 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "sessionSecret" : "YOUR_SECRET"
+  "sessionSecret" : "YOUR_SECRET",
+  "destinationsPageSize" : 12
 }

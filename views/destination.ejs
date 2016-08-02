@@ -7,16 +7,16 @@
   <!-- Start thumbnail photo -->
   <div class="row margin-bottom-20">
     <div class="col-md-12">
-        <img width="100%" class="img-responsive" src="/assets/img/samples/destination-image-sample<%=((destination.id ? destination.id : 1)  % 3) + 1%>.jpeg" alt="" />
+        <img width="100%" class="img-responsive" src="/assets/img/samples/destination-image-sample<%=((destination.id ? destination.id : 1)  % 5) + 1%>.jpeg" alt="" />
     </div>
   </div>
   <!-- End thumbnail photo -->
 
 
   <% include partials/destination-media-thumbnails.ejs %>
-
   <div class="margin-bottom-40"></div>
 
+  <!-- description -->
   <div class="heading  margin-bottom-40">
     <h2>More about The most awesome hotel ever</h2>
     <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
@@ -25,6 +25,26 @@
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
     </p>
   </div>
+  <!-- end description -->
+
+
+  <!-- map -->
+  <div class="row  margin-bottom-40">
+  <style>
+      #map {
+        width: 100%;
+        height: 300px;
+      }
+    </style>
+    <div class="col-md-12">
+      <div id="map"></div>
+    </div>
+  </div>
+  <!-- end map -->
+
+  <!-- reviews -->
+  <!-- end reviews -->
+
 
 
 </div> <!-- container -->
