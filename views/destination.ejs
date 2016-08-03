@@ -18,12 +18,8 @@
 
   <!-- description -->
   <div class="heading  margin-bottom-40">
-    <h2>More about The most awesome hotel ever</h2>
-    <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble.
-    </p>
+    <h2>More about <%= destination.name %></h2>
+    <p class="lead"><%= destination.description %></p>
   </div>
   <!-- end description -->
 
@@ -43,6 +39,8 @@
   <!-- end map -->
 
   <!-- reviews -->
+  <% var destination_reviews = destination.reviews ? destination.reviews : []; %>
+  <% include partials/destination-reviews.ejs %>
   <!-- end reviews -->
 
 
