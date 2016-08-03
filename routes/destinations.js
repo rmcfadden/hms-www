@@ -35,7 +35,7 @@ router.get('/destinations/country/:iso_code2', function(req, res, next) {
 });
 
 
-router.get('/api/destinations', function(req, res, next) {
+router.get('/api/destinations/', function(req, res, next) {
   destinationsProv.findAll({ paging : req.paging}).then(function(destinations){
     res.setHeader('Content-Type', 'application/json');
     res.json(destinations);
