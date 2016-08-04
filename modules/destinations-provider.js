@@ -20,6 +20,26 @@ var destinationsProvider  = function(){
   this.findOneByIsoCode2AndName = function(isoCode2, name,  options){
     return models.destination.findOne({ where: { 'name': name }, include: [ {"model" : models.country, where: { 'iso_code2': isoCode2 }}]}); 
   }
+  
+  this.findAllByCategory = function(categoryName, options){
+    return new Promise(function(resolve, reject){
+      models.destination_category_types.findOne({ where: { 'name': categoryName }}).then(function(categoryType){
+        var categoryLookup = [];
+        models.destinations_categories.findAll({where: {'destination_category_type_id':categoryType.id}}).then(function(returnDestinations){
+          for(var i=0; i < returnDestinations.length; i++)
+          {
+            categoryLookup.push(returnDestinations[i].destination_id);
+          }
+           models.destination.findAndCountAll({  where: { 'id': categoryLookup }});  
+        });     
+      }).catch(function(error){
+        console.log('Error occured');
+        return reject(error);
+      });      
+    });
+    
+  } 
+  
 };
 
 module.exports = destinationsProvider;
