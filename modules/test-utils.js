@@ -22,6 +22,8 @@ testUtils.ensureDestinationCount = function (num, callback){
   });
 }
 
+var defaultDescription = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. ";
+
 
 testUtils.addTestDestinations = function(num, callback){
   if(!num){
@@ -62,7 +64,7 @@ testUtils.addTestDestinations = function(num, callback){
             postal_code: '93105',
             country_id: country_id
           }).then(function(address) {
-            next(null, user_id, country_id, organization_id, address.id)
+            next(null, user_id, country_id, organization_id, address.id);
           }).catch(function(err){
             next(err);
           }); 
@@ -71,18 +73,46 @@ testUtils.addTestDestinations = function(num, callback){
           var destinationName = "destination " + randomstring.generate(2);
           models.destination.create(
           {
-              name: destinationName,
-              organization_id: organization_id,
-              country_id: country_id,
-              user_id: user_id,
-              address_id: address_id,
-              description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. "
+            name: destinationName,
+            organization_id: organization_id,
+            country_id: country_id,
+            user_id: user_id,
+            address_id: address_id,
+            description: defaultDescription
           }).then(function(destination){    
-            next(null);
+            next(null, user_id, country_id, organization_id, address_id, destination.id);
           }).catch(function(err){
             next(err);
           });
-        }        
+        },
+        function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, next){
+          
+          // how to add 3 destination reviews
+          async.forEach([1,2,3], function (id, callback){ 
+            var title  = randomstring.generate(10);
+          
+            models.destination_review.create({
+              destination_id: destination_id,
+              user_id: user_id,
+              title: 'Amazing location!' + title,
+              text: defaultDescription,
+              service_rating: 4,
+              overall_rating: 3.5
+            }).then(function(destination_review){
+              callback();
+            }).catch(function(err){
+              callback(err);
+            });
+          }, function(err) {
+            if(err){
+              return next(err);
+            }
+            else{
+              return next(null);
+            }
+          });
+        }
+
       ],function(error){
         if(error){
           console.log('An error has occurred: ' + error );

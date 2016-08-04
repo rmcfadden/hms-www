@@ -23,9 +23,11 @@
   </div>
   <!-- end description -->
 
-
   <!-- map -->
-  <div class="row  margin-bottom-40">
+  <div class="container">
+    <div class="headline"><h2>Location</h2></div>
+  </div>
+  <div class="row margin-bottom-40">
   <style>
       #map {
         width: 100%;
@@ -39,7 +41,11 @@
   <!-- end map -->
 
   <!-- reviews -->
-  <% var destination_reviews = destination.reviews ? destination.reviews : []; %>
+  <div class="container">
+    <div class="headline"><h2>Top reviews</h2></div>
+  </div>
+
+  <% var destination_reviews = destination.destination_reviews ? destination.destination_reviews : []; %>
   <% include partials/destination-reviews.ejs %>
   <!-- end reviews -->
 
