@@ -104,6 +104,7 @@ describe('GET /api/destinations/country/us/?limit=10&offset=0', function(){
       }
     });
   });
+
   it('should return 10 destinations from US', function(done){
     request(app)
       .get('/api/destinations/country/us/?limit=10&offset=0')
@@ -112,8 +113,7 @@ describe('GET /api/destinations/country/us/?limit=10&offset=0', function(){
       .end(function(err, res) {
         if (err) return done(err);
       
-        console.log('RECORDS::+'+res.body.count);        
-        res.body.count.should.be.above(10);
+        res.body.count.should.be.above(9);
         res.body.rows.length.should.be.equal(10);
    
         // validate that country data is present

@@ -24,13 +24,15 @@ testUtils.ensureDestinationCount = function (num, callback){
 
 testUtils.ensureDestinationCountUs = function (num, callback){
   var proxyThis = this;
-  models.destination.count({ where:{'country_id' : 247}}).then(function(c){
-    if(c < num){
-      return proxyThis.addTestDestinations(num, 'us', callback);
-    }
-    else{
-      return callback(null);
-    }
+  models.country.findOne({ where : { name:  'United States' }}).then(function(country){
+    models.destination.count({ where:{'country_id' : country.id}}).then(function(c){
+      if(c < num){
+        return proxyThis.addTestDestinations(num, 'us', callback);
+      }
+      else{
+        return callback(null);
+      }
+    });
   });
 }
 
@@ -99,13 +101,12 @@ testUtils.addTestDestinations = function(num, country, callback){
             description: defaultDescription
           }).then(function(destination){    
             next(null, user_id, country_id, organization_id, address_id, destination.id);
-            //next(null, destination.id);
           }).catch(function(err){
             next(err);
           });
         }, 
         function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, next){
-            var categoryTypeId  = randomstring.generate({ length: 1, charset: 'numeric' });
+            var categoryTypeId  = 1; // hard coding to romatic
             models.destinations_categories.create(
             {
               destination_category_type_id: categoryTypeId,
@@ -120,7 +121,7 @@ testUtils.addTestDestinations = function(num, country, callback){
             var title  = randomstring.generate(10);
             models.destination_reviews.create({
               destination_id: destination_id,
-              /*user_id: user_id,*/
+              user_id: user_id,
               title: 'Amazing location!' + title,
               text: defaultDescription,
               service_rating: 4,

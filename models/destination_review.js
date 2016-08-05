@@ -21,14 +21,14 @@ module.exports = function(sequelize, DataTypes) {
             key: 'id'
         }
       },
-      /*user_id: {
+      user_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
             model: 'users',
             key: 'id'
         }
-      },*/
+      },
       title: {
         type: DataTypes.TEXT,
         allowNull: false
