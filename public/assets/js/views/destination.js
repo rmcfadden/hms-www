@@ -1,18 +1,11 @@
 var map;
 $( document ).ready(function() {
 
-  map = new GMaps({
-    div: '#map',
-    lat: 48.857,
-    lng: 2.295
-  });
-
-/*
+/* TODO!
   GMaps.geocode({
-    address: '505 Chapala St. Santa Barbara CA 93101',//$('#address').val(),
+    address: '123 Chapala St. Santa Barbara CA 93101',//$('#address').val(),
     callback: function(results, status) {
 
-      alert(status);
       if (status == 'OK') {
         var latlng = results[0].geometry.location;
         map.setCenter(latlng.lat(), latlng.lng());
@@ -24,3 +17,15 @@ $( document ).ready(function() {
     }
   });*/
 });
+
+
+function initGoogleDestinationMap(){
+ map = new GMaps({
+    div: '#map',
+    lat: 48.857,
+    lng: 2.295,
+    width: '100%',
+    height: '500px',
+    zoom: 16
+  });
+}
