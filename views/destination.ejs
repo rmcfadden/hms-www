@@ -16,6 +16,7 @@
         <!-- End thumbnail photo -->
 
         <div class="col-md-12 col-lg-9 nopadding">
+          <% var destination_medias = destination.destination_medias ? destination.destination_medias : []; %>
           <% include partials/destination-media-thumbnails.ejs %>
         </div>
   

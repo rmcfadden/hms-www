@@ -200,6 +200,9 @@ describe('GET /api/destinations/category/category_that_does_exist/?limit=5&offse
 
         if (err) return done(err);
 
+        res.body.count.should.be.equal(0)
+        res.body.rows.length.should.be.equal(0);
+
         return done(err);
       }); 
   })

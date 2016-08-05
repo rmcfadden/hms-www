@@ -129,8 +129,8 @@ testUtils.addTestDestinations = function(num, country, callback){
             });
         },
         function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, next){
-          // how to add 3 destination reviews
-          async.forEach([1,2,3], function (id, callback){ 
+          // how to add 4 destination reviews
+          async.forEach([1,2,3,4], function (id, callback){ 
             var title  = randomstring.generate(10);
             models.destination_reviews.create({
               destination_id: destination_id,
@@ -149,10 +149,36 @@ testUtils.addTestDestinations = function(num, country, callback){
               return next(err);
             }
             else{
+              next(null, user_id, country_id, organization_id, address_id, destination_id);            
+            }
+          });
+        },
+        function createDestinationMedias(user_id,country_id, organization_id, address_id, destination_id, next){
+          var location = "LOC-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+          var title = "Title-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+          async.forEach([1,2,3,4], function (id, callback){ 
+            var title  = randomstring.generate(10);
+              models.destination_medias.create({
+              media_type_id: 2,
+              destination_id: destination_id,
+              location: '/assets/img/samples/destination-image-sample' + id + '.jpeg',
+              title: title,
+              description: defaultDescription
+            }).then(function(destination_reviews){
+              callback();
+            }).catch(function(err){
+              callback(err);
+            });
+          }, function(err) {
+            if(err){
+              return next(err);
+            }
+            else{
               return next(null, destination_id);
             }
           });
         }
+
       ],function(error){
         if(error){
           console.log('An error has occurred: ' + error );
