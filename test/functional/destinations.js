@@ -1,7 +1,12 @@
+'use strict';
+
+require('rootpath')();
+
 var request = require('supertest'),
   should = require('should'),
-  app = require('../../app'),
-  testUtils  = require('../../modules/test-utils');
+  app = require('app'),
+  testUtils  = require('modules/test-utils'),
+  models  = require('models/');
 
 
 describe('GET /api/destinations', function(){
@@ -125,5 +130,80 @@ describe('GET /api/destinations/country/us/?limit=10&offset=0', function(){
 
         done();
       });
+  })
+});
+
+
+describe('GET /api/destinations/category/romantic/?limit=5&offset=0', function(){
+  before(function(done) {
+    this.timeout(15000);
+  
+    testUtils.ensureDestinationCount(12, function(err, result){
+      if(err){
+        done(err);
+      }
+      else{
+        done();
+      }
+    });
+  });
+
+  it('should return 5 destinations with count above 5', function(done){
+    request(app)
+      .get('/api/destinations/category/romantic/?limit=5&offset=0')
+      .expect(200)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .end(function(err, res) {
+
+        if (err) return done(err);
+
+        models.destination_category_types.find({where: {name: 'romantic'}}).then(function(destinationCategory){
+          res.body.count.should.be.above(4);
+          res.body.rows.length.should.be.equal(5);
+
+          res.body.rows[0].destinations_categories[0].destination_category_type_id.should.equal(destinationCategory.id);
+          res.body.rows[1].destinations_categories[0].destination_category_type_id.should.equal(destinationCategory.id);
+          res.body.rows[2].destinations_categories[0].destination_category_type_id.should.equal(destinationCategory.id);
+          res.body.rows[3].destinations_categories[0].destination_category_type_id.should.equal(destinationCategory.id);
+          res.body.rows[4].destinations_categories[0].destination_category_type_id.should.equal(destinationCategory.id);
+
+          return done();
+        }).catch(function(err){
+          return done(err);
+        });      
+      });
+  })
+});
+
+
+
+describe('GET /api/destinations/category/category_that_does_exist/?limit=5&offset=0', function(){
+  before(function(done) {
+    this.timeout(15000);
+  
+    testUtils.ensureDestinationCount(12, function(err, result){
+      if(err){
+        done(err);
+      }
+      else{
+        done();
+      }
+    });
+  });
+
+  it('should return 0 destinations', function(done){
+    request(app)
+      .get('/api/destinations/category/category_that_does_exist/?limit=5&offset=0')
+      .expect(200)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .end(function(err, res) {
+
+        if (err) return done(err);
+
+        res.body.count.should.be.equal(0)
+        res.body.rows.length.should.be.equal(0);
+
+        return done(err);
+      }); 
   })
 });
