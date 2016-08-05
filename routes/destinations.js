@@ -52,7 +52,7 @@ router.get('/api/destinations/', function(req, res, next) {
 router.get('/api/destinations/country/:iso_code2', function(req, res, next) {
   destinationsProv.findAllByIsoCode2(req.params.iso_code2, {  paging : req.paging}).then(function(destinations){
     res.setHeader('Content-Type', 'application/json');
-    res.json(destinations, { destinations : destinations.rows });
+    res.json(destinations);
     res.end();
   });
 });
