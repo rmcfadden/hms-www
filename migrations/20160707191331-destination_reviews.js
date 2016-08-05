@@ -21,6 +21,14 @@ module.exports = {
             key: 'id'
         }
       },
+      user_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
+      },
       title: {
         type: Sequelize.TEXT,
         allowNull: false

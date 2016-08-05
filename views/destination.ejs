@@ -3,49 +3,69 @@
 <div class="margin-bottom-20"></div>
 
 <div class="container center-block">
+  <div class="row">
+    <div class="col-sm-12 col-lg-9">
+      <div id="content-container" class="container center-block">
+        
+        <!-- Start thumbnail photo -->
+        <div class="row margin-bottom-20">
+          <div class="col-md-12 col-lg-9">
+              <img width="100%" class="img-responsive" src="/assets/img/samples/destination-image-sample<%=((destination.id ? destination.id : 1)  % 5) + 1%>.jpeg" alt="" />
+          </div>
+        </div>
+        <!-- End thumbnail photo -->
+
+        <div class="col-md-12 col-lg-9 nopadding">
+          <% include partials/destination-media-thumbnails.ejs %>
+        </div>
   
-  <!-- Start thumbnail photo -->
-  <div class="row margin-bottom-20">
-    <div class="col-md-12">
-        <img width="100%" class="img-responsive" src="/assets/img/samples/destination-image-sample<%=((destination.id ? destination.id : 1)  % 5) + 1%>.jpeg" alt="" />
+        <div class="margin-bottom-20"></div>
+
+        <!-- description -->
+        <div class="col-md-12 col-lg-9">
+          <div class="heading margin-bottom-20">
+            <h2>More about <%= destination.name %></h2>
+            <p class="lead"><%= destination.description %></p>
+          </div>
+        </div>
+        <!-- end description -->
+
+        <!-- map -->
+        <div class="col-md-12 col-lg-9">
+          <div class="container">
+            <div class="headline"><h2>Location</h2></div>
+          </div>
+          <div class="row margin-bottom-20">
+            <div class="col-md-12">
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+        <!-- end map -->
+
+        <!-- reviews -->
+        <div class="col-md-12 col-lg-9">
+          <div class="container">
+            <div class="headline"><h2>Top reviews</h2></div>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-lg-9">
+          <% var destination_reviews = destination.destination_reviews ? destination.destination_reviews : []; %>
+          <% include partials/destination-reviews.ejs %>
+        </div>      
+        <!-- end reviews -->
+
+      </div> <!-- content-container -->
     </div>
+    <div class="hidden-md hidden-sm hidden-xs col-lg-3" style="background-color:red">
+      TEXT HERE!!!!
+      TEXT HERE!!!!
+      TEXT HERE!!!!
+      TEXT HERE!!!!
+      TEXT HERE!!!!
+    </div>    
   </div>
-  <!-- End thumbnail photo -->
-
-
-  <% include partials/destination-media-thumbnails.ejs %>
-  <div class="margin-bottom-40"></div>
-
-  <!-- description -->
-  <div class="heading  margin-bottom-40">
-    <h2>More about <%= destination.name %></h2>
-    <p class="lead"><%= destination.description %></p>
-  </div>
-  <!-- end description -->
-
-
-  <!-- map -->
-  <div class="row  margin-bottom-40">
-  <style>
-      #map {
-        width: 100%;
-        height: 300px;
-      }
-    </style>
-    <div class="col-md-12">
-      <div id="map"></div>
-    </div>
-  </div>
-  <!-- end map -->
-
-  <!-- reviews -->
-  <% var destination_reviews = destination.reviews ? destination.reviews : []; %>
-  <% include partials/destination-reviews.ejs %>
-  <!-- end reviews -->
-
-
-
-</div> <!-- container -->
-
+</div>
 
 <% include partials/footer.ejs %>
