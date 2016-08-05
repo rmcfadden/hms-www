@@ -14,7 +14,7 @@ testUtils.ensureDestinationCount = function (num, callback){
   var proxyThis = this;
   models.destination.count().then(function(c){
     if(c < num){
-      return proxyThis.addTestDestinations(num, callback);
+      return proxyThis.addTestDestinations(num, 'all', callback);
     }
     else{
       return callback(null);
@@ -22,15 +22,30 @@ testUtils.ensureDestinationCount = function (num, callback){
   });
 }
 
+testUtils.ensureDestinationCountUs = function (num, callback){
+  var proxyThis = this;
+  models.country.findOne({ where : { name:  'United States' }}).then(function(country){
+    models.destination.count({ where:{'country_id' : country.id}}).then(function(c){
+      if(c < num){
+        return proxyThis.addTestDestinations(num, 'us', callback);
+      }
+      else{
+        return callback(null);
+      }
+    });
+  });
+}
+
 var defaultDescription = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. ";
 
 
-testUtils.addTestDestinations = function(num, callback){
+testUtils.addTestDestinations = function(num, country, callback){
   if(!num){
     num = 25;
   }
 
-  console.log('Adding ' + num + ' test destinations')
+  console.log('Adding ' + num + ' test destinations');
+  console.log('Adding ' + country + ' test destinations')
 
   getCounties().then(function(countries){
     var destinationCount = 0;
@@ -39,7 +54,12 @@ testUtils.addTestDestinations = function(num, callback){
         function createOrganization(next){
           var organizationName = "organization - " + randomstring.generate();
           models.organization.create({ name: organizationName}).then(function(organization){
-            next(null, countries[Math.floor(Math.random() * countries.length)].id, organization.id);
+            if(country=='us') {
+             var country_id = 247;
+            } else {
+             var country_id = countries[Math.floor(Math.random() * countries.length)].id;
+            }
+            next(null, country_id, organization.id);
           })
         },
         function createUser(country_id, organization_id, next){
@@ -84,21 +104,29 @@ testUtils.addTestDestinations = function(num, callback){
           }).catch(function(err){
             next(err);
           });
+        }, 
+        function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, next){
+            var categoryTypeId  = 1; // hard coding to romatic
+            models.destinations_categories.create(
+            {
+              destination_category_type_id: categoryTypeId,
+              destination_id: destination_id
+            }).then(function(destinations_categories){
+              next(null, user_id, country_id, organization_id, address_id, destination_id);
+            });
         },
         function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, next){
-          
           // how to add 3 destination reviews
           async.forEach([1,2,3], function (id, callback){ 
             var title  = randomstring.generate(10);
-          
-            models.destination_review.create({
+            models.destination_reviews.create({
               destination_id: destination_id,
               user_id: user_id,
               title: 'Amazing location!' + title,
               text: defaultDescription,
               service_rating: 4,
               overall_rating: 3.5
-            }).then(function(destination_review){
+            }).then(function(destination_reviews){
               callback();
             }).catch(function(err){
               callback(err);
@@ -108,11 +136,10 @@ testUtils.addTestDestinations = function(num, callback){
               return next(err);
             }
             else{
-              return next(null);
+              return next(null, destination_id);
             }
           });
         }
-
       ],function(error){
         if(error){
           console.log('An error has occurred: ' + error );

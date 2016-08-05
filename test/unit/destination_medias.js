@@ -107,7 +107,7 @@ describe('create destination media', function () {
       if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });
   });
@@ -245,7 +245,7 @@ describe('update destination', function () {
       if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });
   });
@@ -360,7 +360,7 @@ describe('delete destination media', function () {
      if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -467,7 +467,7 @@ describe('find all', function () {
        
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     }); 
   });

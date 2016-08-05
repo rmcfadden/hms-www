@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var destination_medias = sequelize.define('destination_review', {
+  var destination_reviews = sequelize.define('destination_reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -50,5 +50,5 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: 'created',
     underscored: true
   });
-  return destination_medias;
+  return destination_reviews;
 };

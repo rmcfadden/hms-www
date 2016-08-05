@@ -42,7 +42,7 @@ describe('Create settings', function () {
       done();
      }
      else{
-      should.fail();
+      done(error);
      }
     });    
   });
@@ -109,7 +109,7 @@ describe('Update settings', function () {
       done();
      }
      else{
-      should.fail();
+      done(error);
      }
     });    
   });
@@ -162,7 +162,7 @@ describe('delete settings', function () {
       done();
      }
      else{
-      should.fail();
+      done(error);
      }
     });    
   });
@@ -205,7 +205,7 @@ describe('Find all settings', function () {
       done();
      }
      else{
-      should.fail();
+      done(error);
      }
     });   
   })

@@ -125,7 +125,7 @@ describe('Edit country', function () {
         done();
       }
       else{
-        should.fail();
+        done(error);
       }
     });    
   });
@@ -171,7 +171,7 @@ describe('Delete country', function () {
         done();
       }
       else{
-        should.fail();
+        done(error);
       }
     });    
   });

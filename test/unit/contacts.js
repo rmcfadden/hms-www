@@ -57,7 +57,7 @@ describe('Create contact', function () {
      if(!error){
         done(); 
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -146,7 +146,7 @@ describe('Update contacts', function () {
      if(!error){
         done(); 
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -212,7 +212,7 @@ describe('delete contacts', function () {
      if(!error){
         done(); 
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -276,7 +276,7 @@ describe('Find all contacts', function () {
      if(!error){
         done(); 
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });

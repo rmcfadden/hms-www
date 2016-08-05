@@ -3,7 +3,7 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.bulkInsert("destination_category_types", [
-      { name: "romatic", created: Sequelize.fn("NOW"), updated: Sequelize.fn("NOW") },
+      { name: "romantic", created: Sequelize.fn("NOW"), updated: Sequelize.fn("NOW") },
       { name: "adventurous", created: Sequelize.fn("NOW"), updated: Sequelize.fn("NOW") },
       { name: "scenic", created: Sequelize.fn("NOW"), updated: Sequelize.fn("NOW") },
       { name: "tropical", created: Sequelize.fn("NOW"), updated: Sequelize.fn("NOW") },

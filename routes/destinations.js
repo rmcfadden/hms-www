@@ -34,6 +34,12 @@ router.get('/destinations/country/:iso_code2', function(req, res, next) {
   });
 });
 
+router.get('/destinations/category/:category_name', function(req, res, next) {  
+  destinationsProv.findAllByCategory(req.params.category_name, {  paging : req.paging}).then(function(destinations){
+    res.render('destinations', { destinations : destinations.rows });    
+  });
+});
+
 
 router.get('/api/destinations/', function(req, res, next) {
   destinationsProv.findAll({ paging : req.paging}).then(function(destinations){

@@ -57,7 +57,7 @@ describe('Edit tags', function () {
 	    if(!error){
         done();
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });
@@ -91,7 +91,7 @@ describe('Delete Tag', function () {
       if(!error){
         done();
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });

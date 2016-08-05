@@ -39,7 +39,7 @@ describe('Create destination_attribute_categories', function () {
      if(!error){
        done();
      } else {
-      should.fail();	 
+      done(error);	 
      }
     });    
   });
@@ -100,7 +100,7 @@ describe('Update destination_attribute_categories', function () {
      if(!error){
        done();
      } else {
-      should.fail();	 
+      done(error);	 
      }
     });    
   });
@@ -149,7 +149,7 @@ describe('delete destination_attribute_categories', function () {
      if(!error){
        done();
      } else {
-      should.fail();	 
+      done(error);	 
      }
     });    
   });
@@ -189,7 +189,7 @@ describe('Find all destination_attribute_categories', function () {
      if(!error){
        done();
      } else {
-      should.fail();	 
+      done(error);	 
      }
     });   
   })
