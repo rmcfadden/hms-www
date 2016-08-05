@@ -106,13 +106,26 @@ testUtils.addTestDestinations = function(num, country, callback){
           });
         }, 
         function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, next){
-            var categoryTypeId  = 1; // hard coding to romatic
-            models.destinations_categories.create(
-            {
-              destination_category_type_id: categoryTypeId,
-              destination_id: destination_id
-            }).then(function(destinations_categories){
-              next(null, user_id, country_id, organization_id, address_id, destination_id);
+            models.destination_category_types.findAll().then(function(categoryTypes){
+              async.forEach(categoryTypes, function (destionatCategoryType, callback){ 
+                models.destinations_categories.create({
+                  destination_category_type_id: destionatCategoryType.id,
+                  destination_id: destination_id
+                }).then(function(destinations_category){
+                  callback();
+                }).catch(function(err){
+                  callback(err);
+                });
+              }, function(err) {
+                if(err){
+                  return next(err);
+                }
+                else{
+                  next(null, user_id, country_id, organization_id, address_id, destination_id);
+                }
+              });
+            }).catch(function(err){
+              return next(err);
             });
         },
         function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, next){
