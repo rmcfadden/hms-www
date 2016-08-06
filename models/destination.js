@@ -53,7 +53,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         defaultValue: 0
       },
-      ratings_count: {
+      review_count: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0

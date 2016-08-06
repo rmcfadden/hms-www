@@ -56,7 +56,7 @@ program
   .command('add-test-data')  
   .action(function(cmd) {
     var testUtils  = require('../modules/test-utils');
-    testUtils.addTestDestinations(10, function(error){
+    testUtils.addTestDestinations(10, null, function(error){
       process.exit();
     });
    });

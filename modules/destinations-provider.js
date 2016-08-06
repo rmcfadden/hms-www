@@ -36,12 +36,10 @@ var destinationsProvider  = function(){
   
   this.findAllByDestinationCategory = function(destinationCategoryName, options){
     return new Promise(function(resolve, reject){
-      models.destination_category_types.findOne({ where: { 'name': destinationCategoryName }}).then(function(destinationCategory){
-        
+      models.destination_category_types.findOne({ where: { 'name': destinationCategoryName }}).then(function(destinationCategory){        
         if(!destinationCategory){
           return resolve({ rows: [], count:0});
         }
-
         models.destination.findAndCountAll({  include: [models.country, {"model" : models.destinations_categories, where: { 'destination_category_type_id': destinationCategory.id }}],
            offset: options.paging.offset, limit: options.paging.limit}).then(function(destinations){
           return resolve(destinations);

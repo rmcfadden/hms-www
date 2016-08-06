@@ -6,10 +6,14 @@
         <li>Overall:</li>
         <li>
           <ul class="list-inline star-vote">
-            <li><i class="color-green fa fa-circle"></i></li>
-            <li><i class="color-green fa fa-circle"></i></li>
-            <li><i class="color-green fa fa-circle"></i></li>
-            <li><i class="color-green fa fa-circle"></i></li>
+            <% for(var i=0; i < Math.floor(destination_review.overall_rating); i++) { %>
+              <li><i class="color-green fa fa-circle"></i></li>
+            <% } %>
+            <% if((destination_review.overall_rating > Math.floor(destination_review.overall_rating) + 0.8)) { %>
+              <li><i class="color-green fa fa-circle-"></i></li>
+            <% } else if(destination_review.overall_rating > (Math.floor(destination_review.overall_rating) + 0.35)) { %>
+              <li><i class="color-green fa fa-moon-o"></i></li>
+            <% } %>
           </ul>
         </li>
       </ul>
@@ -19,10 +23,14 @@
         <li>Service:</li>
         <li>
           <ul class="list-inline star-vote">
-            <li><i class="color-green fa fa-circle"></i></li>
-            <li><i class="color-green fa fa-circle"></i></li>
-            <li><i class="color-green fa fa-circle"></i></li>
-            <li><i class="color-green fa fa-moon-o"></i></li>
+            <% for(var i=0; i < Math.floor(destination_review.service_rating); i++) { %>
+              <li><i class="color-green fa fa-circle"></i></li>
+            <% } %>
+            <% if((destination_review.service_rating > Math.floor(destination_review.service_rating) + 0.8)) { %>
+              <li><i class="color-green fa fa-circle-"></i></li>
+            <% } else if(destination_review.service_rating > (Math.floor(destination_review.service_rating) + 0.35)) { %>
+              <li><i class="color-green fa fa-moon-o"></i></li>
+            <% } %>
           </ul>
         </li>    
       </ul>

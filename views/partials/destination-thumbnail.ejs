@@ -3,14 +3,29 @@
   <div class="caption">
     <h3><%= truncateWithEllipses(destination.name, 30); %></h3>
     <p><%= truncateWithEllipses(destination.description, 40); %></p>
+    
+
     <div class="object-raiting" style="text-align:center">
       <ul class="list-inline star-vote">
+
+      <% for(var i=0; i < Math.floor(destination.average_rating); i++) { %>
         <li><i class="color-green fa fa-circle"></i></li>
-        <li><i class="color-green fa fa-circle"></i></li>
-        <li><i class="color-green fa fa-circle"></i></li>
+      <% } %>
+
+      <% if((destination.average_rating > Math.floor(destination.average_rating) + 0.8)) { %>
+        <li><i class="color-green fa fa-circle-"></i></li>
+      <% } else if(destination.average_rating > (Math.floor(destination.average_rating) + 0.35)) { %>
         <li><i class="color-green fa fa-moon-o"></i></li>
+      <% } %>
+
+      <% if(destination.review_count > 0) { %>
+        <li><a href='<%=createDestinationLink(destination)%>?#destination-reviews'><%=destination.review_count%>&nbsp;Review(s)</a></li>
+      <% } %>
+
       </ul>
+
     </div>
+  
   </div>
   <p>
     <button class="btn-u">Read more <i class="fa fa-angle-right margin-left-5"></i></button>

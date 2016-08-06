@@ -61,7 +61,7 @@ describe('create destination categories', function () {
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
@@ -169,7 +169,7 @@ describe('delete destination categories', function () {
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
@@ -283,7 +283,7 @@ describe('find all', function () {
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
