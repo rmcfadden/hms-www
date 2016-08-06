@@ -74,8 +74,7 @@ module.exports = {
       }).then(function(){
         return queryInterface.addIndex(
           'sessions',
-          ['last_activity_date'],
-          {indicesType: 'UNIQUE'}
+          ['last_activity_date']
         );
       })
     })

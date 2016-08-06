@@ -5,7 +5,7 @@ var passport = require('passport');
 require('..//modules/passport-strategies.js')(passport);
 
 router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  res.render('login');
 });
 
 router.post('/api/login', function(req, res, next) {
@@ -14,7 +14,15 @@ router.post('/api/login', function(req, res, next) {
 
     if (err) { res.status(401); return res.send({ success : false, message : 'an error has occurred' }); }
     if (!user) { res.status(401); return res.send({ success : false, message : invalidUsernameOrPassword }); }
-    return res.send({ success : true, token: user.session.token});
+    
+    req.login(user, function(loginErr) {
+      if (loginErr) { 
+        res.status(401); 
+        return res.send({ success : false, message : 'a login error has occurred' }); 
+      }     
+
+      return res.send({ success : true, token: user.session.token});
+    });
 
   })(req, res, next);
 });

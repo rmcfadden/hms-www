@@ -28,13 +28,41 @@ module.exports = function(passport){
     }
   ));
 
+
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    if(user.session && user.session.token){
+      done(null, user.session.token);
+    }else{
+      done("session not provided in serializeUser");     
+    }
   });
 
-  passport.deserializeUser(function(id, done) {
-    models.user.findById(id, function(err, user) {
-      done(err, user);
+  passport.deserializeUser(function(sessionToken, done) {
+    console.log("HERE deserializeUser");
+    console.log("HERE deserializeUser" + sessionToken);
+    
+    models.session.findOne({where : { token : sessionToken }}).then(function(session){
+
+      if(!session){
+        return done("could not find session");
+      }
+
+      if(session.is_expired){
+        return done("session is expired");
+      }
+
+      return models.user.findById(session.id);
+    }).then(function(user){
+      if(!user){
+        return done("could not find user");
+      }
+      else{
+        return done(null, user);
+      }
+    }).
+    catch(function(error){
+      done("error looking up the session");
     });
+
   });
 }
