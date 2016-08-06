@@ -11,7 +11,7 @@ var request = require('supertest'),
 
 describe('GET /api/destinations', function(){
   before(function(done) {
-    this.timeout(15000);
+    this.timeout(60000);
   
     testUtils.ensureDestinationCount(12, function(err, result){
       if(err){
@@ -67,7 +67,7 @@ describe('GET /api/destinations?offset=2&limit=5', function(){
 
 describe('GET /api/destinations/country/us', function(){
   before(function(done) {
-    this.timeout(15000);
+    this.timeout(60000);
   
     testUtils.ensureDestinationCountUs(12, function(err, result){
       if(err){
@@ -179,7 +179,7 @@ describe('GET /api/destinations/category/romantic/?limit=5&offset=0', function()
 
 describe('GET /api/destinations/category/category_that_does_exist/?limit=5&offset=0', function(){
   before(function(done) {
-    this.timeout(15000);
+    this.timeout(60000);
   
     testUtils.ensureDestinationCount(12, function(err, result){
       if(err){

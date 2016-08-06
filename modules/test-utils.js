@@ -14,7 +14,7 @@ testUtils.ensureDestinationCount = function (num, callback){
   var proxyThis = this;
   models.destination.count().then(function(c){
     if(c < num){
-      return proxyThis.addTestDestinations(num, 'all', callback);
+      return proxyThis.addTestDestinations(num, null, callback);
     }
     else{
       return callback(null);
@@ -27,7 +27,7 @@ testUtils.ensureDestinationCountUs = function (num, callback){
   models.country.findOne({ where : { name:  'United States' }}).then(function(country){
     models.destination.count({ where:{'country_id' : country.id}}).then(function(c){
       if(c < num){
-        return proxyThis.addTestDestinations(num, 'us', callback);
+        return proxyThis.addTestDestinations(num, country, callback);
       }
       else{
         return callback(null);
@@ -45,7 +45,6 @@ testUtils.addTestDestinations = function(num, country, callback){
   }
 
   console.log('Adding ' + num + ' test destinations');
-  console.log('Adding ' + country + ' test destinations')
 
   getCounties().then(function(countries){
     var destinationCount = 0;
@@ -54,10 +53,11 @@ testUtils.addTestDestinations = function(num, country, callback){
         function createOrganization(next){
           var organizationName = "organization - " + randomstring.generate();
           models.organization.create({ name: organizationName}).then(function(organization){
-            if(country=='us') {
-             var country_id = 247;
+            var country_id = -1;
+            if(country) {
+              country_id = country.id;
             } else {
-             var country_id = countries[Math.floor(Math.random() * countries.length)].id;
+              country_id = countries[Math.floor(Math.random() * countries.length)].id;
             }
             next(null, country_id, organization.id);
           })
@@ -91,6 +91,10 @@ testUtils.addTestDestinations = function(num, country, callback){
         },
         function createDestination(user_id,country_id, organization_id, address_id, next){
           var destinationName = "destination " + randomstring.generate(2);
+          
+          var average_rating =  (Math.random() * 4) + 1; 
+          var review_count =  (Math.random() * 9) + 1; 
+
           models.destination.create(
           {
             name: destinationName,
@@ -98,14 +102,16 @@ testUtils.addTestDestinations = function(num, country, callback){
             country_id: country_id,
             user_id: user_id,
             address_id: address_id,
-            description: defaultDescription
+            description: defaultDescription,
+            average_rating : average_rating,
+            review_count : review_count 
           }).then(function(destination){    
-            next(null, user_id, country_id, organization_id, address_id, destination.id);
+            next(null, user_id, country_id, organization_id, address_id, destination.id, review_count );
           }).catch(function(err){
             next(err);
           });
         }, 
-        function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, next){
+        function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, review_count , next){
             models.destination_category_types.findAll().then(function(categoryTypes){
               async.forEach(categoryTypes, function (destionatCategoryType, callback){ 
                 models.destinations_categories.create({
@@ -121,24 +127,32 @@ testUtils.addTestDestinations = function(num, country, callback){
                   return next(err);
                 }
                 else{
-                  next(null, user_id, country_id, organization_id, address_id, destination_id);
+                  next(null, user_id, country_id, organization_id, address_id, destination_id, review_count);
                 }
               });
             }).catch(function(err){
               return next(err);
             });
         },
-        function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, next){
+        function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, review_count, next){
           // how to add 4 destination reviews
-          async.forEach([1,2,3,4], function (id, callback){ 
+          var items = [];
+          for(var i=0; i < review_count; i++ ){
+            items.push(i);
+          }
+
+          async.forEach(items, function (id, callback){ 
             var title  = randomstring.generate(10);
+            var service_rating =  (Math.random() * 5.0) + 1.0; 
+            var overall_rating =  (Math.random() * 5.0) + 1.0; 
+
             models.destination_reviews.create({
               destination_id: destination_id,
               user_id: user_id,
               title: 'Amazing location!' + title,
               text: defaultDescription,
-              service_rating: 4,
-              overall_rating: 3.5
+              service_rating: service_rating,
+              overall_rating: overall_rating
             }).then(function(destination_reviews){
               callback();
             }).catch(function(err){
@@ -149,7 +163,7 @@ testUtils.addTestDestinations = function(num, country, callback){
               return next(err);
             }
             else{
-              next(null, user_id, country_id, organization_id, address_id, destination_id);            
+              next(null, user_id, country_id, organization_id, address_id, destination_id);
             }
           });
         },

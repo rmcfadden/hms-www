@@ -62,7 +62,7 @@ describe('create destination', function () {
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
@@ -139,7 +139,7 @@ describe('update destination', function () {
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
@@ -148,7 +148,7 @@ describe('update destination', function () {
           next(null, destination.id);
         });
       },
-      function updatedestination(destination_id, next){
+      function updateDestination(destination_id, next){
         var destinationName = "updatedDest " + randomstring.generate();
         models.destination.update(
         {
@@ -160,11 +160,11 @@ describe('update destination', function () {
           next(null, destination_id);
         });
       },
-      function finddestination(destination_id, next){
+      function findDestination(destination_id, next){
         models.destination.find({where : { id : destination_id }}).then(function(destination){
           destination.id.should.be.greaterThan(0);
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.created.should.be.greaterThan(0);
           destination.updated.should.be.greaterThan(0);
           
@@ -230,13 +230,12 @@ describe('delete destination', function () {
             address_id: address_id,
             description: 'bla, bla'
         }).then(function(destination){
-
           destination.id.should.be.greaterThan(0);
           destination.uuid.should.not.be.null();
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
@@ -319,7 +318,7 @@ describe('find all', function () {
           destination.name.should.be.equal(destinationName);
           destination.description.should.be.equal('bla, bla');
           destination.average_rating.should.be.equal(0);
-          destination.ratings_count.should.be.equal(0);
+          destination.review_count.should.be.equal(0);
           destination.organization_id.should.be.equal(organization_id);
  
           destination.created.should.be.greaterThan(0);
