@@ -1,10 +1,10 @@
 'use strict';
 
 var models  = require('../models');
+var Promise = require('promise');
 
 var config = require('../config/config.json');
 var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
-var Promise = require('promise');
 
 
 models.destination.belongsTo(models.country);
