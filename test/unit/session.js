@@ -58,7 +58,7 @@ describe('Create session', function () {
      if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -153,7 +153,7 @@ describe('Update session', function () {
      if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -222,7 +222,7 @@ describe('delete session', function () {
      if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -288,7 +288,7 @@ describe('Find all sessions', function () {
      if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });

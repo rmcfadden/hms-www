@@ -100,7 +100,7 @@ describe('update address', function () {
       done();
      }
      else{
-      should.fail();
+      done(error);
      }
     });    
   });
@@ -150,7 +150,7 @@ describe('delete address', function () {
       done();
      }
      else{
-      should.fail();
+      done(error);
      }
     });    
   });

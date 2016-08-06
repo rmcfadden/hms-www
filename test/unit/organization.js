@@ -59,7 +59,7 @@ describe('Edit organization', function () {
 	    if(!error){
        done(); 
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });

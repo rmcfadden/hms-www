@@ -14,7 +14,7 @@ testUtils.ensureDestinationCount = function (num, callback){
   var proxyThis = this;
   models.destination.count().then(function(c){
     if(c < num){
-      return proxyThis.addTestDestinations(num, callback);
+      return proxyThis.addTestDestinations(num, 'all', callback);
     }
     else{
       return callback(null);
@@ -22,13 +22,30 @@ testUtils.ensureDestinationCount = function (num, callback){
   });
 }
 
+testUtils.ensureDestinationCountUs = function (num, callback){
+  var proxyThis = this;
+  models.country.findOne({ where : { name:  'United States' }}).then(function(country){
+    models.destination.count({ where:{'country_id' : country.id}}).then(function(c){
+      if(c < num){
+        return proxyThis.addTestDestinations(num, 'us', callback);
+      }
+      else{
+        return callback(null);
+      }
+    });
+  });
+}
 
-testUtils.addTestDestinations = function(num, callback){
+var defaultDescription = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. ";
+
+
+testUtils.addTestDestinations = function(num, country, callback){
   if(!num){
     num = 25;
   }
 
-  console.log('Adding ' + num + ' test destinations')
+  console.log('Adding ' + num + ' test destinations');
+  console.log('Adding ' + country + ' test destinations')
 
   getCounties().then(function(countries){
     var destinationCount = 0;
@@ -37,7 +54,12 @@ testUtils.addTestDestinations = function(num, callback){
         function createOrganization(next){
           var organizationName = "organization - " + randomstring.generate();
           models.organization.create({ name: organizationName}).then(function(organization){
-            next(null, countries[Math.floor(Math.random() * countries.length)].id, organization.id);
+            if(country=='us') {
+             var country_id = 247;
+            } else {
+             var country_id = countries[Math.floor(Math.random() * countries.length)].id;
+            }
+            next(null, country_id, organization.id);
           })
         },
         function createUser(country_id, organization_id, next){
@@ -62,7 +84,7 @@ testUtils.addTestDestinations = function(num, callback){
             postal_code: '93105',
             country_id: country_id
           }).then(function(address) {
-            next(null, user_id, country_id, organization_id, address.id)
+            next(null, user_id, country_id, organization_id, address.id);
           }).catch(function(err){
             next(err);
           }); 
@@ -71,18 +93,92 @@ testUtils.addTestDestinations = function(num, callback){
           var destinationName = "destination " + randomstring.generate(2);
           models.destination.create(
           {
-              name: destinationName,
-              organization_id: organization_id,
-              country_id: country_id,
-              user_id: user_id,
-              address_id: address_id,
-              description: 'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.'
+            name: destinationName,
+            organization_id: organization_id,
+            country_id: country_id,
+            user_id: user_id,
+            address_id: address_id,
+            description: defaultDescription
           }).then(function(destination){    
-            next(null);
+            next(null, user_id, country_id, organization_id, address_id, destination.id);
           }).catch(function(err){
             next(err);
           });
-        }        
+        }, 
+        function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, next){
+            models.destination_category_types.findAll().then(function(categoryTypes){
+              async.forEach(categoryTypes, function (destionatCategoryType, callback){ 
+                models.destinations_categories.create({
+                  destination_category_type_id: destionatCategoryType.id,
+                  destination_id: destination_id
+                }).then(function(destinations_category){
+                  callback();
+                }).catch(function(err){
+                  callback(err);
+                });
+              }, function(err) {
+                if(err){
+                  return next(err);
+                }
+                else{
+                  next(null, user_id, country_id, organization_id, address_id, destination_id);
+                }
+              });
+            }).catch(function(err){
+              return next(err);
+            });
+        },
+        function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, next){
+          // how to add 4 destination reviews
+          async.forEach([1,2,3,4], function (id, callback){ 
+            var title  = randomstring.generate(10);
+            models.destination_reviews.create({
+              destination_id: destination_id,
+              user_id: user_id,
+              title: 'Amazing location!' + title,
+              text: defaultDescription,
+              service_rating: 4,
+              overall_rating: 3.5
+            }).then(function(destination_reviews){
+              callback();
+            }).catch(function(err){
+              callback(err);
+            });
+          }, function(err) {
+            if(err){
+              return next(err);
+            }
+            else{
+              next(null, user_id, country_id, organization_id, address_id, destination_id);            
+            }
+          });
+        },
+        function createDestinationMedias(user_id,country_id, organization_id, address_id, destination_id, next){
+          var location = "LOC-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+          var title = "Title-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+          async.forEach([1,2,3,4], function (id, callback){ 
+            var title  = randomstring.generate(10);
+              models.destination_medias.create({
+              media_type_id: 2,
+              destination_id: destination_id,
+              location: '/assets/img/samples/destination-image-sample' + id + '.jpeg',
+              title: title,
+              description: defaultDescription
+            }).then(function(destination_reviews){
+              callback();
+            }).catch(function(err){
+              callback(err);
+            });
+          }, function(err) {
+            if(err){
+              return next(err);
+            }
+            else{
+              return next(null, destination_id);
+            }
+          });
+        }
+
       ],function(error){
         if(error){
           console.log('An error has occurred: ' + error );

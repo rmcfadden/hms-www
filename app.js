@@ -52,6 +52,8 @@ app.use(require('./routes/destinations'));
 app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
 
+app.use(require('./routes/admin/index'));
+
 
 app.locals.app_version = pjson.version;
 

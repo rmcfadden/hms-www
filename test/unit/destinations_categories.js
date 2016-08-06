@@ -106,7 +106,7 @@ describe('create destination categories', function () {
       if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });
   });
@@ -222,7 +222,7 @@ describe('delete destination categories', function () {
      if(!error){
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     });    
   });
@@ -328,7 +328,7 @@ describe('find all', function () {
        
        done();
      } else {
-      should.fail(); 
+      done(error); 
      }
     }); 
   });

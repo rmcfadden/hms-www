@@ -58,7 +58,7 @@ describe('Edit Setting Category', function () {
 	    if(!error){
        done(); 
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });
@@ -92,7 +92,7 @@ describe('Delete Setting Category', function () {
      if(!error){
        done(); 
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });

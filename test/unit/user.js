@@ -82,7 +82,7 @@ describe('update user', function () {
       if(!error){
        done(); 
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });
@@ -124,7 +124,7 @@ describe('delete user', function () {
      if(!error){
        done(); 
       } else {
-       should.fail(); 
+       done(error); 
       }
     });    
   });

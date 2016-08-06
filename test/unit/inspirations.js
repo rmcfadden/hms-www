@@ -71,7 +71,7 @@ describe('Edit inspirations', function () {
 	  if(!error) {
 		done();  
 	  } else {
-		should.fail();  
+		done(error);  
 	  }
     });    
   });
@@ -110,7 +110,7 @@ describe('Delete inspiration', function () {
      if(!error) {
 		done();  
 	  } else {
-		should.fail();  
+		done(error);  
 	  }
     });    
   });
