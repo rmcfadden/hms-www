@@ -48,6 +48,7 @@
     "should": "^9.0.2",
     "sqlite3": "^3.1.4",
     "supertest": "^2.0.0",
+    "supertest-session": "^2.0.1",
     "sync": "^0.2.5",
     "tedious": "^1.14.0",
     "underscore": "^1.8.3",

@@ -35,14 +35,14 @@ describe('POST /api/login with a valid username but bad password', function(){
       tempUser = user;
       done(); 
     }).catch(function(err){
-      should.fail();
+      done(err);
     });
   });
   afterEach(function(done) {
     usersProv.remove(tempUser).then(function(result){
       done(); 
     }).catch(function(err){
-      should.fail();
+      done(err)
     });
   });
   it('respond with a 401 code and a false status ', function(done){
@@ -74,19 +74,10 @@ describe('POST /api/login with a valid username and valid password', function(){
       tempUser = user;
       done(); 
     }).catch(function(err){
-      should.fail();
+      done(err)
     });
   });
   afterEach(function(done) {
-
-   // TODO: usersProv removes child rows
-    /*
-    usersProv.remove(tempUser).then(function(result){
-      done(); 
-    }).catch(function(err){
-      should.fail();
-    });
-    */
     done();
   });
 
@@ -95,13 +86,13 @@ describe('POST /api/login with a valid username and valid password', function(){
       .post('/api/login')
       .send("username=" + tempUser.username + "&password=123")
       .expect(200)
+      .expect('set-cookie', /connect.sid/)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .end(function(err, res){
         if (err) return done(err);
 
         res.body.success.should.be.true();
         res.body.token.should.not.be.null();
-
         done();
       });    
   })
