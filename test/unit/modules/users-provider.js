@@ -13,8 +13,7 @@ var models  = require('models/');
 
 
 describe('create with simple parameters', function () {
-  it('should return a valid user', function (done) {
-    
+  it('should return a valid user', function (done) {    
     var email = randomstring.generate() + "@test.com";
     var username = "john" + randomstring.generate();
 
@@ -62,8 +61,6 @@ describe('create with roles and organizations', function () {
     
     var email = randomstring.generate() + "@test.com";
     var username = "john" + randomstring.generate();
-
-    // TODO: organizations
     var newUser = { username: username,
       email: email,
       password: "secret123",

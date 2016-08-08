@@ -20,7 +20,7 @@ describe('POST /api/login and /api/users/me should return valid data', function(
 
     usersProv.create({ email: email, username: username, password: "123"}).then(function(user){
       tempUser = user;
-      done(); 
+      return done(); 
     }).catch(function(err){
       done(err);
     });
@@ -43,9 +43,11 @@ describe('POST /api/login and /api/users/me should return valid data', function(
         agent
           .get('/api/users/me')
           .expect(200)
-          .expect('Content-Type', 'application/json; charset=utf-8')
+          .expect('Content-Type', 'application/json')
           .end(function(err, res){
+
             if (err) return done(err);
+
             done();
         });    
 

@@ -6,9 +6,9 @@ var Promise = require('promise');
 var config = require('../config/config.json');
 var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
 
+// Should I move these the models?
 
 models.destination.belongsTo(models.country);
-
 
 models.destination.hasMany(models.destination_reviews, { foreignKey: 'destination_id'})
 models.destination_reviews.belongsTo(models.destination, {foreignKey: 'destination_id'})
