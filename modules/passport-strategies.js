@@ -37,10 +37,7 @@ module.exports = function(passport){
     }
   });
 
-  passport.deserializeUser(function(sessionToken, done) {
-    console.log("HERE deserializeUser");
-    console.log("HERE deserializeUser" + sessionToken);
-    
+  passport.deserializeUser(function(sessionToken, done) {    
     models.session.findOne({where : { token : sessionToken }}).then(function(session){
 
       if(!session){
