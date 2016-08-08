@@ -38,6 +38,22 @@ testUtils.ensureDestinationCountUs = function (num, callback){
 
 var defaultDescription = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble. ";
 
+var testAddresses =[
+  { 
+    address_line1: '800 Alvarado Place',
+    address_line2 : '',
+    city: 'Santa Barbara',
+    province: 'California',
+    postal_code: 93103
+  },
+  { 
+    address_line1: '3600 S Las Vegas Blvd',
+    address_line2 : '',
+    city: 'Las Vegas',
+    province: 'Nevada',
+    postal_code: 89109
+  }
+];
 
 testUtils.addTestDestinations = function(num, country, callback){
   if(!num){
@@ -76,12 +92,15 @@ testUtils.addTestDestinations = function(num, country, callback){
             });
         },
         function createAddress(user_id, country_id, organization_id, next){
+
+          var address = testAddresses[Math.floor(Math.random() * testAddresses.length)];
+
           models.address.create({
-            address_line1: 'testing address1',
-            address_line2: 'testing address2',
-            city: 'Santa Barbara',
-            province: 'California',
-            postal_code: '93105',
+            address_line1: address.address_line1,
+            address_line2: address.address_line2,
+            city: address.city,
+            province: address.province,
+            postal_code: address.postal_code,
             country_id: country_id
           }).then(function(address) {
             next(null, user_id, country_id, organization_id, address.id);
