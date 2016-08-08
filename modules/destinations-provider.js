@@ -10,6 +10,8 @@ var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
 
 models.destination.belongsTo(models.country);
 
+models.destination.belongsTo(models.address);
+
 models.destination.hasMany(models.destination_reviews, { foreignKey: 'destination_id'})
 models.destination_reviews.belongsTo(models.destination, {foreignKey: 'destination_id'})
 
@@ -31,7 +33,18 @@ var destinationsProvider  = function(){
   }
 
   this.findOneByIsoCode2AndName = function(isoCode2, name,  options){
-    return models.destination.findOne({ where: { 'name': name }, include: [ models.destination_reviews, models.destination_medias, {"model" : models.country, where: { 'iso_code2': isoCode2 }}]}); 
+
+// TODO: expand the address here
+/*
+            for(var i=0; i < destinations.length; i++){
+              var destination = destinations[i];
+            console.log(destination.address);
+              if(destination.address && destination.address.length > 0){
+                console.log(destination.address );
+              }
+            }
+*/
+    return models.destination.findOne({ where: { 'name': name }, include: [ models.destination_reviews, models.destination_medias, models.address, {"model" : models.country, where: { 'iso_code2': isoCode2 }}]}); 
   }
   
   this.findAllByDestinationCategory = function(destinationCategoryName, options){
@@ -42,6 +55,7 @@ var destinationsProvider  = function(){
         }
         models.destination.findAndCountAll({  include: [models.country, {"model" : models.destinations_categories, where: { 'destination_category_type_id': destinationCategory.id }}],
            offset: options.paging.offset, limit: options.paging.limit}).then(function(destinations){
+
           return resolve(destinations);
         }).catch(function(err){
           return reject(err);

@@ -23,7 +23,7 @@
         <div class="margin-bottom-20"></div>
 
         <!-- description -->
-        <div class="col-md-12 col-lg-9">
+        <div class="col-md-12 col-lg-9 nopadding margin-bottom-40">
           <div class="heading margin-bottom-20">
             <h2>More about <%= destination.name %></h2>
             <p class="lead"><%= destination.description %></p>
@@ -32,26 +32,31 @@
         <!-- end description -->
 
         <!-- map -->
-        <div class="col-md-12 col-lg-9">
-          <div class="container">
+        <% var destination_adress = destination.address ? destination.address : []; %>
+        <div id="hidden-address" style="display:none;"></div>
+
+        <div class="col-md-12 col-lg-9 nopadding">
+          <div class="container nopadding">
             <div class="headline"><h2>Location</h2></div>
           </div>
-          <div class="row margin-bottom-20">
-            <div class="col-md-12">
-              <div id="map"></div>
+          <div class="row margin-bottom-20 nopadding">
+            <div class="container nopadding">
+              <img class="img-responsive nopadding" id="image-map"/>
             </div>
           </div>
         </div>
         <!-- end map -->
 
+        <div class="margin-bottom-20"></div>
+
         <!-- reviews -->
-        <div id="destination-reviews" class="col-md-12 col-lg-9">
-          <div class="container">
+        <div id="destination-reviews" class="col-md-12 col-lg-9 nopadding">
+          <div class="container nopadding">
             <div class="headline"><h2>Top reviews</h2></div>
           </div>
         </div>
 
-        <div class="col-md-12 col-lg-9">
+        <div class="col-md-12 col-lg-9 nopadding">
           <% var destination_reviews = destination.destination_reviews ? destination.destination_reviews : []; %>
           <% include partials/destination-reviews.ejs %>
         </div>      
