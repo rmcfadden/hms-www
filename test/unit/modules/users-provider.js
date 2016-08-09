@@ -6,8 +6,7 @@ var should  = require('should');
 var randomstring = require("randomstring");
 var async = require('async');
 
-var usersProvider  = require('modules/users-provider');
-var usersProv = new usersProvider(); 
+var usersProv  = new (require('modules/users-provider'));
 
 var models  = require('models/');
 

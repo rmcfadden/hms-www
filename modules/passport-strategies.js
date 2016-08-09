@@ -45,10 +45,10 @@ module.exports = function(passport){
       }
 
       if(session.is_expired){
-        return done("session is expired");
+        return done("session has expired");
       }
 
-      return models.user.findById(session.id);
+      return models.user.findById(session.user_id);
     }).then(function(user){
       if(!user){
         return done("could not find user");
