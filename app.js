@@ -9,7 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 var config = require('./config/config.json');
 var pjson = require('./package.json');
-var me  = require('modules/me');
+var me  = require('./modules/me');
 var app = express();
 
 // Add shared functoins for ejs templates
