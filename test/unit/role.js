@@ -49,13 +49,13 @@ it('should return a valid role', function (done) {
   });
 });
 
-describe('find role with name venue_admin', function () {
+describe('find role with name organization_admin', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'venue_admin' }
+  models.role.findOne({ where: { name: 'organization_admin' }
     }).then(function(role) {
 
       role.id.should.equal(4);
-      role.name.should.equal('venue_admin');
+      role.name.should.equal('organization_admin');
       role.created.should.be.greaterThan(0);
       role.updated.should.be.greaterThan(0);
 
@@ -65,13 +65,13 @@ it('should return a valid role', function (done) {
 });
 
 
-describe('find role with name venue_editor', function () {
+describe('find role with name organization_editor', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'venue_editor' }
+  models.role.findOne({ where: { name: 'organization_editor' }
     }).then(function(role) {
 
       role.id.should.equal(5);
-      role.name.should.equal('venue_editor');
+      role.name.should.equal('organization_editor');
       role.created.should.be.greaterThan(0);
       role.updated.should.be.greaterThan(0);
 
@@ -80,41 +80,11 @@ it('should return a valid role', function (done) {
   });
 });
 
-
-describe('find role with name blog_admin', function () {
-it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'blog_admin' }
-    }).then(function(role) {
-
-      role.id.should.equal(6);
-      role.name.should.equal('blog_admin');
-      role.created.should.be.greaterThan(0);
-      role.updated.should.be.greaterThan(0);
-
-      done();
-    });
-  });
-});
-
-describe('find role with name blog_editor', function () {
-it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'blog_editor' }
-    }).then(function(role) {
-
-      role.id.should.equal(7);
-      role.name.should.equal('blog_editor');
-      role.created.should.be.greaterThan(0);
-      role.updated.should.be.greaterThan(0);
-
-      done();
-    });
-  });
-});
 
 describe('find all', function () {
 it('should return a valid list of roles', function (done) {
   models.role.findAll().then(function(roles) {
-      roles.length.should.equal(7);
+      roles.length.should.equal(5);
       done();
     });
   });

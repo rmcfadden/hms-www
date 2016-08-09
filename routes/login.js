@@ -12,9 +12,6 @@ router.post('/api/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     var invalidUsernameOrPassword = 'Invalid username or password';
 
-console.log("ERROR: ")
-console.log(err);
-
     if (err) { res.status(401); return res.send({ success : false, message : 'an error has occurred' }); }
     if (!user) { res.status(401); return res.send({ success : false, message : invalidUsernameOrPassword }); }
     
