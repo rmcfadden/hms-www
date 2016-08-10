@@ -62,7 +62,6 @@
 * Sequelize for ORM
 * Mocha for testing
 * Supertest for HTTP testing
-* Passport for authentication
 
 # How to contribute
 
@@ -93,7 +92,7 @@
 5. Modules
  * All helper/util classes, or classes that don't fit into the MVC categories, above should go in /modules/.
  * If you find yourself duplicating code (cutting and pasting), why not normalize your code and create a module here (DRY)?
- * Some modules may become candidate for npm packages.
+ * Some modules may become candidates for npm packages.
 
 6. Client side-
  * Do not modify the template code.  Place your .css in custom.css or a stylesheet relevant to the specific view
@@ -120,7 +119,7 @@
  ```
 * Test layout on mobile/tablet/desktop (will figure out e2e later)
 * Use Unify controls: http://htmlstream.com/preview/unify-v1.9.5/shortcode_typo_general.html
-* Create sequelize migrations.  Make sure they migrate up and down all the way everytime.
+* Create sequelize migrations.  Make sure they migrate and migrate down completeley (migrate-undo-all).
 ```
 npm run migrate
 npm run migrate-undo-all
