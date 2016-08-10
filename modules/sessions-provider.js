@@ -30,6 +30,10 @@ var sessionsProvider  = function(){
       });
     });
   }
+
+  this.findByToken = function(token){
+    return models.session.findOne({where : {token :token }});
+  }
  
   this.generateToken = function() {
     var sha = crypto.createHash('sha256');

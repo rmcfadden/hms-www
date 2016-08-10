@@ -3,6 +3,7 @@
 var models  = require('../models');
 var Promise = require('promise');
 
+
 // Should I move these the models?
 models.user.hasMany(models.users_organizations, { foreignKey: 'user_id'})
 models.users_organizations.belongsTo(models.user, {foreignKey: 'user_id'})
@@ -14,7 +15,7 @@ models.users_organizations.belongsTo(models.organization);
 models.users_roles.belongsTo(models.role);
 
 var me  = {
-  middleware: function (req, res, next){    
+  middleware: function (req, res, next){ 
     if(req.user){
       me.findFromUser(req.user).then(function(me){     
        req.me = {
@@ -23,18 +24,16 @@ var me  = {
           organizations : me.organizations,
           roles : me.roles
         };
-        next();
+        return next();
       }).catch(function(err){
-        res.json({ success: false, error: "error in me lookup"});
-        res.end();
+        return next(err);    
       });
 
     }else{
-      next();    
+      return next();
     }
   }
 };
-
 
 me.findFromUser = function(user){
   return new Promise(function(resolve, reject){

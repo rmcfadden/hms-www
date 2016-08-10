@@ -3,15 +3,17 @@ var router = express.Router();
 
 
 router.get('/api/users/me', function(req, res, next) {
-  
+
   res.setHeader('Content-Type', 'application/json');
+
 
   if(req.me){
     res.json(req.me);
-    res.end();
+    return res.end();
   }else{
-    res.json({ message: "user is not authenticated"});
-    res.end();
+    res.status(401);
+    res.json({ success: false, message: "user is not authenticated"});
+    return res.end();
   }
 });
 

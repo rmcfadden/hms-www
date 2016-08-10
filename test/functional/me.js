@@ -16,7 +16,8 @@ var roleName1 = 'admin';
 var roleName2 = 'organization_admin';
 var username = '';
 
-describe('POST /api/login and /api/users/me should return valid data', function(){
+
+describe('POST /api/login and /api/users/me', function(){
   var tempUser = null;
   var agent  = null;
   beforeEach(function(done) { 
@@ -39,13 +40,13 @@ describe('POST /api/login and /api/users/me should return valid data', function(
     });
   });
 
-  it('respond with a 200 code and a true status ', function(done){     
+  it('should respond with a 200 code and me information', function(done){     
     agent
       .post('/api/login')
       .send("username=" + tempUser.username + "&password=123")
       .expect(200)
       .expect('Content-Type', 'application/json; charset=utf-8')
-      .expect('set-cookie', /connect.sid/)
+      .expect('set-cookie', /session-token/)
       .end(function(err, res){
 
         if (err) return done(err);
@@ -58,6 +59,8 @@ describe('POST /api/login and /api/users/me should return valid data', function(
           .expect(200)
           .expect('Content-Type', 'application/json; charset=utf-8')
           .end(function(err, res){
+            
+            console.log(res.text);
 
             if (err) return done(err);
             
@@ -78,4 +81,44 @@ describe('POST /api/login and /api/users/me should return valid data', function(
         });
       });    
   })
+});
+
+
+
+describe('GET /api/users/me without a session', function(){
+
+  it('should respond with a 401 code and a false status ', function(done){     
+    request(app)
+      .get('/api/users/me')
+      .expect(401)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .end(function(err, res){
+        if (err) return done(err);
+
+        res.body.success.should.be.false();
+        res.body.message.should.equal("user is not authenticated");
+
+        done();
+      });  
+  });
+});
+
+
+describe('GET /api/users/me with an invalid session', function(){
+
+  it('should respond with a 401 code and a false status ', function(done){     
+    request(app)
+      .get('/api/users/me')
+      .set('cookie', 'session-token=12312321')
+      .expect(401)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .end(function(err, res){
+        if (err) return done(err);
+
+        res.body.success.should.be.false();
+        res.body.message.should.equal("user is not authenticated");
+
+        done();
+      });  
+  });
 });
