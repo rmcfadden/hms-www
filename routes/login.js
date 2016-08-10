@@ -1,30 +1,56 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
+var models  = require('../models');
 
-require('..//modules/passport-strategies.js')(passport);
+var usersProv  = new (require('../modules/users-provider'));
+var sessionsProv  = new (require('../modules/sessions-provider'));
+
 
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
 router.post('/api/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    var invalidUsernameOrPassword = 'Invalid username or password';
 
-    if (err) { res.status(401); return res.send({ success : false, message : 'an error has occurred' }); }
-    if (!user) { res.status(401); return res.send({ success : false, message : invalidUsernameOrPassword }); }
-    
-    req.login(user, function(loginErr) {
-      if (loginErr) { 
-        res.status(401); 
-        return res.send({ success : false, message : 'a login error has occurred' }); 
-      }     
+  if(!req.body.username){
+    res.status(422);
+    res.send({success: false, message: "no username parameter"});
+    return res.end();
+  }
 
-      return res.send({ success : true, token: user.session.token});
+  if(!req.body.password){
+    res.status(422);
+    res.send({success: false, message: "no password parameter"});
+    return res.end();
+  }
+
+  models.user.findOne({ where : { username: req.body.username }}).then(function (user) { 
+    if (!user) {
+      res.status(401);
+      res.send({success: false, message: "invalid username or password"});
+      return res.end();
+    }
+
+    if (!usersProv.verifyPassword(user, req.body.password)) { 
+      res.status(401);
+      res.send({success: false, message: "invalid username or password"});
+      return res.end();
+    }
+
+    sessionsProv.create(user).then(function(session){
+      res.cookie('session-token', session.token, { maxAge: 900000, httpOnly: true });  
+      return res.send({ success : true, token: session.token});
+    }).catch(function(err){      
+      res.send({success: false, message: "could not create a session"});
+      return res.end();
     });
 
-  })(req, res, next);
+  }).catch(function(err){
+    res.send({success: false, message: "invalid username or password"});
+    return res.end();
+  });
+
 });
+
 
 module.exports = router;

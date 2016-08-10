@@ -5,18 +5,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var session = require('express-session');
 var config = require('./config/config.json');
 var pjson = require('./package.json');
 var me  = require('./modules/me');
+var sessionsMiddleware  = require('./modules/sessions-middleware');
+
 var app = express();
+
+
 
 // Add shared functoins for ejs templates
 require('./modules/ejs-shared.js')(app);
-
-// Add passport strategies
-require('./modules/passport-strategies.js')(passport);
 
 
 // view engine setup
@@ -27,23 +26,18 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 
-var sessionInfo = {
-  secret:  config.sessionSecret,
-  resave: false,
-  saveUninitialized: true
-};
 
 
+app.use(require('less-middleware')(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(require('less-middleware')(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(session(sessionInfo));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(sessionsMiddleware);
 app.use(me.middleware);
+
+
 
 
 app.use('/', require('./routes/index'));

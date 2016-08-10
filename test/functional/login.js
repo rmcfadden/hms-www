@@ -7,11 +7,30 @@ var request = require('supertest'),
 var usersProv = new usersProvider(); 
 
 describe('POST /api/login with a missing username', function(){
-  it('respond with a 401 code and a false status ', function(done){
+  it('respond with a 422 code and a false status ', function(done){
     request(app)
       .post('/api/login')
-      .send("username=12312SDFDs&password=adsf")
-      .expect(401)
+      .send("password=adsf")
+      .expect(422)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .end(function(err, res){
+        if (err) return done(err);
+
+        res.body.success.should.be.false();
+        res.body.message.should.not.be.null();
+
+        done();
+      });    
+  })
+});
+
+
+describe('POST /api/login with a missing password', function(){
+  it('respond with a 422 code and a false status ', function(done){
+    request(app)
+      .post('/api/login')
+      .send("username=adsf")
+      .expect(422)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .end(function(err, res){
         if (err) return done(err);
@@ -45,8 +64,8 @@ describe('POST /api/login with a valid username but bad password', function(){
       done(err)
     });
   });
+
   it('respond with a 401 code and a false status ', function(done){
-  
     request(app)
       .post('/api/login')
       .send("username=" + tempUser.username + "&password=adsf")
@@ -77,16 +96,14 @@ describe('POST /api/login with a valid username and valid password', function(){
       done(err)
     });
   });
-  afterEach(function(done) {
-    done();
-  });
+
 
   it('respond with a 200 code and a true status ', function(done){ 
     request(app)
       .post('/api/login')
       .send("username=" + tempUser.username + "&password=123")
       .expect(200)
-      .expect('set-cookie', /connect.sid/)
+      .expect('set-cookie', /session-token/)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .end(function(err, res){
         if (err) return done(err);
