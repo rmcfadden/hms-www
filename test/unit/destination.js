@@ -46,7 +46,7 @@ describe('create destination', function () {
         });        
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
-        var destinationName = "destination " + randomstring.generate();
+        var destinationName = "destination " + randomstring.generate(2);
         models.destination.create(
         {
             user_id: user_id,
@@ -123,7 +123,7 @@ describe('update destination', function () {
         });        
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
-        var destinationName = "destination " + randomstring.generate();
+        var destinationName = "destination " + randomstring.generate(2);
         models.destination.create(
         {
             user_id: user_id,
@@ -149,7 +149,7 @@ describe('update destination', function () {
         });
       },
       function updateDestination(destination_id, next){
-        var destinationName = "updatedDest " + randomstring.generate();
+        var destinationName = "updatedDest " + randomstring.generate(2);
         models.destination.update(
         {
             name: destinationName,
@@ -220,7 +220,7 @@ describe('delete destination', function () {
         });        
       },
       function createDestination(user_id, country_id, organization_id, address_id, next){
-        var destinationName = "destination " + randomstring.generate();
+        var destinationName = "destination " + randomstring.generate(2);
         models.destination.create(
         {
             user_id: user_id,

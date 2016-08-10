@@ -5,7 +5,6 @@ var models  = require('../models');
 var usersProv  = new (require('../modules/users-provider'));
 var sessionsProv  = new (require('../modules/sessions-provider'));
 
-
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
@@ -24,6 +23,7 @@ router.post('/api/login', function(req, res, next) {
     return res.end();
   }
 
+  // TODO: move this to the provider
   models.user.findOne({ where : { username: req.body.username }}).then(function (user) { 
     if (!user) {
       res.status(401);

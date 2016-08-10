@@ -5,11 +5,9 @@ var randomstring = require("randomstring");
 var bcrypt  = require('bcryptjs');
 var Promise = require('promise');
 
-var rolesProvider  = require('../modules/roles-provider');
-var rolesProv = new rolesProvider(); 
+var rolesProv  = new (require('../modules/roles-provider'));
 
-var organizationsProvider  = require('../modules/organizations-provider');
-var organizationsProv = new organizationsProvider(); 
+var organizationsProv  = new (require('../modules/organizations-provider'))
 
 var usersProvider  = function(){
   this.create = function(user){
