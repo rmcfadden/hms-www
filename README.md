@@ -45,7 +45,7 @@
 6. Update migrate and test
  ```
  sudo npm install
- npm run-script migrate
+ npm run migrate
  npm test
  ```
  
