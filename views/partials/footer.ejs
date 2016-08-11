@@ -97,9 +97,7 @@
 
 	<script src="/assets/js/shared.js?app_version=<%=app_version%>" type='text/javascript'></script>
 
-	<% for (var i in scripts) { %>
-	<script type="text/javascript" src="<%= scripts[i] %>"></script>
-	<% } %>
+	<%- scripts %>
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>

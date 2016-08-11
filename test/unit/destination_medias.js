@@ -71,8 +71,8 @@ describe('create destination media', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_types.find({where : { name : 'image' }}).then(function(media_types){
-          next(null,media_types.id, destination_id);
+        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+          next(null,media_type.id, destination_id);
         });
       },
       function createDestinationMedia(media_types_id, destination_id, next){
@@ -180,8 +180,8 @@ describe('update destination', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_types.find({where : { name : 'image' }}).then(function(media_types){
-          next(null,media_types.id, destination_id);
+        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+          next(null,media_type.id, destination_id);
         });
       },
       function createDestinationMedia(media_types_id, destination_id, next){
@@ -316,8 +316,8 @@ describe('delete destination media', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_types.find({where : { name : 'image' }}).then(function(media_types){
-          next(null,media_types.id, destination_id);
+        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+          next(null,media_type.id, destination_id);
         });
       },
       function createDestinationMedia(media_types_id, destination_id, next){
@@ -431,8 +431,8 @@ describe('find all', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_types.find({where : { name : 'image' }}).then(function(media_types){
-          next(null,media_types.id, destination_id);
+        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+          next(null,media_type.id, destination_id);
         });
       },
       function createDestinationMedia(media_types_id, destination_id, next){
