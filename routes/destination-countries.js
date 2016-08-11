@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models  = require('../models')
 
-router.get('/api/destination_countries', function(req, res, next) {
+router.get('/api/destination-countries', function(req, res, next) {
   
   // TODO:
   models.country.findAll({

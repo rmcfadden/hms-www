@@ -48,6 +48,9 @@ app.use(require('./routes/logout'));
 app.use(require('./routes/destinations'));
 app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
+app.use(require('./routes/destination-gallery'));
+app.use(require('./routes/destination-countries'));
+
 
 app.use(require('./routes/admin/index'));
 
@@ -99,8 +102,7 @@ app.closeTestServer = function(){
   testServer.close();
 }
 
-// place app locals here
-app.locals.scripts  = [];
+app.locals.scripts  = '';
 
 
 module.exports = app;
