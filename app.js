@@ -9,6 +9,7 @@ var config = require('./config/config.json');
 var pjson = require('./package.json');
 var me  = require('./modules/me');
 var sessionsMiddleware  = require('./modules/sessions-middleware');
+var assets = require('./modules/express-assets/');
 
 var app = express();
 
@@ -34,6 +35,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(assets().initialize({appVersion: pjson.version}));
+
 app.use(sessionsMiddleware);
 app.use(me.middleware);
 
