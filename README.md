@@ -58,10 +58,11 @@
 # Current tech stack
 * NodeJs for server side development
 * MySQL for relational database
-* Express for MVC
+* Express for MVC (using ejs view templates)
 * Sequelize for ORM
 * Mocha for testing
 * Supertest for HTTP testing
+* Angular for client-side??
 
 # Devops
 * Currently, hosted using Digital Ocean but considering AWS, Google App Engine
