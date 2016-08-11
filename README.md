@@ -63,6 +63,10 @@
 * Mocha for testing
 * Supertest for HTTP testing
 
+# Devops
+* Currently, hosted using Digital Ocean but considering AWS, Google App Engine
+* Will use S3 for storing uploaded images.
+
 # How to contribute
 
 1. Migrations
