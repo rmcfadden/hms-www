@@ -11,6 +11,7 @@ router.get('/login', function(req, res, next) {
 
 router.post('/api/login', function(req, res, next) {
 
+  // TODO: move this to a module
   if(!req.body.username){
     res.status(422);
     res.send({success: false, message: "no username parameter"});
@@ -23,7 +24,7 @@ router.post('/api/login', function(req, res, next) {
     return res.end();
   }
 
-  // TODO: move this to the provider
+  
   models.user.findOne({ where : { username: req.body.username }}).then(function (user) { 
     if (!user) {
       res.status(401);
