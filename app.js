@@ -35,7 +35,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(assets().initialize({appVersion: pjson.version}));
+app.use(assets.initialize({appVersion: pjson.version}));
 
 app.use(sessionsMiddleware);
 app.use(me.middleware);
