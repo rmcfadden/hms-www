@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_medias', {
+    queryInterface.createTable('galleries', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,47 +13,45 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
-      media_type_id: {
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      organization_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
-            model: 'media_types',
+            model: 'organizations',
             key: 'id'
         }
       },
-      destination_id: {
+      user_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-            model: 'destinations',
+            model: 'users',
             key: 'id'
         }
       },
-      location: {
-        type: Sequelize.STRING(128),
-        allowNull: false
-      },
       title: {
-        type: Sequelize.STRING(128),
+        type: Sequelize.STRING,
         allowNull: false
       },
       description: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      ordinal: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      height: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      width: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+      is_visible: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
       },
       is_approved: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
+      is_moderated: {
         allowNull: false,
         defaultValue: true,
         type: Sequelize.BOOLEAN
@@ -68,13 +66,23 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_medias',
-        ['uuid'],
-        {indicesType: 'UNIQUE'}
-      );
-    });
+        'galleries',
+        ['organization_id']
+      ).then(function(){
+        return queryInterface.addIndex(
+        'galleries',
+        ['user_id']
+      ).then(function(){
+        return queryInterface.addIndex(
+          'galleries',
+          ['uuid'],
+          {indicesType: 'UNIQUE'}
+        );
+      })
+    })
+  })
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_medias');
+    return queryInterface.dropTable('galleries');
   }
 };

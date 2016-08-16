@@ -228,7 +228,8 @@ describe('delete destination', function () {
             name: destinationName,
             organization_id: organization_id,
             address_id: address_id,
-            description: 'bla, bla'
+            description: 'bla, bla',
+            is_approved: false
         }).then(function(destination){
           destination.id.should.be.greaterThan(0);
           destination.uuid.should.not.be.null();

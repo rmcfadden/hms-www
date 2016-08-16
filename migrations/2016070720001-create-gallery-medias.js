@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_medias', {
+    queryInterface.createTable('gallery_medias', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,11 +21,11 @@ module.exports = {
             key: 'id'
         }
       },
-      destination_id: {
+      gallery_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-            model: 'destinations',
+            model: 'galleries',
             key: 'id'
         }
       },
@@ -58,6 +58,11 @@ module.exports = {
         defaultValue: true,
         type: Sequelize.BOOLEAN
       },
+      is_moderated: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
       created: {
         allowNull: false,
         type: Sequelize.DATE
@@ -68,13 +73,13 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_medias',
+        'gallery_medias',
         ['uuid'],
         {indicesType: 'UNIQUE'}
       );
     });
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_medias');
+    return queryInterface.dropTable('gallery_medias');
   }
 };

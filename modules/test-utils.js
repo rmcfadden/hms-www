@@ -196,7 +196,10 @@ testUtils.addTestDestinations = function(num, country, callback){
               destination_id: destination_id,
               location: '/assets/img/samples/destination-image-sample' + id + '.jpeg',
               title: title,
-              description: defaultDescription
+              description: defaultDescription,
+              ordinal: id,
+              height: 300,
+              width: 200
             }).then(function(destination_reviews){
               callback();
             }).catch(function(err){

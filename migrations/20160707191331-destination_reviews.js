@@ -45,6 +45,16 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false
       },
+      is_moderated: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
+      },
       created: {
         allowNull: false,
         type: Sequelize.DATE

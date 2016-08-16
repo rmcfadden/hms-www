@@ -85,7 +85,11 @@ describe('create destination media', function () {
             destination_id: destination_id,
             location: location,
             title: title,
-            description: description
+            description: description,
+            ordinal: 2,
+            height: 200,
+            width: 300,
+            is_approved : true
         }).then(function(destination_medias){
 
           destination_medias.id.should.be.greaterThan(0);
@@ -95,7 +99,11 @@ describe('create destination media', function () {
           destination_medias.location.should.be.equal(location);
           destination_medias.media_type_id.should.be.equal(media_types_id);
           destination_medias.destination_id.should.be.equal(destination_id);
- 
+
+          destination_medias.height.should.be.equal(200);
+          destination_medias.width.should.be.equal(300);
+          destination_medias.is_approved.should.be.true();
+
           destination_medias.created.should.be.greaterThan(0);
           destination_medias.updated.should.be.greaterThan(0);
           
@@ -194,7 +202,11 @@ describe('update destination', function () {
             destination_id: destination_id,
             location: location,
             title: title,
-            description: description
+            description: description,
+            ordinal: 2,
+            height: 200,
+            width: 300,
+            is_approved : true
         }).then(function(destination_medias){
 
           destination_medias.id.should.be.greaterThan(0);
@@ -204,7 +216,12 @@ describe('update destination', function () {
           destination_medias.location.should.be.equal(location);
           destination_medias.media_type_id.should.be.equal(media_types_id);
           destination_medias.destination_id.should.be.equal(destination_id);
- 
+
+          destination_medias.ordinal.should.be.equal(2); 
+          destination_medias.height.should.be.equal(200);
+          destination_medias.width.should.be.equal(300);
+          destination_medias.is_approved.should.be.true();
+
           destination_medias.created.should.be.greaterThan(0);
           destination_medias.updated.should.be.greaterThan(0);
           
@@ -219,7 +236,11 @@ describe('update destination', function () {
         {
             location: location,
             title: title,
-            description: description
+            description: description,
+            ordinal: 3,
+            height: 1200,
+            width: 1300,
+            is_approved : false
         }, 
         { where: { id: destination_medias_id }} 
         ).then(function(destination_medias) {   
@@ -235,6 +256,12 @@ describe('update destination', function () {
           destination_medias.location.should.be.equal(location);
           destination_medias.title.should.be.equal(title);
           destination_medias.description.should.be.equal(description);
+
+          destination_medias.ordinal.should.be.equal(3);
+          destination_medias.height.should.be.equal(1200);
+          destination_medias.width.should.be.equal(1300);
+          destination_medias.is_approved.should.be.false();
+
           destination_medias.created.should.be.greaterThan(0);
           destination_medias.updated.should.be.greaterThan(0);
           
@@ -330,7 +357,11 @@ describe('delete destination media', function () {
             destination_id: destination_id,
             location: location,
             title: title,
-            description: description
+            description: description,
+            ordinal: 2,
+            height: 200,
+            width: 300,
+            is_approved : true
         }).then(function(destination_medias){
 
           destination_medias.id.should.be.greaterThan(0);
@@ -445,7 +476,11 @@ describe('find all', function () {
             destination_id: destination_id,
             location: location,
             title: title,
-            description: description
+            description: description,
+            ordinal: 2,
+            height: 200,
+            width: 300,
+            is_approved : true
         }).then(function(destination_medias){
 
           destination_medias.id.should.be.greaterThan(0);
@@ -474,20 +509,6 @@ describe('find all', function () {
   it('should return a valid list of destination medias', function (done) {
     models.destination_medias.findAll().then(function(destination_medias) {
       destination_medias.length.should.be.greaterThan(0);
-      done();
-    });
-  });
-});
-
-
-describe('find destination_medias with id 1', function () {
-it('should return a valid destination_medias', function (done) {
-  models.destination_medias.findOne({ where: { id: 1 }
-    }).then(function(destination_medias) {
-      destination_medias.id.should.be.greaterThan(0);
-      destination_medias.created.should.be.greaterThan(0);
-      destination_medias.updated.should.be.greaterThan(0);
-
       done();
     });
   });

@@ -44,6 +44,16 @@ module.exports = function(sequelize, DataTypes) {
       service_rating: {
         type: DataTypes.FLOAT,
         allowNull: false
+      },
+      is_moderated: {
+        allowNull: false,
+        defaultValue: true,
+        type: DataTypes.BOOLEAN
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN
       }
     }, {
     updatedAt: 'updated',

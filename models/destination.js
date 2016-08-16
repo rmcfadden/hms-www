@@ -35,7 +35,6 @@ module.exports = function(sequelize, DataTypes) {
             key: 'id'
         }
       },
-
       address_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -62,7 +61,12 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         defaultValue: true,
         type: DataTypes.BOOLEAN
-      }
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: true,
+        type: DataTypes.BOOLEAN
+      },
     }, {
     updatedAt: 'updated',
     createdAt: 'created',

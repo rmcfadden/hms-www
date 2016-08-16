@@ -33,6 +33,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
+    }).then(function(){
+      return queryInterface.addIndex(
+        'destinations_tags',
+        ['destination_id']
+      );
     });
   },
 

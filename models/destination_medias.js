@@ -34,6 +34,23 @@ module.exports = function(sequelize, DataTypes) {
       description: {
         type: DataTypes.TEXT,
         allowNull: false
+      },
+      ordinal: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      height: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      width: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: true,
+        type: DataTypes.BOOLEAN
       }
     }, {
     updatedAt: 'updated',

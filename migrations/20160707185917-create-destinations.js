@@ -62,8 +62,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0
-      },      
+      },
       is_visible: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
+      is_approved: {
         allowNull: false,
         defaultValue: true,
         type: Sequelize.BOOLEAN
