@@ -4,6 +4,10 @@
 var program = require('commander');
 var colors = require('colors');
 
+if(!process.env.NODE_ENV){
+  process.env.NODE_ENV = 'development';
+}
+
 console.log('Node Environment =' + process.env.NODE_ENV);
 
 program
