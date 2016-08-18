@@ -202,16 +202,3 @@ describe('Find all destination_attribute_categories', function () {
 });
 
 
-describe('find destination_attribute_categories with id 1', function () {
-it('should return a valid destination_attribute_categories record', function (done) {
-  models.destination_attribute_categories.findOne({ where: { id: 1 }
-    }).then(function(destination_attribute_categories) {
-      destination_attribute_categories.id.should.be.greaterThan(0);
-      destination_attribute_categories.created.should.be.greaterThan(0);
-      destination_attribute_categories.updated.should.be.greaterThan(0);
-      done();
-    });
-  });
-});
-
-

@@ -8,7 +8,7 @@ var testUtils  = require('modules/test-utils');
 
 describe('create destination review', function () {
   before(function(done) {
-    this.timeout(60000);
+    this.timeout(testUtils.addDestinationsTimeout);
   
     testUtils.ensureDestinationCount(12, function(err, result){
       if(err){
