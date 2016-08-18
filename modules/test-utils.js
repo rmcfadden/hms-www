@@ -81,7 +81,7 @@ testUtils.addTestDestinations = function(args, callback){
           models.organizations.create({ name: organizationName}).then(function(organization){
             var country_id = -1;
             if(args.country) {
-              country_id = country.id;
+              country_id = args.country.id;
             } else {
               country_id = countries[Math.floor(Math.random() * countries.length)].id;
             }

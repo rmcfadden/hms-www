@@ -24,14 +24,23 @@ describe('create destination review', function () {
   it('should return a valid destination review', function (done) {
     testUtils.getRandomDestination().then(function(destination){
 
-      console.log('destination');
-      console.log(destination);
+/*
+      models.destinations_reviews.create({
+        destination_id : destination.id,
+      }).then(function(destination_review){
 
-      //models.destinations_reviews.
+        console.log('destination_review');
+        console.log(destination_review);
 
+        done();
+
+      }).catch(function(error){
+        return done(error);
+      });
+*/
       done();
     }).catch(function(error){
-      done(error);
+      return done(error);
     });
     
   });
