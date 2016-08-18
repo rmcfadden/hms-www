@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var session = sequelize.define('session', {
+  var session = sequelize.define('sessions', {
     id: {
       allowNull: false,
       autoIncrement: true,

@@ -21,7 +21,7 @@ var usersProvider  = function(){
       var salt =  proxy.generateSalt();
       var hashedPassword = proxy.hashPassword(user.password, salt);
 
-      models.user.create({
+      models.users.create({
         username: user.username,
         email: user.email,
         password: hashedPassword,

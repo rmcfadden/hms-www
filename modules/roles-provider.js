@@ -8,7 +8,7 @@ var Promise = require('promise');
 var rolesProvider  = function(){
   this.findAll = function(){
     // TODO: cache this
-    return models.role.findAll();
+    return models.roles.findAll();
   }
 
   this.addRoleToUser = function(user, roleName){

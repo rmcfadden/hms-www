@@ -17,7 +17,7 @@ var sessionsProvider  = function(){
       var token = proxy.generateToken();
 
       var sessionHours = 24;  // TODO: move to config
-      models.session.create({
+      models.sessions.create({
         user_id: user.id,
         token : token,
         start:  moment(),
@@ -32,7 +32,7 @@ var sessionsProvider  = function(){
   }
 
   this.findByToken = function(token){
-    return models.session.findOne({where : {token :token }});
+    return models.sessions.findOne({where : {token :token }});
   }
 
   this.expire = function(token){

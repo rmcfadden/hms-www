@@ -7,7 +7,7 @@ var async = require('async');
 
 describe('find all', function () {
   it('should return a valid list of media types', function (done) {
-    models.media_type.findAll().then(function(media_type) {
+    models.media_types.findAll().then(function(media_type) {
       media_type.length.should.be.greaterThan(0);
       done();
     });
@@ -17,7 +17,7 @@ describe('find all', function () {
 
 describe('find media_type with name image', function () {
 it('should return a valid media_type', function (done) {
-  models.media_type.findOne({ where: { name: 'image' }
+  models.media_types.findOne({ where: { name: 'image' }
     }).then(function(media_type) {
 
       media_type.id.should.equal(1);
@@ -33,7 +33,7 @@ it('should return a valid media_type', function (done) {
 
 describe('find media_type with name image', function () {
 it('should return a valid media_type', function (done) {
-  models.media_type.findOne({ where: { name: 'thumbnail' }
+  models.media_types.findOne({ where: { name: 'thumbnail' }
     }).then(function(media_type) {
 
       media_type.id.should.equal(2);
@@ -49,7 +49,7 @@ it('should return a valid media_type', function (done) {
 
 describe('find media_type with name image', function () {
 it('should return a valid media_type', function (done) {
-  models.media_type.findOne({ where: { name: 'video' }
+  models.media_types.findOne({ where: { name: 'video' }
     }).then(function(media_type) {
 
       media_type.id.should.equal(3);

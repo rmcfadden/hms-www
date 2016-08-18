@@ -5,7 +5,7 @@ var models  = require('../models')
 router.get('/api/destination-countries', function(req, res, next) {
   
   // TODO:
-  models.country.findAll({
+  models.countries.findAll({
   }).then(function(countries){
     res.setHeader('Content-Type', 'application/json');
     res.json(countries);

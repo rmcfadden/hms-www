@@ -10,7 +10,7 @@ describe('create destination media', function () {
   it('should return a valid destination media', function (done) {
     async.waterfall([
       function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -18,7 +18,7 @@ describe('create destination media', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -28,12 +28,12 @@ describe('create destination media', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -46,7 +46,7 @@ describe('create destination media', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate({ length: 3, charset: 'alphanumeric' });
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,
@@ -71,7 +71,7 @@ describe('create destination media', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+        models.media_types.find({where : { name : 'image' }}).then(function(media_type){
           next(null,media_type.id, destination_id);
         });
       },
@@ -127,7 +127,7 @@ describe('update destination', function () {
 
     async.waterfall([
       function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -135,7 +135,7 @@ describe('update destination', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -145,12 +145,12 @@ describe('update destination', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -163,7 +163,7 @@ describe('update destination', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate();
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,
@@ -188,7 +188,7 @@ describe('update destination', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+        models.media_types.find({where : { name : 'image' }}).then(function(media_type){
           next(null,media_type.id, destination_id);
         });
       },
@@ -282,7 +282,7 @@ describe('delete destination media', function () {
   it('should delete a destination media', function (done) {
      async.waterfall([
        function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -290,7 +290,7 @@ describe('delete destination media', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -300,12 +300,12 @@ describe('delete destination media', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -318,7 +318,7 @@ describe('delete destination media', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate();
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,
@@ -343,7 +343,7 @@ describe('delete destination media', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+        models.media_types.find({where : { name : 'image' }}).then(function(media_type){
           next(null,media_type.id, destination_id);
         });
       },
@@ -401,7 +401,7 @@ describe('find all', function () {
   before(function(done){
     async.waterfall([
       function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -409,7 +409,7 @@ describe('find all', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -419,12 +419,12 @@ describe('find all', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -437,7 +437,7 @@ describe('find all', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate();
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,
@@ -462,7 +462,7 @@ describe('find all', function () {
         });
       },
       function getMediaType(destination_id, next){
-        models.media_type.find({where : { name : 'image' }}).then(function(media_type){
+        models.media_types.find({where : { name : 'image' }}).then(function(media_type){
           next(null,media_type.id, destination_id);
         });
       },

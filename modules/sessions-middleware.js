@@ -8,7 +8,7 @@ var sessionsMiddleware = function (req, res, next){
       if(!session){
         return null;
       }else{
-        return models.user.findById(session.user_id);
+        return models.users.findById(session.user_id);
       }
     }).then(function(user){
       req.user = user;

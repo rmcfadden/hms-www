@@ -9,7 +9,7 @@ describe('create user', function () {
   it('should return a valid user', function (done) {
     var email = randomstring.generate() + "@test.com";
     var username = "john" + randomstring.generate();
-    models.user.create({
+    models.users.create({
       username: username,
       email: email,
       password: "secret",
@@ -35,7 +35,7 @@ describe('update user', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -53,7 +53,7 @@ describe('update user', function () {
       },
       function updateUser(username, next){
         var email = 'test' + randomstring.generate() + "@test.com";
-        models.user.update(
+        models.users.update(
           { email: email, password : 'secretUpdated', password_salt : '456', is_enabled : 2, is_subscribed: 2, is_subscribed_to_partners: 2 },
           { where: { username: username }}
         ).then(function(user) {   
@@ -61,7 +61,7 @@ describe('update user', function () {
         });
       },
       function findUser(username, email, next){
-        models.user.find({where : { email : email }}).then(function(user){
+        models.users.find({where : { email : email }}).then(function(user){
           user.id.should.be.greaterThan(0);
           user.username.should.equal(username);
           user.email.should.equal(email);
@@ -93,7 +93,7 @@ describe('delete user', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-          models.user.create({
+          models.users.create({
             username: username,
             email: email,
             password: "secret",
@@ -110,8 +110,8 @@ describe('delete user', function () {
           });
        },
        function deleteUser(user_id){
-         models.user.destroy({ where : { id : user_id} }).then(function(status) {
-	          models.user.findAll({where : { id : user_id }}).then(function(users){
+         models.users.destroy({ where : { id : user_id} }).then(function(status) {
+	          models.users.findAll({where : { id : user_id }}).then(function(users){
               users.length.should.equal(0);
 	            done();
 	          });
@@ -131,7 +131,7 @@ describe('find all', function () {
   before(function(){
     var email = randomstring.generate() + "@abc.com";
     var username = "Tim" + randomstring.generate();
-      models.user.create({
+      models.users.create({
       username: username,
       email: email,
       password: "secret",
@@ -148,7 +148,7 @@ describe('find all', function () {
   })
 
   it('should return a valid list of users', function (done) {
-    models.user.findAll().then(function(users) {
+    models.users.findAll().then(function(users) {
       users.length.should.be.greaterThan(0);
       done();
     });

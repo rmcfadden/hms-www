@@ -25,7 +25,7 @@ router.post('/api/login', function(req, res, next) {
   }
 
   
-  models.user.findOne({ where : { username: req.body.username }}).then(function (user) { 
+  models.users.findOne({ where : { username: req.body.username }}).then(function (user) { 
     if (!user) {
       res.status(401);
       res.send({success: false, message: "invalid username or password"});

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var country = sequelize.define('country', {
+  var countries = sequelize.define('countries', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -28,5 +28,6 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: 'updated',
     createdAt: 'created'
   });
-  return country;
+  return countries;
+
 };

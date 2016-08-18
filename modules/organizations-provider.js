@@ -7,7 +7,7 @@ var async  = require('async');
 var organizationsProvider  = function(){
   this.findAll = function(){
     // TODO: cache this
-    return models.organization.findAll();
+    return models.organizations.findAll();
   }
 
   this.addOrganizationToUser = function(user, organizationName){
@@ -17,7 +17,7 @@ var organizationsProvider  = function(){
   this.addOrganizationsToUser = function(user, organizations){  
     var proxyThis = this;
     return new Promise(function(resolve, reject){
-      models.organization.findAll( { where : { name : { $in :organizations }}}).then(function(returnOrganizations){        
+      models.organizations.findAll( { where : { name : { $in :organizations }}}).then(function(returnOrganizations){        
  
         // create a lookup table so we don't have O(N^2) runtime
         var organizationsLookup = {}

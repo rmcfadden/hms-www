@@ -44,10 +44,10 @@ describe('create with roles and organizations', function () {
 
   before(function(done){ 
     organizationName1 = "organization" + randomstring.generate();
-     models.organization.create({
+     models.organizations.create({
       name: organizationName1}).then(function(organization){
         organizationName2 = "organization" + randomstring.generate();      
-        return models.organization.create({name: organizationName2});
+        return models.organizations.create({name: organizationName2});
       }).then(function(organization){
         done();
       })

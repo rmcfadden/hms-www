@@ -12,7 +12,7 @@ describe('Create contact', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-         models.user.create({
+         models.users.create({
            username: username,
            email: email,
            password: "secret",
@@ -70,7 +70,7 @@ describe('Update contacts', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-         models.user.create({
+         models.users.create({
            username: username,
            email: email,
            password: "secret",
@@ -158,7 +158,7 @@ describe('delete contacts', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-         models.user.create({
+         models.users.create({
            username: username,
            email: email,
            password: "secret",
@@ -224,7 +224,7 @@ describe('Find all contacts', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-         models.user.create({
+         models.users.create({
            username: username,
            email: email,
            password: "secret",

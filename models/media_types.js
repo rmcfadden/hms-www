@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var media_type = sequelize.define('media_type', {
+  var media_type = sequelize.define('media_types', {
     id: {
       allowNull: false,
       autoIncrement: true,

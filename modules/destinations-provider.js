@@ -8,27 +8,27 @@ var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
 
 // Should I move these the models?
 
-models.destination.belongsTo(models.country);
+models.destinations.belongsTo(models.countries);
 
-models.destination.belongsTo(models.address);
+models.destinations.belongsTo(models.addresses);
 
-models.destination.hasMany(models.destination_reviews, { foreignKey: 'destination_id'})
-models.destination_reviews.belongsTo(models.destination, {foreignKey: 'destination_id'})
+models.destinations.hasMany(models.destination_reviews, { foreignKey: 'destination_id'})
+models.destination_reviews.belongsTo(models.destinations, {foreignKey: 'destination_id'})
 
-models.destination.hasMany(models.destinations_categories, { foreignKey: 'destination_id'})
-models.destinations_categories.belongsTo(models.destination, {foreignKey: 'destination_id'})
+models.destinations.hasMany(models.destinations_categories, { foreignKey: 'destination_id'})
+models.destinations_categories.belongsTo(models.destinations, {foreignKey: 'destination_id'})
 
-models.destination.hasMany(models.destination_medias, { foreignKey: 'destination_id'})
-models.destination_medias.belongsTo(models.destination, {foreignKey: 'destination_id'})
+models.destinations.hasMany(models.destination_medias, { foreignKey: 'destination_id'})
+models.destination_medias.belongsTo(models.destinations, {foreignKey: 'destination_id'})
 
 
 var destinationsProvider  = function(){
   this.findAll = function(options){
-    return models.destination.findAndCountAll({ include: [models.country], offset: options.paging.offset, limit: options.paging.limit});
+    return models.destinations.findAndCountAll({ include: [models.countries], offset: options.paging.offset, limit: options.paging.limit});
   }
 
   this.findAllByIsoCode2 = function(isoCode2, options){
-    return models.destination.findAndCountAll({  include: [  {"model" : models.country, where: { 'iso_code2': isoCode2 }}], 
+    return models.destinations.findAndCountAll({  include: [  {"model" : models.countries, where: { 'iso_code2': isoCode2 }}], 
       offset: options.paging.offset, limit: options.paging.limit});  
   }
 
@@ -44,7 +44,7 @@ var destinationsProvider  = function(){
               }
             }
 */
-    return models.destination.findOne({ where: { 'name': name }, include: [ models.destination_reviews, models.destination_medias, models.address, {"model" : models.country, where: { 'iso_code2': isoCode2 }}]}); 
+    return models.destinations.findOne({ where: { 'name': name }, include: [ models.destination_reviews, models.destination_medias, models.addresses, {"model" : models.countries, where: { 'iso_code2': isoCode2 }}]}); 
   }
   
   this.findAllByDestinationCategory = function(destinationCategoryName, options){
@@ -53,7 +53,7 @@ var destinationsProvider  = function(){
         if(!destinationCategory){
           return resolve({ rows: [], count:0});
         }
-        models.destination.findAndCountAll({  include: [models.country, {"model" : models.destinations_categories, where: { 'destination_category_type_id': destinationCategory.id }}],
+        models.destinations.findAndCountAll({  include: [models.countries, {"model" : models.destinations_categories, where: { 'destination_category_type_id': destinationCategory.id }}],
            offset: options.paging.offset, limit: options.paging.limit}).then(function(destinations){
 
           return resolve(destinations);

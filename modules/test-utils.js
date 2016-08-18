@@ -3,18 +3,18 @@
 var models  = require('../models');
 var Promise = require('promise');
 var randomstring = require("randomstring");
-var usersProvider  = require('../modules/users-provider');
+var usersProv  = new (require('../modules/users-provider'));
 var async = require('async');
-var usersProv = new usersProvider(); 
+var Sequelize = require("sequelize");
 
 
 var testUtils = {};
 
 testUtils.ensureDestinationCount = function (num, callback){
   var proxyThis = this;
-  models.destination.count().then(function(c){
+  models.destinations.count().then(function(c){
     if(c < num){
-      return proxyThis.addTestDestinations(num, null, callback);
+      return proxyThis.addTestDestinations({ num: num}, null, callback);
     }
     else{
       return callback(null);
@@ -24,10 +24,10 @@ testUtils.ensureDestinationCount = function (num, callback){
 
 testUtils.ensureDestinationCountUs = function (num, callback){
   var proxyThis = this;
-  models.country.findOne({ where : { name:  'United States' }}).then(function(country){
-    models.destination.count({ where:{'country_id' : country.id}}).then(function(c){
+  models.countries.findOne({ where : { name:  'United States' }}).then(function(country){
+    models.destinations.count({ where: {'country_id' : country.id}}).then(function(c){
       if(c < num){
-        return proxyThis.addTestDestinations(num, country, callback);
+        return proxyThis.addTestDestinations({ num: num, country: country}, callback);
       }
       else{
         return callback(null);
@@ -55,22 +55,32 @@ var testAddresses =[
   }
 ];
 
-testUtils.addTestDestinations = function(num, country, callback){
-  if(!num){
-    num = 25;
+testUtils.getRandomDestination = function(){
+  return models.destinations.find({
+  order: [
+    Sequelize.fn( 'RAND' ),
+  ]});
+}
+
+testUtils.addTestDestinations = function(args, callback){
+  var num = 25;
+  if(args.num){
+    num = args.num;
   }
 
   console.log('Adding ' + num + ' test destinations');
 
-  getCounties().then(function(countries){
+  var returnIds = [];
+
+  getTestCounties().then(function(countries){
     var destinationCount = 0;
     for(var i=0;i < num; i++){      
       async.waterfall([
         function createOrganization(next){
           var organizationName = "organization - " + randomstring.generate();
-          models.organization.create({ name: organizationName}).then(function(organization){
+          models.organizations.create({ name: organizationName}).then(function(organization){
             var country_id = -1;
-            if(country) {
+            if(args.country) {
               country_id = country.id;
             } else {
               country_id = countries[Math.floor(Math.random() * countries.length)].id;
@@ -95,7 +105,7 @@ testUtils.addTestDestinations = function(num, country, callback){
 
           var address = testAddresses[Math.floor(Math.random() * testAddresses.length)];
 
-          models.address.create({
+          models.addresses.create({
             address_line1: address.address_line1,
             address_line2: address.address_line2,
             city: address.city,
@@ -114,7 +124,7 @@ testUtils.addTestDestinations = function(num, country, callback){
           var average_rating =  (Math.random() * 4) + 1; 
           var review_count =  (Math.random() * 9) + 1; 
 
-          models.destination.create(
+          models.destinations.create(
           {
             name: destinationName,
             organization_id: organization_id,
@@ -210,6 +220,7 @@ testUtils.addTestDestinations = function(num, country, callback){
               return next(err);
             }
             else{
+              returnIds.push(destination_id)
               return next(null, destination_id);
             }
           });
@@ -225,7 +236,7 @@ testUtils.addTestDestinations = function(num, country, callback){
         
         if(++destinationCount == num){
           if(callback){
-            return callback(null);
+            return callback(null, returnIds);
           }
         }
 
@@ -237,9 +248,9 @@ testUtils.addTestDestinations = function(num, country, callback){
   });
 }
 
-function getCounties(){
+function getTestCounties(){
   return new Promise(function(resolve, reject){
-    models.country.findAll({where : { $or: [
+    models.countries.findAll({where : { $or: [
         {
           name: {
             $eq: 'United States'

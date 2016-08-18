@@ -8,7 +8,7 @@ var async = require("async");
 describe('create organization', function () {
   it('should return a valid organization', function (done) {
     var organizationName = "organization" + randomstring.generate();
-    models.organization.create({
+    models.organizations.create({
           name: organizationName,
       }).then(function(organization) {
         organization.id.should.be.greaterThan(0);
@@ -27,7 +27,7 @@ describe('Edit organization', function () {
     async.waterfall([
       function createorganization(next){
       	var name = randomstring.generate() + "-organization";
-        models.organization.create({      
+        models.organizations.create({      
           name: name,
         }).then(function(organization) {
           organization.id.should.be.greaterThan(0);
@@ -39,7 +39,7 @@ describe('Edit organization', function () {
       },
       function updateorganization(organization_id, next){
 	      var name = randomstring.generate() + "-organizationUpdate";
-        models.organization.update({      
+        models.organizations.update({      
           name: name,
         },
         { where: { id : organization_id }}).then(function(organization) {
@@ -47,7 +47,7 @@ describe('Edit organization', function () {
         });       
       },
       function findorganization(organization_id, name, next){
-        models.organization.find({where : { id : organization_id }}).then(function(organization){
+        models.organizations.find({where : { id : organization_id }}).then(function(organization){
           organization.id.should.be.greaterThan(0);
           organization.name.should.equal(name);
           organization.created.should.be.greaterThan(0);
@@ -70,7 +70,7 @@ describe('Delete organization', function () {
      async.waterfall([
        function createorganization(next){
       	var name = randomstring.generate() + "-organization";
-        models.organization.create({      
+        models.organizations.create({      
           name: name,
         }).then(function(organization) {
           organization.id.should.be.greaterThan(0);
@@ -81,9 +81,9 @@ describe('Delete organization', function () {
         });   
       },
        function deleteorganization(organization_id){
-         models.organization.destroy({ where : { id : organization_id} })
+         models.organizations.destroy({ where : { id : organization_id} })
          .then(function(status) {
-	          models.organization.findAll({where : { id : organization_id }}).then(function(organization){
+	          models.organizations.findAll({where : { id : organization_id }}).then(function(organization){
               organization.length.should.equal(0);
 	            done();
 	          });
@@ -98,7 +98,7 @@ describe('Delete organization', function () {
 describe('find all', function () {
   before(function(done){
     var name = randomstring.generate() + "-organization";
-    models.organization.create({      
+    models.organizations.create({      
       name: name,
     }).then(function(organization) {
       organization.id.should.be.greaterThan(0);
@@ -109,7 +109,7 @@ describe('find all', function () {
     });   
   })
   it('should return a valid list of organization', function (done) {
-    models.organization.findAll().then(function(organization) {
+    models.organizations.findAll().then(function(organization) {
       organization.length.should.be.greaterThan(0);
       done();
     });
@@ -119,7 +119,7 @@ describe('find all', function () {
 
 describe('find organization with id 1', function () {
 it('should return a valid organization', function (done) {
-      models.organization.findOne({ where: { id: 1 }
+      models.organizations.findOne({ where: { id: 1 }
     }).then(function(organization) {
       organization.id.should.be.greaterThan(0);
       organization.created.should.be.greaterThan(0);
