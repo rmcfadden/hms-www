@@ -344,17 +344,3 @@ describe('find all', function () {
     });
   });
 });
-
-
-describe('find destination with id 1', function () {
-it('should return a valid destination', function (done) {
-  models.destinations.findOne({ where: { id: 1 }
-    }).then(function(destination) {
-      destination.id.should.be.greaterThan(0);
-      destination.created.should.be.greaterThan(0);
-      destination.updated.should.be.greaterThan(0);
-
-      done();
-    });
-  });
-});

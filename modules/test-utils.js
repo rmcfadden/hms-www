@@ -9,6 +9,8 @@ var Sequelize = require("sequelize");
 
 
 var testUtils = {};
+testUtils.addDestinationsTimeout = 120000;
+
 
 testUtils.ensureDestinationCount = function (num, callback){
   var proxyThis = this;
@@ -62,6 +64,91 @@ testUtils.getRandomDestination = function(){
   ]});
 }
 
+testUtils.addTestDestination = function(args){
+  var countries = [];
+  var destination = null;
+  return new Promise(function(resolve, reject){
+    async.waterfall([
+      function getCountries(next){
+        getTestCounties().then(function(testCountries){
+          countries = testCountries;
+          return next(null);
+        });
+      }, 
+      function createOrganization(next){
+        var organizationName = "organization - " + randomstring.generate();
+        models.organizations.create({ name: organizationName}).then(function(organization){
+          var country_id = -1;
+          if(args && args.country) {
+            country_id = args.country.id;
+          } else {
+            country_id = countries[Math.floor(Math.random() * countries.length)].id;
+          }
+          return next(null, country_id, organization.id);
+        });
+      },
+      function createUser(country_id, organization_id, next){
+        var email = randomstring.generate() + "@test.com";
+        var username = "john" + randomstring.generate();
+
+        usersProv.create({ username: username,
+          email: email,
+          password: "secret123"
+          }).then(function(user){
+            return next(null, user.id, country_id, organization_id);
+          }).catch(function(err){
+            return next(err);
+          });
+      },
+      function createAddress(user_id, country_id, organization_id, next){
+
+        var address = testAddresses[Math.floor(Math.random() * testAddresses.length)];
+
+        models.addresses.create({
+          address_line1: address.address_line1,
+          address_line2: address.address_line2,
+          city: address.city,
+          province: address.province,
+          postal_code: address.postal_code,
+          country_id: country_id
+        }).then(function(address) {
+          return next(null, user_id, country_id, organization_id, address.id);
+        }).catch(function(err){
+          return next(err);
+        }); 
+      },
+      function createDestination(user_id,country_id, organization_id, address_id, next){
+        var destinationName = "destination " + randomstring.generate(2);
+        
+        var average_rating =  (Math.random() * 4) + 1; 
+        var review_count =  (Math.random() * 9) + 1; 
+
+        models.destinations.create(
+        {
+          name: destinationName,
+          organization_id: organization_id,
+          country_id: country_id,
+          user_id: user_id,
+          address_id: address_id,
+          description: defaultDescription,
+          average_rating : average_rating,
+          review_count : review_count 
+        }).then(function(newDestination){    
+          destination = newDestination;
+          return next(null);
+        }).catch(function(err){
+           return next(err);
+        });
+      }],function(error){
+        if(error){
+          return reject(Error);
+        }
+        return resolve(destination);
+      });
+    });
+  }
+
+
 testUtils.addTestDestinations = function(args, callback){
   var num = 25;
   if(args.num){
@@ -85,7 +172,7 @@ testUtils.addTestDestinations = function(args, callback){
             } else {
               country_id = countries[Math.floor(Math.random() * countries.length)].id;
             }
-            next(null, country_id, organization.id);
+            return next(null, country_id, organization.id);
           })
         },
         function createUser(country_id, organization_id, next){
@@ -96,9 +183,9 @@ testUtils.addTestDestinations = function(args, callback){
             email: email,
             password: "secret123"
             }).then(function(user){
-              next(null, user.id, country_id, organization_id);
+              return next(null, user.id, country_id, organization_id);
             }).catch(function(err){
-              next(err);
+              return next(err);
             });
         },
         function createAddress(user_id, country_id, organization_id, next){
@@ -113,9 +200,9 @@ testUtils.addTestDestinations = function(args, callback){
             postal_code: address.postal_code,
             country_id: country_id
           }).then(function(address) {
-            next(null, user_id, country_id, organization_id, address.id);
+            return next(null, user_id, country_id, organization_id, address.id);
           }).catch(function(err){
-            next(err);
+            return next(err);
           }); 
         },
         function createDestination(user_id,country_id, organization_id, address_id, next){
@@ -135,11 +222,11 @@ testUtils.addTestDestinations = function(args, callback){
             average_rating : average_rating,
             review_count : review_count 
           }).then(function(destination){    
-            next(null, user_id, country_id, organization_id, address_id, destination.id, review_count );
+            return next(null, user_id, country_id, organization_id, address_id, destination.id, review_count );
           }).catch(function(err){
-            next(err);
+             return next(err);
           });
-        }, 
+        },
         function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, review_count , next){
             models.destination_category_types.findAll().then(function(categoryTypes){
               async.forEach(categoryTypes, function (destionatCategoryType, callback){ 
@@ -156,7 +243,7 @@ testUtils.addTestDestinations = function(args, callback){
                   return next(err);
                 }
                 else{
-                  next(null, user_id, country_id, organization_id, address_id, destination_id, review_count);
+                  return next(null, user_id, country_id, organization_id, address_id, destination_id, review_count);
                 }
               });
             }).catch(function(err){
@@ -192,7 +279,7 @@ testUtils.addTestDestinations = function(args, callback){
               return next(err);
             }
             else{
-              next(null, user_id, country_id, organization_id, address_id, destination_id);
+              return next(null, user_id, country_id, organization_id, address_id, destination_id);
             }
           });
         },
@@ -266,9 +353,9 @@ function getTestCounties(){
         }
       ]}      
     }).then(function(countries){
-      resolve(countries);
+      return resolve(countries);
     }).catch(function(error){
-      reject(Error);
+       return reject(Error);
     });
   });
 }
