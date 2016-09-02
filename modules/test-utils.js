@@ -16,7 +16,7 @@ testUtils.ensureDestinationCount = function (num, callback){
   var proxyThis = this;
   models.destinations.count().then(function(c){
     if(c < num){
-      return proxyThis.addTestDestinations({ num: num}, null, callback);
+      return proxyThis.addTestDestinations({ num: num}, callback);
     }
     else{
       return callback(null);
@@ -356,7 +356,15 @@ testUtils.addTestDestinations = function(args, callback){
           }
         }
         
+console.log("destinationCount");
+console.log(destinationCount);
+console.log(num);
+console.log("HERE A");
+
         if(++destinationCount == num){
+console.log(callback);
+console.log("HERE B");
+
           if(callback){
             return callback(null, returnIds);
           }
