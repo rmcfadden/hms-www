@@ -7,8 +7,8 @@ var async = require('async');
 
 describe('create address', function () {
   it('should return a valid address', function (done) {
-    models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
-      models.address.create({
+    models.countries.find({ where : { iso_code2 : 'US' }}).then(function(country){
+      models.addresses.create({
         address_line1: 'testing address1',
         address_line2: 'testing address2',
         city: 'Santa Barbara',
@@ -41,8 +41,8 @@ describe('update address', function () {
   it('should update a address data', function (done) {
     async.waterfall([
       function createAddress(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
-	      models.address.create({
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
+	      models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -67,7 +67,7 @@ describe('update address', function () {
 	      });
       },
       function updateAddress(address_id, country_id, next){        
-        models.address.update(
+        models.addresses.update(
           { 
             address_line1: 'updated address1',
             address_line2: 'updated address2',
@@ -81,7 +81,7 @@ describe('update address', function () {
           });
         },
       function findAddress(address_id, country_id, next){
-	      models.address.find({where : { id : address_id }}).then(function(address){
+	      models.addresses.find({where : { id : address_id }}).then(function(address){
           address.id.should.be.greaterThan(0);
           address.uuid.should.not.be.null();
           address.address_line1.should.be.equal('updated address1');
@@ -111,8 +111,8 @@ describe('delete address', function () {
   it('should delete a address', function (done) {
      async.waterfall([
        function createAddress(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
-	      models.address.create({
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
+	      models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -137,9 +137,9 @@ describe('delete address', function () {
 	    });
       },
      function deleteAddress(address_id, next){
-         models.address.destroy({ where : { id : address_id} })
+         models.addresses.destroy({ where : { id : address_id} })
           .then(function(status) {
-	          models.address.findAll({where : { id : address_id }}).then(function(addresses){
+	          models.addresses.findAll({where : { id : address_id }}).then(function(addresses){
               addresses.length.should.equal(0);
 	            next()
 	          });
@@ -158,8 +158,8 @@ describe('delete address', function () {
 
 describe('find all', function () {
   before(function(done){
-    models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
-      models.address.create({
+    models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
+      models.addresses.create({
         address_line1: 'testing address1',
         address_line2: 'testing address2',
         city: 'Santa Barbara',
@@ -187,7 +187,7 @@ describe('find all', function () {
     });
   })
   it('should return a valid list of address', function (done) {
-    models.address.findAll().then(function(addresses) {
+    models.addresses.findAll().then(function(addresses) {
       addresses.length.should.be.greaterThan(0);
       done();
     });
@@ -197,7 +197,7 @@ describe('find all', function () {
 
 describe('find address with id 1', function () {
 it('should return a valid address', function (done) {
-  models.address.findOne({ where: { id: 1 }
+  models.addresses.findOne({ where: { id: 1 }
     }).then(function(address) {
       address.id.should.be.greaterThan(0);
       address.created.should.be.greaterThan(0);

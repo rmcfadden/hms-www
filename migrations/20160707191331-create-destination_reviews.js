@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_medias', {
+    queryInterface.createTable('destination_reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,15 +12,7 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
-      },
-      media_type_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'media_types',
-            key: 'id'
-        }
-      },
+      }, 
       destination_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
@@ -29,17 +21,39 @@ module.exports = {
             key: 'id'
         }
       },
-      location: {
-        type: Sequelize.STRING(128),
-        allowNull: false
+      user_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
       },
       title: {
-        type: Sequelize.STRING(128),
-        allowNull: false
-      },
-      description: {
         type: Sequelize.TEXT,
         allowNull: false
+      },
+      text: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      overall_rating: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      service_rating: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      is_moderated: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
       },
       created: {
         allowNull: false,
@@ -51,13 +65,13 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_medias',
+        'destination_reviews',
         ['uuid'],
         {indicesType: 'UNIQUE'}
       );
     });
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_medias');
+    return queryInterface.dropTable('destination_reviews');
   }
 };

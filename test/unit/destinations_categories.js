@@ -10,7 +10,7 @@ describe('create destination categories', function () {
   it('should return a valid destination media', function (done) {
     async.waterfall([
       function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -18,7 +18,7 @@ describe('create destination categories', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -28,12 +28,12 @@ describe('create destination categories', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -46,7 +46,7 @@ describe('create destination categories', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate({ length: 3, charset: 'alphanumeric' });
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,
@@ -118,7 +118,7 @@ describe('delete destination categories', function () {
   it('should delete a destination categories', function (done) {
      async.waterfall([
        function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -126,7 +126,7 @@ describe('delete destination categories', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -136,12 +136,12 @@ describe('delete destination categories', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -154,7 +154,7 @@ describe('delete destination categories', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate({ length: 3, charset: 'alphanumeric' });
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,
@@ -232,7 +232,7 @@ describe('find all', function () {
   before(function(done){
     async.waterfall([
        function getCountry(next){
-        models.country.find({where : { iso_code2 : 'US' }}).then(function(country){
+        models.countries.find({where : { iso_code2 : 'US' }}).then(function(country){
             next(null,country.id);
         });
       },
@@ -240,7 +240,7 @@ describe('find all', function () {
         var email = randomstring.generate() + "@test.com";
         var username = "john" + randomstring.generate();
 
-        models.user.create({ username: username,
+        models.users.create({ username: username,
           email: email,
           password: "secret",
           password_salt: "123"
@@ -250,12 +250,12 @@ describe('find all', function () {
       },
       function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
-        models.organization.create({ name: organizationName}).then(function(organization){
+        models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
       function createAddress(user_id,country_id, organization_id, next){
-        models.address.create({
+        models.addresses.create({
           address_line1: 'testing address1',
           address_line2: 'testing address2',
           city: 'Santa Barbara',
@@ -268,7 +268,7 @@ describe('find all', function () {
       },
       function createdestination(user_id, country_id, organization_id, address_id, next){
         var destinationName = "destination " + randomstring.generate({ length: 3, charset: 'alphanumeric' });
-        models.destination.create(
+        models.destinations.create(
         {
             user_id: user_id,
             country_id: country_id,

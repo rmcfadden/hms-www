@@ -22,6 +22,7 @@ before_script:
 - mysql -e "create database hms_test;" -u root
 script:
 - npm run-script migrate
+- utils/cli.js add-test-data
 - npm test
 
 after_success:

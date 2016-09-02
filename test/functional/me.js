@@ -24,9 +24,9 @@ describe('POST /api/login and /api/users/me', function(){
     agent = session(app);
 
     organizationName1 = "organization" + randomstring.generate();
-    models.organization.create({name: organizationName1}).then(function(organization){
+    models.organizations.create({name: organizationName1}).then(function(organization){
       organizationName2 = "organization" + randomstring.generate();      
-      return models.organization.create({name: organizationName2});
+      return models.organizations.create({name: organizationName2});
     }).then(function(organization){
       var email = randomstring.generate() + "@test1.com";
       username = "john1" + randomstring.generate();

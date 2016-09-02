@@ -6,10 +6,9 @@ var config = require('../config/config.json');
 
 var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
 
-var destinationsProvider = require('../modules/destinations-provider');
-var destinationsProv = new destinationsProvider();
+var destinationsProv = new (require('../modules/destinations-provider'));
 
-models.destination.belongsTo(models.country);
+models.destinations.belongsTo(models.countries);
 
 router.use(function getLimitOffset(req, res, next){
   var url_parts = url.parse(req.url, true);

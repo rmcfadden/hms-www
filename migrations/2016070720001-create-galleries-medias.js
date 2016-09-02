@@ -2,26 +2,26 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    queryInterface.createTable('destinations_tags', {
+    queryInterface.createTable('galleries_medias', {
       id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true        
       },
-      destination_id: {
+      user_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-            model: 'destinations',
+            model: 'users',
             key: 'id'
         }
       },
-      tag_id: {
+      organization_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'tags',
+            model: 'organizations',
             key: 'id'
         }
       },
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destinations_tags');
+    return queryInterface.dropTable('galleries_medias');
   }
 };

@@ -4,6 +4,10 @@
 var program = require('commander');
 var colors = require('colors');
 
+if(!process.env.NODE_ENV){
+  process.env.NODE_ENV = 'development';
+}
+
 console.log('Node Environment =' + process.env.NODE_ENV);
 
 program
@@ -56,7 +60,7 @@ program
   .command('add-test-data')  
   .action(function(cmd) {
     var testUtils  = require('../modules/test-utils');
-    testUtils.addTestDestinations(10, null, function(error){
+    testUtils.addTestDestinations({num: 10 }, function(error){
       process.exit();
     });
    });

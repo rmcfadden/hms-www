@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var destination = sequelize.define('destination', {
+  var destination = sequelize.define('destinations', {
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -35,7 +35,6 @@ module.exports = function(sequelize, DataTypes) {
             key: 'id'
         }
       },
-
       address_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -62,7 +61,12 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         defaultValue: true,
         type: DataTypes.BOOLEAN
-      }
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: true,
+        type: DataTypes.BOOLEAN
+      },
     }, {
     updatedAt: 'updated',
     createdAt: 'created',

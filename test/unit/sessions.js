@@ -12,7 +12,7 @@ describe('Create session', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-         models.user.create({
+         models.users.create({
            username: username,
            email: email,
            password: "secret",
@@ -31,7 +31,7 @@ describe('Create session', function () {
       function createSession(user_id){
         var token = randomstring.generate();
         var now = moment();
-        models.session.create({
+        models.sessions.create({
           user_id: user_id,
           token: token,
           start: now,
@@ -72,7 +72,7 @@ describe('Update session', function () {
        function createUser(next){
           var email = randomstring.generate() + "@abc.com";
           var username = "Tim" + randomstring.generate();
-          models.user.create({
+          models.users.create({
             username: username,
             email: email,
             password: "secret",
@@ -92,7 +92,7 @@ describe('Update session', function () {
         var token = 'test'+randomstring.generate();
         var now = moment();
 
-        models.session.create({
+        models.sessions.create({
           user_id: user_id,
           token: token,
           start: moment(),
@@ -121,7 +121,7 @@ describe('Update session', function () {
         var lastActivity = now.subtract(1, 'd');
         var end = now.add(3, 'h');
 
-        models.session.update(
+        models.sessions.update(
         {  
           token: token,
           start: now,
@@ -135,7 +135,7 @@ describe('Update session', function () {
         });
       },
       function findSession(session_id, user_id, token, next){
-        models.session.find({where : { id : session_id }}).then(function(session){
+        models.sessions.find({where : { id : session_id }}).then(function(session){
           session.token.should.equal(token);
           session.user_id.should.equal(user_id);
           session.id.should.be.greaterThan(0);
@@ -167,7 +167,7 @@ describe('delete session', function () {
        function createUser(next){
          var email = randomstring.generate() + "@abc.com";
          var username = "Tim" + randomstring.generate();
-        models.user.create({
+        models.users.create({
           username: username,
           email: email,
           password: "secret",
@@ -186,7 +186,7 @@ describe('delete session', function () {
        function createSession(user_id, next){
         var token = 'test'+randomstring.generate();
         var now = moment();
-         models.session.create({
+         models.sessions.create({
           user_id: user_id,
           token: token,
           start: moment(),
@@ -210,9 +210,9 @@ describe('delete session', function () {
           });
         },
        function deleteSession(session_id){
-         models.session.destroy({ where : { id : session_id} })
+         models.sessions.destroy({ where : { id : session_id} })
           .then(function(status) {
-	          models.session.findAll({where : { id : session_id }}).then(function(sessions){
+	          models.sessions.findAll({where : { id : session_id }}).then(function(sessions){
               sessions.length.should.equal(0);
 	          done();
 	        });
@@ -233,7 +233,7 @@ describe('Find all sessions', function () {
     async.waterfall([function createUser(next){
       var email = randomstring.generate() + "@abc.com";
       var username = "Tim" + randomstring.generate();
-      models.user.create({
+      models.users.create({
         username: username,
         email: email,
         password: "secret",
@@ -254,7 +254,7 @@ describe('Find all sessions', function () {
       var now = moment();
       var lastActivity = now.subtract(8, 'h');
       var end = now.add(1, 'd');
-      models.session.create({
+      models.sessions.create({
         user_id: user_id,
         token: token,
         start: now,
@@ -277,7 +277,7 @@ describe('Find all sessions', function () {
       });
     },
     function findAll(){
-      models.session.findAll().then(function(sessions) {
+      models.sessions.findAll().then(function(sessions) {
         sessions.length.should.be.greaterThan(0);
         done();
     });

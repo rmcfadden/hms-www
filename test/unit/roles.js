@@ -6,7 +6,7 @@ var randomstring = require('randomstring');
 
 describe('find role with name admin', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'public' }
+  models.roles.findOne({ where: { name: 'public' }
     }).then(function(role) {
 
       role.id.should.equal(1);
@@ -21,7 +21,7 @@ it('should return a valid role', function (done) {
 
 describe('find role with name admin', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'admin' }
+  models.roles.findOne({ where: { name: 'admin' }
     }).then(function(role) {
 
       role.id.should.equal(2);
@@ -36,7 +36,7 @@ it('should return a valid role', function (done) {
 
 describe('find role with name editor', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'editor' }
+  models.roles.findOne({ where: { name: 'editor' }
     }).then(function(role) {
 
       role.id.should.equal(3);
@@ -51,7 +51,7 @@ it('should return a valid role', function (done) {
 
 describe('find role with name organization_admin', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'organization_admin' }
+  models.roles.findOne({ where: { name: 'organization_admin' }
     }).then(function(role) {
 
       role.id.should.equal(4);
@@ -67,7 +67,7 @@ it('should return a valid role', function (done) {
 
 describe('find role with name organization_editor', function () {
 it('should return a valid role', function (done) {
-  models.role.findOne({ where: { name: 'organization_editor' }
+  models.roles.findOne({ where: { name: 'organization_editor' }
     }).then(function(role) {
 
       role.id.should.equal(5);
@@ -83,7 +83,7 @@ it('should return a valid role', function (done) {
 
 describe('find all', function () {
 it('should return a valid list of roles', function (done) {
-  models.role.findAll().then(function(roles) {
+  models.roles.findAll().then(function(roles) {
       roles.length.should.equal(5);
       done();
     });

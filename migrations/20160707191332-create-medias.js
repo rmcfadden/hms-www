@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    queryInterface.createTable('destination_reviews', {
+    queryInterface.createTable('medias', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,38 +12,43 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
-      }, 
-      destination_id: {
-        type: Sequelize.BIGINT,
+      },
+      media_type_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'destinations',
+            model: 'media_types',
             key: 'id'
         }
       },
-      user_id: {
-        type: Sequelize.BIGINT,
-        allowNull: false,
-        references: {
-            model: 'users',
-            key: 'id'
-        }
+      location: {
+        type: Sequelize.STRING(128),
+        allowNull: false
       },
       title: {
+        type: Sequelize.STRING(128),
+        allowNull: false
+      },
+      description: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      text: {
-        type: Sequelize.TEXT,
+      ordinal: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      overall_rating: {
-        type: Sequelize.FLOAT,
+      height: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      service_rating: {
-        type: Sequelize.FLOAT,
+      width: {
+        type: Sequelize.INTEGER,
         allowNull: false
+      },
+      is_approved: {
+        allowNull: false,
+        defaultValue: true,
+        type: Sequelize.BOOLEAN
       },
       created: {
         allowNull: false,
@@ -55,13 +60,13 @@ module.exports = {
       }
     }).then(function(){
       return queryInterface.addIndex(
-        'destination_reviews',
+        'medias',
         ['uuid'],
         {indicesType: 'UNIQUE'}
       );
     });
   },
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('destination_reviews');
+    return queryInterface.dropTable('medias');
   }
 };

@@ -5,14 +5,14 @@ var Promise = require('promise');
 
 
 // Should I move these the models?
-models.user.hasMany(models.users_organizations, { foreignKey: 'user_id'})
-models.users_organizations.belongsTo(models.user, {foreignKey: 'user_id'})
+models.users.hasMany(models.users_organizations, { foreignKey: 'user_id'})
+models.users_organizations.belongsTo(models.users, {foreignKey: 'user_id'})
 
-models.user.hasMany(models.users_roles, { foreignKey: 'user_id'});
-models.users_roles.belongsTo(models.user, {foreignKey: 'user_id'});
+models.users.hasMany(models.users_roles, { foreignKey: 'user_id'});
+models.users_roles.belongsTo(models.users, {foreignKey: 'user_id'});
 
-models.users_organizations.belongsTo(models.organization);
-models.users_roles.belongsTo(models.role);
+models.users_organizations.belongsTo(models.organizations);
+models.users_roles.belongsTo(models.roles);
 
 var me  = {
   middleware: function (req, res, next){ 
@@ -37,10 +37,10 @@ var me  = {
 
 me.findFromUser = function(user){
   return new Promise(function(resolve, reject){
-      models.users_organizations.findAll({ include: [models.organization], where : { user_id : user.id}})
+      models.users_organizations.findAll({ include: [models.organizations], where : { user_id : user.id}})
       .then(function(users_organizations){
         user.users_organizations = users_organizations;
-        return models.users_roles.findAll({ include: [models.role], where : { user_id : user.id}});
+        return models.users_roles.findAll({ include: [models.roles], where : { user_id : user.id}});
       }).then(function(users_roles){
 
         user.users_roles = users_roles;
