@@ -18,8 +18,11 @@ models.destination_reviews.belongsTo(models.destinations, {foreignKey: 'destinat
 models.destinations.hasMany(models.destinations_categories, { foreignKey: 'destination_id'})
 models.destinations_categories.belongsTo(models.destinations, {foreignKey: 'destination_id'})
 
-models.destinations.hasMany(models.destination_medias, { foreignKey: 'destination_id'})
-models.destination_medias.belongsTo(models.destinations, {foreignKey: 'destination_id'})
+models.destinations.hasMany(models.destinations_medias, { foreignKey: 'destination_id'})
+models.destinations_medias.belongsTo(models.destinations, {foreignKey: 'destination_id'})
+
+models.destinations.belongsToMany(models.medias, { through: 'destinations_medias'});
+//models.medias.belongsToMany(models.destinations, { through: 'destinations_medias'});
 
 
 var destinationsProvider  = function(){
@@ -33,18 +36,8 @@ var destinationsProvider  = function(){
   }
 
   this.findOneByIsoCode2AndName = function(isoCode2, name,  options){
-
-// TODO: expand the address here
-/*
-            for(var i=0; i < destinations.length; i++){
-              var destination = destinations[i];
-            console.log(destination.address);
-              if(destination.address && destination.address.length > 0){
-                console.log(destination.address );
-              }
-            }
-*/
-    return models.destinations.findOne({ where: { 'name': name }, include: [ models.destination_reviews, models.destination_medias, models.addresses, {"model" : models.countries, where: { 'iso_code2': isoCode2 }}]}); 
+    return models.destinations.findOne({ where: { 'name': name }, include: [ models.destination_reviews, models.medias, 
+      models.addresses, {"model" : models.countries, where: { 'iso_code2': isoCode2 }}]}); 
   }
   
   this.findAllByDestinationCategory = function(destinationCategoryName, options){

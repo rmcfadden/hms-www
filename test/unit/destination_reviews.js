@@ -10,7 +10,7 @@ var models  = require('models');
 
 describe('create/update/get/delete destination review', function () {
   var newdestinationReview = null;
-  it('should return a valid destination review', function (done) {
+  it('should return validate destination review and update properly and get and delete', function (done) {
     testUtils.addTestDestination().then(function(destination){
       models.destination_reviews.create({
         destination_id: destination.id,

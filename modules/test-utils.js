@@ -150,7 +150,7 @@ testUtils.addTestDestination = function(args){
 
 
 testUtils.addTestDestinations = function(args, callback){
-  var num = 25;
+  var num =  10;
   if(args.num){
     num = args.num;
   }
@@ -172,7 +172,8 @@ testUtils.addTestDestinations = function(args, callback){
             } else {
               country_id = countries[Math.floor(Math.random() * countries.length)].id;
             }
-            return next(null, country_id, organization.id);
+            next(null, country_id, organization.id);
+            return null;
           })
         },
         function createUser(country_id, organization_id, next){
@@ -183,9 +184,11 @@ testUtils.addTestDestinations = function(args, callback){
             email: email,
             password: "secret123"
             }).then(function(user){
-              return next(null, user.id, country_id, organization_id);
+              next(null, user.id, country_id, organization_id);
+              return null;
             }).catch(function(err){
-              return next(err);
+              next(err);
+              return null;
             });
         },
         function createAddress(user_id, country_id, organization_id, next){
@@ -199,56 +202,63 @@ testUtils.addTestDestinations = function(args, callback){
             province: address.province,
             postal_code: address.postal_code,
             country_id: country_id
-          }).then(function(address) {
-            return next(null, user_id, country_id, organization_id, address.id);
+          }).then(function(newAddress) {
+            next(null, user_id, country_id, organization_id, newAddress.id);
+            return null;
           }).catch(function(err){
-            return next(err);
+            next(err);
+            return null;
           }); 
         },
         function createDestination(user_id,country_id, organization_id, address_id, next){
-          var destinationName = "destination " + randomstring.generate(2);
-          
+          var destinationName = "destination " + randomstring.generate(1);          
           var average_rating =  (Math.random() * 4) + 1; 
-          var review_count =  (Math.random() * 9) + 1; 
+          var review_count =  (Math.random() * 9) + 1;  
 
           models.destinations.create(
           {
-            name: destinationName,
-            organization_id: organization_id,
             country_id: country_id,
             user_id: user_id,
+            name: destinationName,
+            organization_id: organization_id,
             address_id: address_id,
             description: defaultDescription,
             average_rating : average_rating,
             review_count : review_count 
-          }).then(function(destination){    
-            return next(null, user_id, country_id, organization_id, address_id, destination.id, review_count );
+          }).then(function(newDestination){    
+            next(null, user_id, country_id, organization_id, address_id, newDestination.id, review_count );
+            return null;
           }).catch(function(err){
-             return next(err);
+            next(err);
+            return null;
           });
         },
-        function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, review_count , next){
-            models.destination_category_types.findAll().then(function(categoryTypes){
-              async.forEach(categoryTypes, function (destionatCategoryType, callback){ 
-                models.destinations_categories.create({
-                  destination_category_type_id: destionatCategoryType.id,
-                  destination_id: destination_id
-                }).then(function(destinations_category){
-                  callback();
-                }).catch(function(err){
-                  callback(err);
-                });
-              }, function(err) {
-                if(err){
-                  return next(err);
-                }
-                else{
-                  return next(null, user_id, country_id, organization_id, address_id, destination_id, review_count);
-                }
+        function createDestinationCategories(user_id,country_id, organization_id, address_id, destination_id, review_count, next){
+          models.destination_category_types.findAll().then(function(categoryTypes){
+            async.forEach(categoryTypes, function (categoryType, callback){ 
+              models.destinations_categories.create({
+                destination_category_type_id: categoryType.id,
+                destination_id: destination_id
+              }).then(function(destinations_category){
+                callback();
+                return null;
+              }).catch(function(err){
+                callback(err);
               });
-            }).catch(function(err){
-              return next(err);
+            }, function(err, result) {
+              if(err){
+                next(err);
+                return null;
+              }
+              else{
+                next(null, user_id, country_id, organization_id, address_id, destination_id, review_count);
+                return null;
+              }
             });
+          }).catch(function(err){
+            next(err);
+            return null;
+          });
         },
         function createDestinationReviews(user_id,country_id, organization_id, address_id, destination_id, review_count, next){
           // how to add 4 destination reviews
@@ -274,21 +284,24 @@ testUtils.addTestDestinations = function(args, callback){
             }).catch(function(err){
               callback(err);
             });
-          }, function(err) {
+          }, function(err, result) {
             if(err){
-              return next(err);
+              next(err);
+              return null;
             }
             else{
-              return next(null, user_id, country_id, organization_id, address_id, destination_id);
+              next(null, user_id, country_id, organization_id, address_id, destination_id);
+              return null;
             }
           });
         },
-        function createDestinationMedias(user_id,country_id, organization_id, address_id, destination_id, next){
+        function createMedias(user_id,country_id, organization_id, address_id, destination_id, next){
           var location = "LOC-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
           var title = "Title-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+          var mediaIds = [];
           async.forEach([1,2,3,4], function (id, callback){ 
             var title  = randomstring.generate(10);
-              models.destination_medias.create({
+              models.medias.create({
               media_type_id: 2,
               destination_id: destination_id,
               location: '/assets/img/samples/destination-image-sample' + id + '.jpeg',
@@ -297,23 +310,45 @@ testUtils.addTestDestinations = function(args, callback){
               ordinal: id,
               height: 300,
               width: 200
-            }).then(function(destination_reviews){
+            }).then(function(media){
+              mediaIds.push(media.id);
               callback();
             }).catch(function(err){
               callback(err);
             });
           }, function(err) {
             if(err){
-              return next(err);
+              next(err);
+              return null;
+            }
+            else{
+              next(null, user_id, country_id, organization_id, address_id, destination_id, mediaIds);
+              return null;
+            }
+          });
+        },
+        function createDestinationsMedias(user_id,country_id, organization_id, address_id, destination_id,  mediaIds, next){
+          async.forEach(mediaIds, function (id, callback){ 
+              models.destinations_medias.create({
+              destination_id: destination_id,
+              media_id : id
+            }).then(function(media){
+              callback();
+            }).catch(function(err){
+              callback(err);
+            });
+          }, function(err) {
+            if(err){
+              next(err);
+              return null;
             }
             else{
               returnIds.push(destination_id)
-              return next(null, destination_id);
+              next(null, destination_id);
+              return null;
             }
           });
-        }
-
-      ],function(error){
+        }],function(error){
         if(error){
           console.log('An error has occurred: ' + error );
           if(callback){
@@ -331,7 +366,7 @@ testUtils.addTestDestinations = function(args, callback){
     }
   }).catch(function(error){
     console.log('an error has occurred listng the countries ' + error);
-    callback(error);
+    return callback(error);
   });
 }
 

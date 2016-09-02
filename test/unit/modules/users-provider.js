@@ -56,8 +56,7 @@ describe('create with roles and organizations', function () {
       });
   });
   
-  it('should return a valid user', function (done) {
-    
+  it('should return a valid user', function (done) {    
     var email = randomstring.generate() + "@test.com";
     var username = "john" + randomstring.generate();
     var newUser = { username: username,
@@ -96,7 +95,6 @@ describe('create with roles and organizations', function () {
       user.organizations[1].name.should.match(new RegExp('(^' + organizationName1 + '$)|(^' + organizationName2 + '$)','g'));
       user.organizations[1].organization_id.should.be.greaterThan(0);
       user.organizations[1].user_id.should.equal(user.id);
-
 
       done();
     }).catch(function(error){

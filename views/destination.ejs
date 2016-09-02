@@ -16,7 +16,7 @@
         <!-- End thumbnail photo -->
 
         <!-- Start photo gallery -->        
-        <% var destination_medias = destination.destination_medias ? destination.destination_medias : []; %>
+        <% var destination_medias = destination.medias ? destination.medias : []; %>
         <% if(destination_medias.length > 0) { %>
         <div class="col-md-9 nopadding">
           <% include partials/destination-media-thumbnails.ejs %>
@@ -68,7 +68,7 @@
         <!-- end reviews -->
 
         <!-- start hidden gallery -->
-        <% var medias = destination.destination_medias ? destination.destination_medias : []; %>
+        <% var medias = destination.medias ? destination.medias : []; %>
         <% if(medias.length > 0) { %>
 
         <div id="gallery-popup">

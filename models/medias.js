@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var destination_medias = sequelize.define('destination_medias', {
+  var medias = sequelize.define('medias', {
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,14 +12,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         references: {
             model: 'media_types',
-            key: 'id'
-        }
-      },
-      destination_id: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references: {
-            model: 'destinations',
             key: 'id'
         }
       },
@@ -57,5 +49,5 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: 'created',
     underscored: true
   });
-  return destination_medias;
+  return medias;
 };
