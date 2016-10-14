@@ -15,6 +15,8 @@
         <li><i class="color-green fa fa-circle-"></i></li>
       <% } else if(destination.average_rating > (Math.floor(destination.average_rating) + 0.35)) { %>
         <li><i class="color-green fa fa-moon-o"></i></li>
+      <% } else { %>
+        <li><i></i></li>
       <% } %>
 
       <% if(destination.review_count > 0) { %>
