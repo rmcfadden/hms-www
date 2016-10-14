@@ -103,11 +103,7 @@ describe('create destination categories', function () {
       }
       
     ],function(error, result){
-      if(!error){
-       done();
-     } else {
       done(error); 
-     }
     });
   });
 });

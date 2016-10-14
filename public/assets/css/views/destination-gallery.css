@@ -1,15 +1,15 @@
 .blog_masonry_3col {
-	padding-bottom: 60px;
+	padding-bottom: 40px;
 }
 
 .blog_masonry_3col .grid-boxes-in {
-	padding: 0;
-	margin-bottom: 30px;
+	padding: 0px;
+	margin: 0px;
 	border: solid 1px #eee;
 }
 
 .blog_masonry_3col .grid-boxes-caption {
-	padding: 15px;
+	padding: 10px;
 }
 
 .blog_masonry_3col h3 {
@@ -31,7 +31,7 @@
 }
 
 .blog_masonry_3col ul.grid-boxes-news {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 .blog_masonry_3col ul.grid-boxes-news li {
@@ -49,7 +49,7 @@
 
 /*Quote Block*/
 .grid-boxes-caption.grid-boxes-quote {
-	padding: 30px;
+	padding: 5px;
 	background: #333;
 	text-align: center;
 }
@@ -59,17 +59,17 @@
 }
 
 .grid-boxes-quote p:after {
-    content: " \" ";
+	content: " \" ";
 	margin-left: 10px;
-    position: absolute;
-    font-family: Tahoma;
+	position: absolute;
+	font-family: Tahoma;
 }
 
 .grid-boxes-quote p:before {
-    content: " \" ";
+	content: " \" ";
 	margin-left: -15px;
-    position: absolute;
-    font-family: Tahoma;
+	position: absolute;
+	font-family: Tahoma;
 }
 
 .grid-boxes-quote p,
@@ -92,3 +92,4 @@
 	border: 0px solid #fff;
 	border-radius: 0px;
 }
+
