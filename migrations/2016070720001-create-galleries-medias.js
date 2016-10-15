@@ -9,22 +9,27 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true        
       },
-      user_id: {
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
+      },
+      gallery_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-            model: 'users',
+            model: 'galleries',
             key: 'id'
         }
       },
-      organization_id: {
-        type: Sequelize.INTEGER,
+      media_id: {
+        type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-            model: 'organizations',
+            model: 'medias',
             key: 'id'
         }
-      },
+      },  
       created: {
         type: Sequelize.DATE,
         allowNull: false

@@ -106,8 +106,7 @@ describe('create/update/get/delete gallery', function () {
           gallery.created.should.be.greaterThan(0);
           gallery.updated.should.be.greaterThan(0);
 
-          next(null, user_id,country_id, organization_id, gallery);
-   			
+          next(null, user_id,country_id, organization_id, gallery);   			
      		});
       },
       function deleteGallery(user_id, country_id, organization_id, gallery, next){       	
