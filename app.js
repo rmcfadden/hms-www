@@ -14,7 +14,6 @@ var assets = require('./modules/express-assets/');
 var app = express();
 
 
-
 // Add shared functoins for ejs templates
 require('./modules/ejs-shared.js')(app);
 
@@ -27,8 +26,6 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 
-
-
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
@@ -39,8 +36,7 @@ app.use(assets.initialize({appVersion: pjson.version}));
 
 app.use(sessionsMiddleware);
 app.use(me.middleware);
-
-
+app.use(require('./modules/paging-middleware'));
 
 
 app.use('/', require('./routes/index'));
@@ -53,6 +49,8 @@ app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
 app.use(require('./routes/destination-gallery'));
 app.use(require('./routes/destination-countries'));
+app.use(require('./routes/galleries'));
+app.use(require('./routes/gallery'));
 
 
 app.use(require('./routes/admin/index'));

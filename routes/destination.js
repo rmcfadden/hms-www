@@ -5,10 +5,10 @@ var assets = require('../modules/express-assets');
 var destinationsProv = new (require('../modules/destinations-provider'));
 
 router.get('/destination/:iso_code2/:name', 
-  assets.scripts(['/assets/js/plugins/imagesloaded.pkgd.js', 
-    '/assets/plugins/masonry/jquery.masonry.min.js',
+  assets.scripts(['/assets/js/plugins/freewall.js', 
     '/assets/js/plugins/animatedModal.min.js',
     '/assets/js/views/destination.js',
+    '/assets/js/views/media-gallery.js',
     '/assets/plugins/photoswipe/js/photoswipe.min.js',
     '/assets/plugins/photoswipe/js/photoswipe-ui-default.min.js']),
   assets.stylesheets(['/assets/css/views/destination-gallery.css',
@@ -19,7 +19,7 @@ router.get('/destination/:iso_code2/:name',
     if(destination){
       res.render('destination', { destination : destination});
     }else{
-      // TODO: note found
+      // TODO: not found
     }
   });
 });

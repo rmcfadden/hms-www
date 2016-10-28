@@ -1,3 +1,5 @@
+'use strict';
+
 var sessionsProv  = new (require('./sessions-provider'));
 var models  = require('../models');
 

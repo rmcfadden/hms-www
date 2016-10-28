@@ -1,25 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var models  = require('../models')
-var url = require('url');
-var config = require('../config/config.json');
-
-var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
 
 var destinationsProv = new (require('../modules/destinations-provider'));
 
 models.destinations.belongsTo(models.countries);
 
-router.use(function getLimitOffset(req, res, next){
-  var url_parts = url.parse(req.url, true);
-  var query = url_parts.query;
-
-  req.paging = {};
-  req.paging.offset =  query.offset ? parseInt(query.offset) : 0;
-  req.paging.limit =  query.limit ? parseInt(query.limit) : pageSize;
-
-  next();
-});
 
 router.get('/destinations/', function(req, res, next) {  
   destinationsProv.findAll({ paging : req.paging}).then(function(destinations){

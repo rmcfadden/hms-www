@@ -60,9 +60,12 @@ program
   .command('add-test-data')  
   .action(function(cmd) {
     var testUtils  = require('../modules/test-utils');
-    testUtils.addTestDestinations({num: 10 }, function(error){
+    var numTests = 10;
+    testUtils.addTestDestinations({num: numTests })
+      .then(testUtils.addTestGalleries({num: numTests }))
+      .then(function(results){
       process.exit();
-    });
+    });    
    });
 
 program.parse(process.argv);

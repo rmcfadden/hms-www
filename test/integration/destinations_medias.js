@@ -77,13 +77,13 @@ describe('create destination media', function () {
       },
       function createMedia(media_types_id, destination_id, next){
         var location = "LOC-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
-        var title = "Title-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+        var name = "Name-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
         var description = "BLA BLA BLA..";
         models.medias.create(
         {
             media_type_id: media_types_id,
             location: location,
-            title: title,
+            name: name,
             description: description,
             ordinal: 2,
             height: 200,
@@ -93,7 +93,7 @@ describe('create destination media', function () {
 
           media.id.should.be.greaterThan(0);
           media.uuid.should.not.be.null();
-          media.title.should.be.equal(title);
+          media.name.should.be.equal(name);
           media.description.should.be.equal(description);
           media.location.should.be.equal(location);
           media.media_type_id.should.be.equal(media_types_id);
@@ -191,13 +191,13 @@ describe('delete destination media', function () {
       },
       function createMedia(media_types_id, destination_id, next){
         var location = "LOC-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
-        var title = "Title-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
+        var name = "Name-" + randomstring.generate({ length: 2, charset: 'alphanumeric' });
         var description = "BLA BLA BLA..";
         models.medias.create(
         {
             media_type_id: media_types_id,
             location: location,
-            title: title,
+            name: name,
             description: description,
             ordinal: 2,
             height: 200,
@@ -207,7 +207,7 @@ describe('delete destination media', function () {
 
           media.id.should.be.greaterThan(0);
           media.uuid.should.not.be.null();
-          media.title.should.be.equal(title);
+          media.name.should.be.equal(name);
           media.description.should.be.equal(description);
           media.location.should.be.equal(location);
           media.media_type_id.should.be.equal(media_types_id);

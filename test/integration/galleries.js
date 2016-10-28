@@ -32,22 +32,20 @@ describe('create/update/get/delete gallery', function () {
           next(null, user.id, country_id);
         });
       },
-     function createOrganization(user_id,country_id, next){
+      function createOrganization(user_id,country_id, next){
         var organizationName = "organization - " + randomstring.generate();
         models.organizations.create({ name: organizationName}).then(function(organization){
           next(null, user_id,country_id, organization.id);
         });
       },
-     function createGallery(user_id,country_id, organization_id, next){
+      function createGallery(user_id,country_id, organization_id, next){
         var galleryName = 'gallery - ' + randomstring.generate();
-        var title = 'Title - 123';
         var description = 'Testing 123 !! 123';
 
         models.galleries.create({ 
         	name: galleryName,
         	organization_id: organization_id,
         	user_id: user_id,
-        	title: title,
         	description: description,
         	is_visible: true,
        		is_approved: true,
@@ -57,7 +55,6 @@ describe('create/update/get/delete gallery', function () {
           gallery.name.should.equal(galleryName);
           gallery.organization_id.should.equal(organization_id);
           gallery.user_id.should.equal(user_id);
-          gallery.title.should.equal('Title - 123');
           gallery.description.should.equal('Testing 123 !! 123');
           gallery.is_visible.should.be.true();
           gallery.is_approved.should.be.true();
@@ -77,7 +74,6 @@ describe('create/update/get/delete gallery', function () {
         	name: galleryName,
         	organization_id: organization_id,
         	user_id: user_id,
-        	title: title,
         	description: description,
         	is_visible: false,
        		is_approved: false,
@@ -98,7 +94,6 @@ describe('create/update/get/delete gallery', function () {
           gallery.name.should.equal(galleryName);
           gallery.organization_id.should.equal(organization_id);
           gallery.user_id.should.equal(user_id);
-          gallery.title.should.equal('Title - 123 UPDATED');
           gallery.description.should.equal('Testing 123 !! 123 UPDATED');
           gallery.is_visible.should.be.false();
           gallery.is_approved.should.be.false();

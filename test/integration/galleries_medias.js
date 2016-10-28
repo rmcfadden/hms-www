@@ -39,14 +39,12 @@ describe('create a gallery and media and associate with a galleries_medias item 
       },
      function createGallery(user_id,country_id, organization_id, next){
         var galleryName = 'gallery - ' + randomstring.generate();
-        var title = 'Title - 123';
         var description = 'Testing 123 !! 123';
 
         models.galleries.create({ 
         	name: galleryName,
         	organization_id: organization_id,
         	user_id: user_id,
-        	title: title,
         	description: description,
         	is_visible: true,
        		is_approved: true,
@@ -56,7 +54,6 @@ describe('create a gallery and media and associate with a galleries_medias item 
           gallery.name.should.equal(galleryName);
           gallery.organization_id.should.equal(organization_id);
           gallery.user_id.should.equal(user_id);
-          gallery.title.should.equal('Title - 123');
           gallery.description.should.equal('Testing 123 !! 123');
           gallery.is_visible.should.be.true();
           gallery.is_approved.should.be.true();
@@ -74,22 +71,23 @@ describe('create a gallery and media and associate with a galleries_medias item 
       },
       function createMedia(user_id,country_id, organization_id, gallery, media_type_id, next){
         var location = "LOC-" + randomstring.generate();
-        var title = "Title-" + randomstring.generate();
+        var name = "Name-" + randomstring.generate();
         var description = "BLA BLA BLA..";
         models.medias.create(
         {
             media_type_id: media_type_id,
             location: location,
-            title: title,
+            name: name,
             description: description,
             ordinal: 2,
             height: 200,
             width: 300,
             is_approved : true
         }).then(function(media){
+
           media.id.should.be.greaterThan(0);
           media.uuid.should.not.be.null();
-          media.title.should.be.equal(title);
+          media.name.should.be.equal(name);
           media.description.should.be.equal(description);
           media.location.should.be.equal(location);
           media.media_type_id.should.be.equal(media_type_id);
@@ -111,6 +109,7 @@ describe('create a gallery and media and associate with a galleries_medias item 
             media_id: media.id
         }).then(function(galleries_media){
 
+
           galleries_media.id.should.be.greaterThan(0);
           galleries_media.uuid.should.not.be.null();
 
@@ -126,7 +125,7 @@ describe('create a gallery and media and associate with a galleries_medias item 
     	function deleteGalleriesMedia(user_id,country_id, organization_id, gallery, media_type_id, media, galleries_media, next){       	
        	models.galleries_medias.destroy({ where : { id : galleries_media.id} })
         .then(function(status) {
-        	models.galleries_medias.findAll({where : { id : gallery.id }}).then(function(galleries_medias){
+        	models.galleries_medias.findAll({where : { id : galleries_media.id }}).then(function(galleries_medias){
             galleries_medias.length.should.equal(0);
 	          done();
 	      	});

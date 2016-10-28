@@ -1,0 +1,16 @@
+<% include partials/header.ejs %>
+
+<div class="margin-bottom-20"></div>
+    
+<div class="container-fluid text-center">
+
+<% var medias = gallery.medias ? gallery.medias : []; %>
+
+<% include partials/media-thumbnails.ejs %>
+
+<div class="margin-bottom-20"></div>
+
+<% include partials/photo-swipe.ejs %>
+
+
+<% include partials/footer.ejs %>

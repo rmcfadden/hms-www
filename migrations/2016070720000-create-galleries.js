@@ -13,10 +13,6 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       organization_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -33,7 +29,7 @@ module.exports = {
             key: 'id'
         }
       },
-      title: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -64,23 +60,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }).then(function(){
-      return queryInterface.addIndex(
-        'galleries',
-        ['organization_id']
-      ).then(function(){
-        return queryInterface.addIndex(
-        'galleries',
-        ['user_id']
-      ).then(function(){
-        return queryInterface.addIndex(
-          'galleries',
-          ['uuid'],
-          {indicesType: 'UNIQUE'}
-        );
-      })
-    })
-  })
+    }).then(queryInterface.addIndex(
+      'galleries',
+      ['organization_id']
+    )).then(queryInterface.addIndex(
+      'galleries',
+      ['user_id']
+    )).then(queryInterface.addIndex(
+      'galleries',
+      ['uuid'],
+      {indicesType: 'UNIQUE'}
+    )).then(queryInterface.addIndex(
+      'galleries',
+      ['name'],
+      {indicesType: 'UNIQUE'}
+    ));
   },
   down: function (queryInterface, Sequelize) {
     return queryInterface.dropTable('galleries');

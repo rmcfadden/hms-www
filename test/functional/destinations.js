@@ -13,13 +13,8 @@ describe('GET /api/destinations', function(){
   before(function(done) {
     this.timeout(testUtils.addDestinationsTimeout);
   
-    testUtils.ensureDestinationCount(12, function(err, result){
-      if(err){
-        done(err);
-      }
-      else{
-        done();
-      }
+    testUtils.ensureDestinationCount(12).then(function(result){
+      done();
     });
   });
 
@@ -69,13 +64,8 @@ describe('GET /api/destinations/country/us', function(){
   before(function(done) {
     this.timeout(testUtils.addDestinationsTimeout);
   
-    testUtils.ensureDestinationCountUs(12, function(err, result){
-      if(err){
-        done(err);
-      }
-      else{
-        done();
-      }
+    testUtils.ensureDestinationCountUs(12).then(function(result){
+      done();
     });
   });
 
@@ -100,13 +90,8 @@ describe('GET /api/destinations/country/us/?limit=10&offset=0', function(){
   before(function(done) {
     this.timeout(testUtils.addDestinationsTimeout);
 
-    testUtils.ensureDestinationCountUs(10, function(err, result){
-      if(err){
-        done(err);
-      }
-      else{
-        done();
-      }
+    testUtils.ensureDestinationCountUs(12).then(function(result){
+      done();
     });
   });
 
@@ -138,13 +123,8 @@ describe('GET /api/destinations/category/romantic/?limit=5&offset=0', function()
   before(function(done) {
     this.timeout(testUtils.addDestinationsTimeout);
   
-    testUtils.ensureDestinationCount(12, function(err, result){
-      if(err){
-        done(err);
-      }
-      else{
-        done();
-      }
+    testUtils.ensureDestinationCount(12).then(function(result){
+      done();
     });
   });
 
@@ -181,13 +161,8 @@ describe('GET /api/destinations/category/category_that_does_exist/?limit=5&offse
   before(function(done) {
     this.timeout(testUtils.addDestinationsTimeout);
   
-    testUtils.ensureDestinationCount(12, function(err, result){
-      if(err){
-        done(err);
-      }
-      else{
-        done();
-      }
+     testUtils.ensureDestinationCount(12).then(function(result){
+      done();
     });
   });
 

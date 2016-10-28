@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING(128),
         allowNull: false
       },
-      title: {
+      name: {
         type: Sequelize.STRING(128),
         allowNull: false
       },
