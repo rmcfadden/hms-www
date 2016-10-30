@@ -4,8 +4,17 @@ $( document ).ready(function() {
   wall.reset({
     selector: '.cell',
     animate: true,
-    cellW: 420,
-    cellH: 280,
+    cellW: function(width) {
+
+      var NumColums = 4;
+      if(width < 768)
+      {
+        NumColums = 2;
+      }
+
+      var cellWidth = width / NumColums;
+      return cellWidth - 10;
+    },
     onResize: function() {
       wall.fitWidth();
     }
@@ -31,7 +40,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             linkEl,
             size,
             item;
-
 
         for(var i = 0; i < numNodes; i++) {
 

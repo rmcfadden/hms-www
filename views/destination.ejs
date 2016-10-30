@@ -89,10 +89,10 @@
     </div>
     
     <div class="hidden-sm hidden-xs col-md-3 nopadding">
-      <div id="request-brochure-left" style="margin-left:10px">        
-        <div class="thumbnail" style="text-align:center; padding:10px;">
+      <div id="request-brochure-left" style="margin-left:10px; padding: 0px">        
+        <div class="thumbnail" style="text-align:center; padding:5px;">
           <h2><%= destination.name %></h2>
-          <a id="gallery-button" href="#gallery-popup"><button class="btn-u btn-u-lg">Request a Brochure<i class="fa fa-angle-right margin-left-5"></i></button></a>
+          <a id="gallery-button" href="<%= createDestinationRequestLink(destination) %>"><button class="btn-u btn-u-lg">Request a Brochure<i class="fa fa-angle-right margin-left-5"></i></button></a>
         </div>
       </div>
     </div>

@@ -12,8 +12,10 @@ router.get('/destination/:iso_code2/:name',
     '/assets/plugins/photoswipe/js/photoswipe.min.js',
     '/assets/plugins/photoswipe/js/photoswipe-ui-default.min.js']),
   assets.stylesheets(['/assets/css/views/destination-gallery.css',
+    '/assets/css/views/destination.css',
     '/assets/plugins/photoswipe/css/photoswipe.css',
-    '/assets/plugins/photoswipe/default-skin/default-skin.css']),  
+    '/assets/plugins/photoswipe/default-skin/default-skin.css',
+    ]),  
     function(req, res, next) {
   destinationsProv.findOneByIsoCode2AndName(req.params.iso_code2, req.params.name).then(function(destination){    
     if(destination){

@@ -38,10 +38,6 @@ var expressAssets  = function(){
 	      scriptsText += '<script type="text/javascript" src="' + applyVersion(req, scripts[i]) + '"></script>\n';
       }
       res.locals.scripts = scriptsText;
-
-console.log('scriptsText');
-console.log(scriptsText);
-
       next();
     }
   }  
@@ -54,10 +50,6 @@ console.log(scriptsText);
 	      stylesheetsText += '<link rel="stylesheet" href="' + applyVersion(req, stylesheets[i]) + '">\n';
       }
       res.locals.stylesheets = stylesheetsText;
-
-console.log('stylesheetsText');
-console.log(stylesheetsText);
-
       next();
     }
   }  

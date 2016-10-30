@@ -49,6 +49,7 @@ app.use(require('./routes/destination'));
 app.use(require('./routes/countries'));
 app.use(require('./routes/destination-gallery'));
 app.use(require('./routes/destination-countries'));
+app.use(require('./routes/destination-request'));
 app.use(require('./routes/galleries'));
 app.use(require('./routes/gallery'));
 
