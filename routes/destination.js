@@ -6,7 +6,7 @@ var destinationsProv = new (require('../modules/destinations-provider'));
 
 router.get('/destination/:iso_code2/:name', 
   assets.scripts(['/assets/js/plugins/freewall.js', 
-    '/assets/js/plugins/animatedModal.min.js',
+    '/assets/plugins/animatedModal/js/animatedModal.min.js',
     '/assets/js/views/destination.js',
     '/assets/js/views/media-gallery.js',
     '/assets/plugins/photoswipe/js/photoswipe.min.js',

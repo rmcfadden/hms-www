@@ -72,9 +72,10 @@
         <% if(medias.length > 0) { %>
 
         <div id="gallery-popup">
-          <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID -->
-          <div id="btn-close-modal" class="close-gallery-popup"> 
-              CLOSE
+          
+          <div class="container-fluid text-center nopadding">
+            <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID -->
+            <li style="list-style:none;"><i id="gallery-popup-close-button" class="close-gallery-popup glyphicon glyphicon-remove-circle" style="line-height: 3em !important; font-size: 60px; cursor:pointer"></i></li>
           </div>
               
           <div id="gallery-modal-content" class="modal-content gallery-modal-content" >

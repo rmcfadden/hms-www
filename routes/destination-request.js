@@ -8,7 +8,8 @@ var destinationsProv = new destinationsProvider();
 
 router.get('/destination-request/:iso_code2/:name', 
 
-  assets.scripts(['/assets/js/views/destination-request.js'] ), 
+  assets.scripts(['/assets/plugins/jquery/jquery-ui.min.js',
+    '/assets/js/views/destination-request.js'] ), 
   assets.stylesheets([
     '/assets/plugins/line-icons/line-icons.css',
     '/assets/plugins/sky-forms-pro/sky-forms/css/sky-forms.css',
