@@ -49,7 +49,8 @@
     "sync": "^0.2.5",
     "tedious": "^1.14.0",
     "underscore": "^1.8.3",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "destinations-provider": "./modules/destinations-provider"
   },
   "devDependencies": {
     "mocha-lcov-reporter": "^1.2.0",

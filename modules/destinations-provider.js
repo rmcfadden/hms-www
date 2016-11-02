@@ -4,12 +4,11 @@ var models  = require('../models');
 var Promise = require('promise');
 
 var config = require('../config/config.json');
-var pageSize = config.destinationsPageSize ? config.destinationsPageSize : 12;
+var pageSize = config.pageSize ? config.pageSize : 12;
 
 // Should I move these the models?
 
 models.destinations.belongsTo(models.countries);
-
 models.destinations.belongsTo(models.addresses);
 
 models.destinations.hasMany(models.destination_reviews, { foreignKey: 'destination_id'})

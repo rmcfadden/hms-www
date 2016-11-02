@@ -1,10 +1,13 @@
+'use strict';
+
+
+require('rootpath')();
+
 var express = require('express');
 var router = express.Router();
-var models  = require('../models')
+var models  = require('models')
 
-var destinationsProv = new (require('../modules/destinations-provider'));
-
-models.destinations.belongsTo(models.countries);
+var destinationsProv = new (require('modules/destinations-provider'));
 
 
 router.get('/destinations/', function(req, res, next) {  

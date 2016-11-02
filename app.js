@@ -1,4 +1,5 @@
 'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -54,7 +55,11 @@ app.use(require('./routes/galleries'));
 app.use(require('./routes/gallery'));
 
 
+// admin
 app.use(require('./routes/admin/index'));
+app.use(require('./routes/admin/destinations'));
+app.use(require('./routes/admin/destination'));
+
 
 
 app.locals.app_version = pjson.version;
