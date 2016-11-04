@@ -11,16 +11,18 @@
 
     <title></title>
 
+
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-
-    <link href="/assets/admin/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/plugins/normalize.min.css">
+    <link rel="stylesheet" href="/assets/plugins/animate.min.css">
+    <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
     <link href="/assets/admin/plugins/metisMenu/css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/assets/admin/plugins/sb-admin-2/css/sb-admin-2.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/assets/admin/css/style.css">
 
 
 
@@ -33,51 +35,103 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+   <div id="wrapper">
+     <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/admin/">SB Admin</a>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+              <li>
+                  <a href="/admin/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+              </li>
+
+              <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo" ><i class="fa fa-fw fa-upload"></i> Content Management <i class="fa fa-fw fa-caret-down" aria-expanded="true"></i></a>
+                <ul id="demo" >
+                  <li>
+                    <a href="/admin/destinations/">
+                      <span class="sidebar-nav-item-icon fa fa-edit fa-fw"></span>
+                      Destinations
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/comments/">
+                      <span class="sidebar-nav-item-icon fa fa-comment fa-fw"></span>
+                      Comments
+                    </a>
+                  </li> 
+                  <li>
+                    <a href="/admin/galleries/">
+                      <span class="sidebar-nav-item-icon fa fa-photo fa-fw"></span>
+                      Galleries
+                    </a>
+                  </li> 
+                  <li>
+                    <a href="/admin/medias/">
+                      <span class="sidebar-nav-item-icon fa fa-photo fa-fw"></span>
+                      Medias
+                    </a>
+                  </li> 
+                </ul>
+              </li>
+
+              <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo" ><i class="fa fa-fw fa-upload"></i> Admin <i class="fa fa-fw fa-caret-down" aria-expanded="true"></i></a>
+                <ul id="demo" >
+                  <li>
+                    <a href="/admin/users/">
+                      <span class="sidebar-nav-item-icon fa fa-user fa-fw"></span>
+                      Users
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/organizations/">
+                      <span class="sidebar-nav-item-icon fa fa-users fa-fw"></span>
+                      Organizations
+                    </a>
+                  </li> 
+                </ul>
+              </li>
+
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+  
+      </nav>
+
+
+      <div id="page-wrapper">
+        <div class="container-fluid">

@@ -1,20 +1,13 @@
-<% var destinationsPerRow = 3;%>
+<% var destinationsPerRow = 4;%>
+  <div class="row margin-bottom-10" %>">
+
 <% for(var i=0; i < destinations.length; i++) { %>
 <% var destination = destinations[i]; %>
-<% if((i % destinationsPerRow) == 0) { %>
-  <div class="row margin-bottom-20 row-<%- i.toString(); %>">
-<% } %>
 
-<div class="col-md-4">
+<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
   <% include destination-thumbnail.ejs %>
 </div>
 
-<% if((i % (destinationsPerRow)) === (destinationsPerRow - 1)) { %>
-  </div> <!-- row -->
-<% } %>
-<% } %>
+<% }%>
 
-<!-- add last closing row if one was not provided -->
-<% if((destinations.length -1 % (destinationsPerRow)) !== (destinationsPerRow - 1)) { %>
-  </div> <!-- row added or closinig -->
-<% } %>
+</div> <!-- row added or closinig -->
