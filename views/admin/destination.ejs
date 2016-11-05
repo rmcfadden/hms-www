@@ -15,84 +15,201 @@
 
 <!-- General Unify Forms -->
 <form action="#" class="sky-form">
-	<fieldset>
+
+<fieldset>					
+	<div class="row">	
+		<section class="col col-lg-6 col-xs-12">
+		<label class="label">Select a country:</label>
+		<label class="select">
+			<select name="country" id="">
+				<option value="0">Choose name</option>
+				<option value="1">Alexandra</option>
+				<option value="2">Alice</option>
+				<option value="3" selected>Anastasia</option>
+				<option value="4">Avelina</option>
+			</select>
+		</label>
+		</section>
+		<section class="col col-lg-6 col-xs-0"></section>
+	</div>
+</fieldset>
+
+<fieldset>
+<div class="row">	
+	<section class="col col-lg-6 col-xs-12">
+			<label class="label">Name:</label>
+			<label class="input">
+				<input type="text" value="<%= destination.name %>">
+			</label>
+	</section>
+	<section class="col col-lg-6 col-xs-12"></section>
+</div>					
+<div class="row">	
+	<section class="col col-lg-6 col-xs-12">
+			<label class="label">Description:</label>
+			<label class="input">
+				<textarea id="description-textarea" rows="1"><%= destination.description %></textarea>			
+			</label>
+	</section>
+	<section class="col col-lg-6 col-xs-12"></section>
+</div>					
+</fieldset>
+
+<fieldset>
+<div class="row">	
+	<section class="col col-lg-6 col-xs-12">
+		<label class="label">Medias:</label>	
 		<div class="row">
-			<section class="col col-12">
-				<label class="label">I would like to request</label>
-				<label class="checkbox"><input type="checkbox" name="brochure" checked><i></i>A free brochure</label>
-				<label class="checkbox"><input type="checkbox" name="prices" checked><i></i>Prices and availability</label>
-			</section>
+			<label class="label">COMING SOON!!</label>
 		</div>
-	</fieldset>
+	</section>
+	<section class="col col-lg-6 col-xs-12"></section>
+</div>		
+</fieldset>
+
+<fieldset>					
+	<div class="row">	
+		<section class="col col-lg-6 col-xs-12">
+			<label class="label">Categories:</label>
+			<label class="select">
+				<select name="categories" id="">
+					<option value="1">Romantic</option>
+				</select>
+			</label>
+		</section>
+		<section class="col col-lg-6 col-xs-12"></section>
+	</div>
+	<div class="row">	
+		<section class="col col-lg-6 col-xs-12">
+			<label class="input">
+				<textarea id="categories-textarea" rows="1"></textarea>			
+			</label>
+		</section>
+		<section class="col col-lg-6 col-xs-12"></section>
+	</div>
+
+	<div class="row">	
+		<section class="col col-lg-6 col-xs-12">
+			<label class="label">Tags:</label>
+			<label class="input">
+				<textarea id="tags-textarea" rows="1"></textarea>			
+			</label>
+		</section>
+		<section class="col col-lg-6 col-xs-0"></section>
+	</div>
+</fieldset>
 
 
 	<fieldset>
-	<label class="label">Proposed honeymoon date:</label>	
 	<div class="row">	
-		<section class="col col-5">
-			<label class="input">
-				<i class="icon-append fa fa-calendar"></i>
-				<input type="text" name="start" id="start" placeholder="Start date">
-			</label>
+		<section class="">
+			<label class="label">Contact:</label>
 		</section>
-		<section class="col col-5">
-			<label class="input">
-				<i class="icon-append fa fa-calendar"></i>
-				<input type="text" name="finish" id="finish" placeholder="End date">
-			</label>
-		</section>
-	</div>					
-	</fieldset>
+	</div>
 
 
-	<fieldset>
 	<div class="row">	
-		<section class="col col-5">
-				<label class="label">First name:</label>
+		<section class="col col-lg-3 col-md-6 col-xs-12">
+				<label class="label">Address Line 1:</label>
 				<label class="input">
 					<input type="text">
 				</label>
 		</section>
-		<section class="col col-5">
-				<label class="label">Last name:</label>
+		<section class="col col-lg-3 col-md-6 col-xs-12">
+				<label class="label">Address Line 2:</label>
 				<label class="input">
 					<input type="text">
 				</label>
 		</section>
+		<section class="col col-lg-6 col-md-0"></section>
 	</div>					
 
 	<div class="row">	
-		<section class="col col-5">
+		<section class="col col-lg-3 col-md-6 col-xs-12">
+				<label class="label">State/Province:</label>
+				<label class="input">
+					<input type="text">
+				</label>
+		</section>
+		<section class="col col-lg-3 col-md-6 col-xs-12">
+				<label class="label">Postal Code:</label>
+				<label class="input">
+					<input type="text">
+				</label>
+		</section>
+		<section class="col col-lg-6 col-md-0"></section>
+	</div>					
+
+
+	<div class="row">	
+		<section class="col col-lg-3 col-md-6 col-xs-12">
 				<label class="label">Email:</label>
 				<label class="input">
 				<i class="icon-append fa fa-envelope"></i>
 				<input type="email" name="email">
 			</label>						
 		</section>
-		<section class="col col-5">
+		<section class="col col-lg-3 col-md-6 col-xs-12">
 				<label class="label">Telephone:</label>
 				<label class="input">
+					<i class="icon-append fa fa-phone"></i>
 					<input type="tel">
 				</label>
 		</section>
 	</div>					
+	<div class="row">	
+		<section class="col col-md-6 col-xs-12">
+				<label class="label">Website:</label>
+				<label class="input">
+				<i class="icon-append fa fa-home"></i>
+				<input type="website" name="website">
+			</label>						
+		</section>
+		<section class="col col-md-6 col-xs-0"></section>
+	</div>					
+
 	</fieldset>
 
 	<fieldset>
-	<label class="label">Subscribe to:</label>	
-		<div class="row">
-			<section class="col col-12">
-				<label class="checkbox"><input type="checkbox" name="brochure" checked><i></i>Honeymoonstyle newsletters</label>
-				<label class="checkbox"><input type="checkbox" name="prices" checked><i></i>Honeymoonstyle offers</label>
-				<label class="checkbox"><input type="checkbox" name="prices" checked><i></i>3rd party offers</label>
-			</section>
-		</div>
+		<section>
+			<label class="label">Checkboxes</label>
+			<div class="row">
+				<div class="col col-2">
+					<label class="checkbox state-success"><input type="checkbox" name="checkbox"><i></i>Alexandra</label>
+					<label class="checkbox state-success"><input type="checkbox" name="checkbox" checked><i></i>Alice</label>
+				</div>
+				<div class="col col-2">
+					<label class="checkbox state-success"><input type="checkbox" name="checkbox"><i></i>Avelina</label>
+					<label class="checkbox state-success"><input type="checkbox" name="checkbox"><i></i>Basilia</label>
+				</div>
+				<div class="col col-2">
+					<label class="checkbox state-success"><input type="checkbox" name="checkbox" checked><i></i>Cassandra</label>
+					<label class="checkbox state-success"><input type="checkbox" name="checkbox"><i></i>Clemencia</label>
+				</div>
+			</div>
+			<section class="col col-md-6 col-xs-0"></section>
+		</section>
 	</fieldset>
 
 
-	<footer>
-		<button type="submit" class="btn-u .btn-lg">Request Information</button>
-	</footer>
+
+
+<fieldset>
+<label class="label">Visibility settings:</label>	
+	<div class="row">
+		<section class="col col-12">
+			<label class="checkbox"><input type="checkbox" name="is_visible" checked><i></i>Is visible</label>
+			<label class="checkbox"><input type="checkbox" name="is_approved" checked><i></i>Is approved</label>
+		</section>
+	</div>
+</fieldset>
+
+
+<footer>
+	<button type="submit" class="btn-u .btn-lg">Apply</button>
+	<button type="submit" class="btn-u .btn-lg">Cancel</button>
+
+</footer>
 
 </form>
 

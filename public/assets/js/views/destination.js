@@ -16,10 +16,9 @@ $( document ).ready(function() {
 });
 
 
-
 var elementPosition = $('#request-brochure-left').offset();
-
 var topOffset = '90px';
+
 $(window).scroll(function(){
   if($(window).scrollTop() - 30 > elementPosition.top){
     $('#request-brochure-left').css('position','fixed').css('top',topOffset);
