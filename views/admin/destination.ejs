@@ -1,6 +1,108 @@
+<% include partials/header.ejs %>
+
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Destination</h1>
+        <h1 class="page-header">Destination - <%= destination.name %></h1>
     </div>
 </div>
 
+<div class="margin-bottom-20"></div>
+    
+
+<div class="container-fluid">
+<div class="row">	
+
+
+<!-- General Unify Forms -->
+<form action="#" class="sky-form">
+	<fieldset>
+		<div class="row">
+			<section class="col col-12">
+				<label class="label">I would like to request</label>
+				<label class="checkbox"><input type="checkbox" name="brochure" checked><i></i>A free brochure</label>
+				<label class="checkbox"><input type="checkbox" name="prices" checked><i></i>Prices and availability</label>
+			</section>
+		</div>
+	</fieldset>
+
+
+	<fieldset>
+	<label class="label">Proposed honeymoon date:</label>	
+	<div class="row">	
+		<section class="col col-5">
+			<label class="input">
+				<i class="icon-append fa fa-calendar"></i>
+				<input type="text" name="start" id="start" placeholder="Start date">
+			</label>
+		</section>
+		<section class="col col-5">
+			<label class="input">
+				<i class="icon-append fa fa-calendar"></i>
+				<input type="text" name="finish" id="finish" placeholder="End date">
+			</label>
+		</section>
+	</div>					
+	</fieldset>
+
+
+	<fieldset>
+	<div class="row">	
+		<section class="col col-5">
+				<label class="label">First name:</label>
+				<label class="input">
+					<input type="text">
+				</label>
+		</section>
+		<section class="col col-5">
+				<label class="label">Last name:</label>
+				<label class="input">
+					<input type="text">
+				</label>
+		</section>
+	</div>					
+
+	<div class="row">	
+		<section class="col col-5">
+				<label class="label">Email:</label>
+				<label class="input">
+				<i class="icon-append fa fa-envelope"></i>
+				<input type="email" name="email">
+			</label>						
+		</section>
+		<section class="col col-5">
+				<label class="label">Telephone:</label>
+				<label class="input">
+					<input type="text">
+				</label>
+		</section>
+	</div>					
+	</fieldset>
+
+	<fieldset>
+	<label class="label">Subscribe to:</label>	
+		<div class="row">
+			<section class="col col-12">
+				<label class="checkbox"><input type="checkbox" name="brochure" checked><i></i>Honeymoonstyle newsletters</label>
+				<label class="checkbox"><input type="checkbox" name="prices" checked><i></i>Honeymoonstyle offers</label>
+				<label class="checkbox"><input type="checkbox" name="prices" checked><i></i>3rd party offers</label>
+			</section>
+		</div>
+	</fieldset>
+
+
+	<footer>
+		<button type="submit" class="btn-u .btn-lg">Request Information</button>
+	</footer>
+
+</form>
+
+<div class="margin-bottom-20"></div>
+
+</div>
+</div> <!-- container -->
+
+
+
+</div> <!-- container -->
+
+<% include partials/footer.ejs %>

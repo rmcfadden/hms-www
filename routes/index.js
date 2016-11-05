@@ -7,7 +7,7 @@ var models  = require('../models');
 router.get('/', function(req, res, next) {
 
   models.destinations.findAndCountAll({ include: [models.countries], offset: 0, limit: 4}).then(function(destinations){
-    res.render('index', { destinations : destinations.rows });
+    res.render('index', { destinations : destinations });
   });
 });
 
