@@ -57,6 +57,7 @@ app.use(require('./routes/gallery'));
 
 // admin
 app.use(require('./routes/admin/index'));
+app.use(require('./routes/admin/login'));
 app.use(require('./routes/admin/destinations'));
 app.use(require('./routes/admin/destination'));
 
