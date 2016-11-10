@@ -11,6 +11,12 @@ router.get('/login', function(req, res, next) {
 
 router.post('/api/login', function(req, res, next) {
 
+console.log("REQUEST!!!!!!!!!!!");
+console.log(req.body.username);
+console.log(req.body.password);
+
+
+
   // TODO: move this to a module
   if(!req.body.username){
     res.status(422);

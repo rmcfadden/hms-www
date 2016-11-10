@@ -122,3 +122,13 @@ body {
 .side-nav>li>ul>li>a:hover {
     color: #fff;
 }
+
+.margin-bottom-20
+{
+	margin-bottom: 20px;
+}
+
+.margin-bottom-40
+{
+	margin-bottom: 40px;
+}

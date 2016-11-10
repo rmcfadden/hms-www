@@ -4,11 +4,14 @@ app.controller("authenticationController", function($scope, $http) {
  	
 	$scope.submitLogin = function() {
 		
+		$('#message-panel').hideMessagePanel();
+
 		var formData = angular.toJson($scope.form)
 
+		$('#ajax-loader').showSpinner();
 
-console.log('email');
-console.log($scope.email);
+console.log('username');
+console.log($scope.username);
 
 		$http({
 	    method : 'POST',
@@ -17,14 +20,20 @@ console.log($scope.email);
 	    headers : {
 	      'Content-Type' : 'application/json'
 		  }
-		}).then( _success, _error ); 
+		}).then( _success, _error )
+			.finally(function() {
+				$('#ajax-loader').hideSpinner();
+			});
 	};
 
-	function _success(){
+	function _success(response){
+		alert('SUCCESS!!!');
 	}
 
 
-	function _error(){
+	function _error(response){
+
+		$('#message-panel').showMessagePanel(response.data.message)
 	}
 
 });
