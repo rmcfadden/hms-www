@@ -11,8 +11,8 @@
 <div class="container-fluid text-center">
 
 <div class="row">
-    <div class="col-lg-6">
-			<form action="" class="sky-form">
+    <div class="col-lg-6" >
+			<form ng-submit="submitLogin()" ng-controller="authenticationController" class="sky-form">
 			<header>Enter your login details</header>
 			<fieldset>					
 				<section>
@@ -21,7 +21,7 @@
 						<div class="col col-8">
 							<label class="input">
 								<i class="icon-append icon-user"></i>
-								<input type="email">
+								<input type="username" ng-model="username" name="username">
 							</label>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 						<div class="col col-8">
 							<label class="input">
 								<i class="icon-append icon-lock"></i>
-								<input type="password">
+								<input type="password" ng-model="password" name="password">
 							</label>
 							<div class="note"><a href="#">Forgot password?</a></div>
 						</div>
