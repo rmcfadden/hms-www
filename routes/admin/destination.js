@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 require('rootpath')();
 
@@ -7,10 +7,13 @@ var router = express.Router();
 var assets = require('modules/express-assets');
 
 var destinationsProv = new (require('modules/destinations-provider'));
+var auth = require('modules/authorization-provider');
+
 
 router.get('/admin/destination/:iso_code2/:name', 
+  auth.demandAdmin({is_admin: true}),
   assets.scripts(['/assets/admin/js/views/destination.js'
-  	]), 
+    ]), 
   assets.stylesheets([,
     ]),  
     function(req, res, next) {

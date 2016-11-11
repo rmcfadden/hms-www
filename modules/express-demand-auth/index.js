@@ -4,11 +4,11 @@ var authorization = module.exports = function(){
 
 };
 
-authorization.isInRole = function(role){
-  return isInRoles([role]);
+authorization.isInAnyRole = function(role, requiredRoles){
+  return authorization.isInAnyRoles([role], requiredRoles);
 };
 
-authorization.isInRoles = function(roles){
+authorization.isInAnyRoles = function(roles, requiredRoles){
   return false;
 };
 

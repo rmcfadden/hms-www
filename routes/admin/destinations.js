@@ -7,31 +7,37 @@ var router = express.Router();
 
 var destinationsProv = new (require('modules/destinations-provider'));
 
+var auth = require('modules/authorization-provider');
 
-router.get('/admin/destinations/', function(req, res, next) {  
-
-  console.log('ME!!');
-  console.log(req.me);
-
-  destinationsProv.findAll({ paging : req.paging}).then(function(destinations){
-    res.render('admin/destinations', { destinations : addIsAdminProperty(destinations) });
-
-  });
-});
-
-
-router.get('/admin/destinations/country/:iso_code2', function(req, res, next) {  
-  destinationsProv.findAllByIsoCode2(req.params.iso_code2, {  paging : req.paging}).then(function(destinations){
-    res.render('admin/destinations', { destinations : addIsAdminProperty(destinations) });
-  });
-});
+router.get('/admin/destinations/', 
+  auth.demandAdmin({is_admin: true}), 
+  function(req, res, next) {  
+    destinationsProv.findAll({ paging : req.paging})
+    .then(function(destinations){
+      res.render('admin/destinations', { destinations : addIsAdminProperty(destinations) });
+    });
+  }
+);
 
 
-router.get('/admin/destinations/category/:category_name', function(req, res, next) {
-  destinationsProv.findAllByDestinationCategory(req.params.category_name, {paging : req.paging}).then(function(destinations){
-    res.render('admin/destinations', { destinations : addIsAdminProperty(destinations) });
-  });
-});
+router.get('/admin/destinations/country/:iso_code2', 
+  auth.demandAdmin({is_admin: true}), 
+  function(req, res, next) {  
+    destinationsProv.findAllByIsoCode2(req.params.iso_code2, {  paging : req.paging}).then(function(destinations){
+      res.render('admin/destinations', { destinations : addIsAdminProperty(destinations)  });
+    });
+  }
+);
+
+
+router.get('/admin/destinations/category/:category_name', 
+  auth.demandAdmin({is_admin: true}), 
+  function(req, res, next) {
+    destinationsProv.findAllByDestinationCategory(req.params.category_name, {paging : req.paging}).then(function(destinations){
+      res.render('admin/destinations', { destinations : addIsAdminProperty(destinations) });
+    });
+  }
+);
 
 
 function addIsAdminProperty(destinations){
