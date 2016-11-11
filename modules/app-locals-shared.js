@@ -17,4 +17,12 @@ module.exports = function(app){
    app.locals.createDestinationRequestLink = function (destination){
     return '/destination-request/' + destination.country.iso_code2.toLowerCase() + '/' +  encodeURI(destination.name.toLowerCase()) + '/';
   };
+
+
+/*
+  app.locals.isLoggedIn = function()
+  {
+  	return (typeof res.locals.me !== 'undefined' );
+  }
+  */
 }

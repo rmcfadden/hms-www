@@ -1,0 +1,50 @@
+<!-- Start login form -->
+<form ng-submit="submitLogin()" ng-controller="authenticationController" class="sky-form">
+<header>Login here</header>
+<div class="row">
+	<div class="col col-xs-12">
+				<% include ../partials/message-panel.ejs %>
+	</div>
+</div>
+
+<fieldset>					
+	<section>
+		<div class="row">
+			<div class="col col-xs-12">
+				<label class="label">Email:</label>
+				<label class="input">
+					<i class="icon-append icon-user"></i>
+					<input type="email" ng-model="email" name="email">
+				</label>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<div class="row">
+			<div class="col col-xs-12">
+				<label class="label">Password:</label>
+				<label class="input">
+					<i class="icon-append icon-lock"></i>
+					<input type="password" ng-model="password" name="password">
+				</label>
+				<div class="note"><a href="#">Forgot password?</a></div>
+			</div>
+		</div>
+	</section>
+	
+</fieldset>
+<footer>
+	<div class="row">
+		<div class="col col-xs-12">
+			<button type="submit" class="btn btn-primary btn-block">Log in</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col col-xs-12 text-center" style="padding:10px">
+			<div id="ajax-loader"/>
+		</div>
+	</div>
+</footer>
+</form>
+<!-- End login form -->

@@ -6,7 +6,7 @@ var request = require('supertest'),
 
 var usersProv = new usersProvider(); 
 
-describe('POST /api/login with a missing username', function(){
+describe('POST /api/login with a missing email', function(){
   it('respond with a 422 code and a false status ', function(done){
     request(app)
       .post('/api/login')
@@ -29,7 +29,7 @@ describe('POST /api/login with a missing password', function(){
   it('respond with a 422 code and a false status ', function(done){
     request(app)
       .post('/api/login')
-      .send("username=adsf")
+      .send("email=adsf")
       .expect(422)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .end(function(err, res){
@@ -44,7 +44,7 @@ describe('POST /api/login with a missing password', function(){
 });
 
 
-describe('POST /api/login with a valid username but bad password', function(){
+describe('POST /api/login with a valid email but bad password', function(){
   var tempUser = null;
   beforeEach(function(done) { 
     var email = randomstring.generate() + "@test.com";
@@ -68,7 +68,7 @@ describe('POST /api/login with a valid username but bad password', function(){
   it('respond with a 401 code and a false status ', function(done){
     request(app)
       .post('/api/login')
-      .send("username=" + tempUser.username + "&password=adsf")
+      .send("email=" + tempUser.email + "&password=adsf")
       .expect(401)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .end(function(err, res){
@@ -83,7 +83,7 @@ describe('POST /api/login with a valid username but bad password', function(){
 });
 
 
-describe('POST /api/login with a valid username and valid password', function(){
+describe('POST /api/login with a valid email and valid password', function(){
   var tempUser = null;
   beforeEach(function(done) { 
     var email = randomstring.generate() + "@test.com";
@@ -101,7 +101,7 @@ describe('POST /api/login with a valid username and valid password', function(){
   it('respond with a 200 code and a true status ', function(done){ 
     request(app)
       .post('/api/login')
-      .send("username=" + tempUser.username + "&password=123")
+      .send("email=" + tempUser.email + "&password=123")
       .expect(200)
       .expect('set-cookie', /session-token/)
       .expect('Content-Type', 'application/json; charset=utf-8')

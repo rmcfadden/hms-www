@@ -43,7 +43,7 @@ describe('POST /api/login and /api/users/me', function(){
   it('should respond with a 200 code and me information', function(done){     
     agent
       .post('/api/login')
-      .send("username=" + tempUser.username + "&password=123")
+      .send("email=" + tempUser.email+ "&password=123")
       .expect(200)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .expect('set-cookie', /session-token/)

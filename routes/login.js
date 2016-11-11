@@ -11,16 +11,10 @@ router.get('/login', function(req, res, next) {
 
 router.post('/api/login', function(req, res, next) {
 
-console.log("REQUEST!!!!!!!!!!!");
-console.log(req.body.username);
-console.log(req.body.password);
-
-
-
   // TODO: move this to a module
-  if(!req.body.username){
+  if(!req.body.email){
     res.status(422);
-    res.send({success: false, message: "no username parameter"});
+    res.send({success: false, message: "no email parameter"});
     return res.end();
   }
 
@@ -31,16 +25,16 @@ console.log(req.body.password);
   }
 
   
-  models.users.findOne({ where : { username: req.body.username }}).then(function (user) { 
+  models.users.findOne({ where : { email: req.body.email }}).then(function (user) { 
     if (!user) {
       res.status(401);
-      res.send({success: false, message: "invalid username or password"});
+      res.send({success: false, message: "invalid email or password"});
       return res.end();
     }
 
     if (!usersProv.verifyPassword(user, req.body.password)) { 
       res.status(401);
-      res.send({success: false, message: "invalid username or password"});
+      res.send({success: false, message: "invalid email or password"});
       return res.end();
     }
 

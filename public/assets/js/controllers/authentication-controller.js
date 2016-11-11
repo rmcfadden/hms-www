@@ -1,4 +1,4 @@
-var app = angular.module("hmsAdmin", []);
+var app = angular.module("hms", []);
          
 app.controller("authenticationController", function($scope, $http) {
  	
@@ -10,30 +10,46 @@ app.controller("authenticationController", function($scope, $http) {
 
 		$('#ajax-loader').showSpinner();
 
-console.log('username');
-console.log($scope.username);
-
 		$http({
 	    method : 'POST',
 	    url : '/api/login',
-	    data : { username : $scope.username, password: $scope.password},
+	    data : { email : $scope.email, password: $scope.password},
 	    headers : {
 	      'Content-Type' : 'application/json'
 		  }
-		}).then( _success, _error )
-			.finally(function() {
-				$('#ajax-loader').hideSpinner();
-			});
+		}).then( _loginSuccess, _loginError )
+		.finally(function() {
+			$('#ajax-loader').hideSpinner();
+		});
 	};
 
-	function _success(response){
-		alert('SUCCESS!!!');
+	function _loginSuccess(response){
+		window.location = '/admin/';
 	}
 
 
-	function _error(response){
+	function _loginError(response){
+		$('#message-panel').showMessagePanel(response.data.message);
+	}
 
-		$('#message-panel').showMessagePanel(response.data.message)
+
+	$scope.logout = function() {
+
+		$http({
+	    method : 'POST',
+	    url : '/api/logout',
+	    headers : {
+	      'Content-Type' : 'application/json'
+		  }
+		}).then( _logoutSuccess, _logoutError );
+	}
+
+	function _logoutSuccess(response){
+		window.location = '/admin/login';
+	}
+
+	function _logoutError(response){
+			alert('LOGOUT ERROR!');
 	}
 
 });

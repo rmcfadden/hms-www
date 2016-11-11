@@ -9,6 +9,10 @@ var destinationsProv = new (require('modules/destinations-provider'));
 
 
 router.get('/admin/destinations/', function(req, res, next) {  
+
+  console.log('ME!!');
+  console.log(req.me);
+
   destinationsProv.findAll({ paging : req.paging}).then(function(destinations){
     res.render('admin/destinations', { destinations : addIsAdminProperty(destinations) });
 

@@ -32,10 +32,11 @@ var sessionsProvider  = function(){
   }
 
   this.findByToken = function(token){
-    return models.sessions.findOne({where : {token :token }});
+    return models.sessions.findOne({ where : { token : token, $or: {"is_expired": "false"}}});
   }
 
   this.expire = function(token){
+   return models.sessions.update({ is_expired: true }, {where : {token :token }});
   };
  
   this.generateToken = function() {

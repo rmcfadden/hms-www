@@ -1,14 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/logout', function(req, res){
-  req.logout();
+var sessionsProv  = new (require('../modules/sessions-provider'));
 
-  if(req.user){
-    
+router.post('/api/logout', function(req, res){
+  if(req.sessionToken){
+		  sessionsProv.expire(req.sessionToken).then(function (rows) { 
+      	res.clearCookie('session-token');  
+    		return res.send({ success : true });
+
+		  });  
+  }
+  else{
+    return res.send({ success : true });
   }
 
-  res.redirect('/');
 });
 
 module.exports = router;

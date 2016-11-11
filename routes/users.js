@@ -6,7 +6,6 @@ router.get('/api/users/me', function(req, res, next) {
 
   res.setHeader('Content-Type', 'application/json');
 
-
   if(req.me){
     res.json(req.me);
     return res.end();

@@ -24,6 +24,9 @@ var me  = {
           organizations : me.organizations,
           roles : me.roles
         };
+
+        res.locals.me = me;
+
         return next();
       }).catch(function(err){
         return next(err);    
@@ -67,7 +70,6 @@ me.findFromUser = function(user){
     });
   });
 };
-
 
 
 module.exports = me;

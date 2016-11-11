@@ -16,7 +16,7 @@ var app = express();
 
 
 // Add shared functoins for ejs templates
-require('./modules/ejs-shared.js')(app);
+require('./modules/app-locals-shared.js')(app);
 
 
 // view engine setup

@@ -13,7 +13,12 @@ var sessionsMiddleware = function (req, res, next){
         return models.users.findById(session.user_id);
       }
     }).then(function(user){
-      req.user = user;
+
+      if(user){
+        req.user = user;
+        req.sessionToken = req.cookies['session-token'];
+      }
+
       return next();
     }).catch(function(error){
       return next(error);

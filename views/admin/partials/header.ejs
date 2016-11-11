@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css?app_version=<%=app_version%>">
 
-    <link rel="stylesheet" href="/assets/admin/plugins/sky-forms/css/sky-forms.css?app_version=<%=app_version%>">
+    <link rel="stylesheet" href="/assets/plugins/sky-forms/css/sky-forms.css?app_version=<%=app_version%>">
     <link rel="stylesheet" href="/assets/admin/plugins/sky-forms/css/custom-sky-forms.css?app_version=<%=app_version%>">
     <link rel="stylesheet" href="/assets/admin/plugins/simplemde/css/simplemde.min.css?app_version=<%=app_version%>">
     <link rel="stylesheet" href="/assets/admin/plugins/tagEditor/css/jquery.tag-editor.css?app_version=<%=app_version%>">
@@ -43,7 +43,7 @@
 
   </head>
 
-  <body ng-app="hmsAdmin">
+  <body ng-app="hms">
 
    <div id="wrapper">
      <!-- Navigation -->
@@ -57,29 +57,35 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/admin/">SB Admin</a>
-
         </div>
         <!-- Top Menu Items -->
+
+        <% if( typeof me !== 'undefined' ) { %>
+
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= me.username %> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                    <li id="#logout" ng-controller="authenticationController" ng-click="logout()">
+                        <a href="#"><i class="fa fa-fw fa-power-off"></i>Log Out</a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                    </li>
-                </ul>
+                </ul> 
             </li>
         </ul>
+
+        <% } else { %>
+
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Not logged in <b class="caret"></b></a>
+            </li>
+        </ul>
+
+
+        <% } %>
 
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
