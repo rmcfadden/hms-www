@@ -67,6 +67,10 @@ describe('create with roles and organizations', function () {
     };
 
     usersProv.create(newUser).then(function(user){      
+
+//console.log("USER");
+//console.log(user);
+
       user.id.should.be.greaterThan(0);
       user.username.should.equal(username);
       user.email.should.equal(email);

@@ -20,48 +20,42 @@ var organizationsProvider  = function(){
       models.organizations.findAll( { where : { name : { $in :organizations }}}).then(function(returnOrganizations){        
  
         // create a lookup table so we don't have O(N^2) runtime
-        var organizationsLookup = {}
-        for(var i=0; i < returnOrganizations.length; i++)
-        {
-            organizationsLookup[returnOrganizations[i].name] = returnOrganizations[i].id
+        var organizationsLookup = {};
+        var organizationsMap = {};
+
+        for(var i=0; i < returnOrganizations.length; i++){
+            organizationsLookup[returnOrganizations[i].name] = returnOrganizations[i].id;
+            organizationsMap[returnOrganizations[i].id] = returnOrganizations[i].name;
         }
 
         // make sure the organizations exist
         var mappedOrganizations = [];
-        for(var i=0; i < organizations.length; i++)
-        {
+        for(var i=0; i < organizations.length; i++){
             if(!organizationsLookup[organizations[i]]){
               return reject('organization ' + organizations[i] + ' does not exist');
             }
-            else
-            {
+            else{
               mappedOrganizations.push({ id: organizationsLookup[organizations[i]], name: organizations[i] });
             }
         }
 
         user.organizations = [];
 
-        async.forEach(mappedOrganizations, function (organization, callback){ 
-          models.users_organizations.create({ user_id: user.id, organization_id: organization.id }).then(function(user_organization){            
-            user.organizations.push({ name : organization.name, organization_id: user_organization.id, user_id: user.id});
-            callback();
-          }).catch(function(error){
-              return callback(error);
+        var newFunc =  function(organization){
+          return models.users_organizations.create({ user_id: user.id, organization_id: organization.id });
+        }
+
+        Promise.all(mappedOrganizations.map(newFunc)).then(function(results){
+          results.forEach(function(user_organization){
+            user.organizations.push({ name : organizationsMap[user_organization.organization_id], organization_id: user_organization.organization_id, user_id: user.id});
           });
-        }, function(err) {
-          if(err){
-            return reject(err);
-          }
-          else{
-            return resolve(user);
-          }
-        }); 
 
+          return resolve(user);
+        }).catch(function(err){
+          return reject(err);
+        });
 
-      }).catch(function(error){
-        return reject(error);
       });
-
     });
   }
 }

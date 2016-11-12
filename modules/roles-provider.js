@@ -21,49 +21,42 @@ var rolesProvider  = function(){
       proxyThis.findAll().then(function(returnRoles){
         
         // create a lookup table so we don't have O(N^2) runtime
-        var rolesLookup = {}
-        for(var i=0; i < returnRoles.length; i++)
-        {
+        var rolesLookup = {};
+        var rolesMap = {};
+
+        for(var i=0; i < returnRoles.length; i++){
             rolesLookup[returnRoles[i].name] = returnRoles[i].id
+            rolesMap[returnRoles[i].id] = returnRoles[i].name;
+
         }
 
         // make sure the roles exist
         var mappedRoles = [];
-        for(var i=0; i < roles.length; i++)
-        {
+        for(var i=0; i < roles.length; i++){
             if(!rolesLookup[roles[i]]){
               return reject('role ' + roles[i] + ' does not exist');
             }
-            else
-            {
+            else{
               mappedRoles.push({ id: rolesLookup[roles[i]], name: roles[i] });
             }
         }
 
         user.roles = [];
 
-        async.forEach(mappedRoles, function (role, callback){ 
-          models.users_roles.create({ user_id: user.id, role_id: role.id }).then(function(user_role){            
-            user.roles.push({ name : role.name, role_id: role.id, user_id: user.id});
-            callback();
-          }).catch(function(error){
-              return callback(error);
+        var newFunc =  function(role){
+          return models.users_roles.create({ user_id: user.id, role_id: role.id });
+        }
+
+        Promise.all(mappedRoles.map(newFunc)).then(function(results){
+          results.forEach(function(user_role){
+            user.roles.push({ name : rolesMap[user_role.role_id], role_id: user_role.role_id, user_id: user.id});
           });
-        }, function(err) {
-          if(err){
-            return reject(err);
-          }
-          else{
-            return resolve(user);
-          }
-        }); 
 
-      }).catch(function(error){
-        return reject(error);
+          return resolve(user);
+        });
+
       });
-
     });
   }
 }
-
 module.exports = rolesProvider;

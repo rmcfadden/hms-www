@@ -9,6 +9,19 @@ authorization.isInAnyRole = function(role, requiredRoles){
 };
 
 authorization.isInAnyRoles = function(roles, requiredRoles){
+
+	var rolesObject = {};
+	roles.forEach(function(role){
+		rolesObject[role] = role;
+	});
+
+
+	requiredRoles.forEach(function(requiredRole){
+		if(rolesObject[requiredRole]){
+			return true;
+		}
+	});
+
   return false;
 };
 

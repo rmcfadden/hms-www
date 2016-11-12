@@ -50,7 +50,6 @@ function addIsAdminProperty(destinations){
   });
 
   return destinations;
-
 }
 
 

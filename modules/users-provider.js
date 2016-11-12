@@ -27,17 +27,26 @@ var usersProvider  = function(){
         password: hashedPassword,
         password_salt: salt
       }).then(function(newUser) {
-        if(user.roles){
-          return proxy.addRolesToUser(newUser, user.roles);
-        }else{
-          return newUser;
-        }
+        return new Promise(function(currentResolve, currentReject){        
+          if(user.roles){
+            proxy.addRolesToUser(newUser, user.roles).then(function(user){ 
+              return currentResolve(user);
+            });
+          }else{
+            return currentResolve(newUser);
+          }
+        });
+
       }).then(function(newUser) {
-        if(user.organizations){
-          return proxy.addOrganizationsToUser(newUser, user.organizations);
-        }else{
-          return newUser;
-        }
+        return new Promise(function(currentResolve, currentReject){        
+          if(user.organizations){
+            proxy.addOrganizationsToUser(newUser, user.organizations).then(function(user){ 
+              return currentResolve(user);
+            });
+          }else{
+            return currentResolve(newUser);
+          }
+        });
       })
       .then(function(user) {
         resolve(user);

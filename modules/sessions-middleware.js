@@ -24,9 +24,8 @@ var sessionsMiddleware = function (req, res, next){
       return next(error);
     });
   }else{
-    next();
+    return next();
   }
-
 }
 
 
