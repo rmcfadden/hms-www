@@ -39,7 +39,8 @@ router.post('/api/login', function(req, res, next) {
     }
 
     sessionsProv.create(user).then(function(session){
-      res.cookie('session-token', session.token, { maxAge: 900000, httpOnly: true });  
+      var oneMonth =  30 * 24 * 3600 * 1000;
+      res.cookie('session-token', session.token, { maxAge: oneMonth, httpOnly: true });  
       return res.send({ success : true, token: session.token});
     }).catch(function(err){      
       res.send({success: false, message: "could not create a session"});

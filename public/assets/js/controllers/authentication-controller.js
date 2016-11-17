@@ -1,14 +1,10 @@
-var app = angular.module("hms", []);
-         
-app.controller("authenticationController", function($scope, $http) {
+angular.module("hms").controller("authenticationController", function($scope, $http) {
  	
 	$scope.submitLogin = function() {
 		
+		$('#ajax-loader').showSpinner();
 		$('#message-panel').hideMessagePanel();
 
-		var formData = angular.toJson($scope.form)
-
-		$('#ajax-loader').showSpinner();
 
 		$http({
 	    method : 'POST',
@@ -24,14 +20,13 @@ app.controller("authenticationController", function($scope, $http) {
 	};
 
 	function _loginSuccess(response){
-		window.location = '/admin/';
+		window.location = '/admin/destinations';
 	}
 
 
 	function _loginError(response){
 		$('#message-panel').showMessagePanel(response.data.message);
 	}
-
 
 	$scope.logout = function() {
 

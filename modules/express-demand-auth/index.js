@@ -15,14 +15,14 @@ authorization.isInAnyRoles = function(roles, requiredRoles){
 		rolesObject[role] = role;
 	});
 
-
+	var IsFound = false;
 	requiredRoles.forEach(function(requiredRole){
 		if(rolesObject[requiredRole]){
-			return true;
+			IsFound = true;
 		}
 	});
 
-  return false;
+  return IsFound;
 };
 
 /*

@@ -8,7 +8,9 @@ var sequelize = require('sequelize');
 var moment = require('moment');
 
 var sessionsProvider  = function(){
- this.create = function(user){
+  var sessionHours = 24 * 30;  // TODO: move to config
+  
+  this.create = function(user){
     var proxy = this;
     return new Promise(function(resolve, reject){
       
@@ -16,12 +18,11 @@ var sessionsProvider  = function(){
 
       var token = proxy.generateToken();
 
-      var sessionHours = 24;  // TODO: move to config
       models.sessions.create({
         user_id: user.id,
         token : token,
         start:  moment(),
-        end:  moment().add(24, 'hours'),
+        end:  moment().add(sessionHours, 'hours'),
         last_activity_date:  moment()
       }).then(function(session) {
         resolve(session);
@@ -34,6 +35,24 @@ var sessionsProvider  = function(){
   this.findByToken = function(token){
     return models.sessions.findOne({ where : { token : token, $or: {"is_expired": "false"}}});
   }
+
+  this.isExpired = function(session){
+    if(session.is_expired === true){
+      return true;
+    }
+
+    if(moment().isAfter(moment(session.end))) {
+      return true;
+    }
+
+    return false;
+  };
+
+
+  this.refresh = function(token){
+   return models.sessions.update({ last_activity_date: moment(), end: moment().add(sessionHours, 'hours') }, {where : {token :token }});
+  };
+
 
   this.expire = function(token){
    return models.sessions.update({ is_expired: true }, {where : {token :token }});

@@ -1,8 +1,10 @@
 <% include partials/header.ejs %>
 
+<div ng-controller="destinationController">
+
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Destination - <%= destination.name %></h1>
+        <h1 class="page-header">{{ destination.country.name }} - {{ destination.name }}</h1>
     </div>
 </div>
 
@@ -14,44 +16,38 @@
 
 
 <!-- General Unify Forms -->
-<form action="#" class="sky-form">
-
+<form  class="sky-form" ng-controller="destinationManageController" ng-submit="addUpdateDestination();">
 <fieldset>					
-	<div class="row">	
-		<section class="col col-lg-6 col-xs-12">
+	<div class="row" ng-controller="countriesController">	
+		<section class="col col-xs-12 col-lg-8">
 		<label class="label">Select a country:</label>
 		<label class="select">
-			<select name="country" id="">
-				<option value="0">Choose name</option>
-				<option value="1">Alexandra</option>
-				<option value="2">Alice</option>
-				<option value="3" selected>Anastasia</option>
-				<option value="4">Avelina</option>
-			</select>
+			<select ng-model="destination.country.id" ng-options="item.id as item.name  for item in countries">
+			</select>		
 		</label>
 		</section>
-		<section class="col col-lg-6 col-xs-0"></section>
+		<section class="col col-xs-0 col-lg-4"></section>
 	</div>
 </fieldset>
 
 <fieldset>
 <div class="row">	
-	<section class="col col-lg-6 col-xs-12">
-			<label class="label">Name:</label>
-			<label class="input">
-				<input type="text" value="<%= destination.name %>">
-			</label>
+	<section class="col col-xs-12 col-lg-8">
+		<label class="label">Name:</label>
+		<label class="input">
+			<input type="text" value="{{ destination.name }}">
+		</label>
 	</section>
-	<section class="col col-lg-6 col-xs-12"></section>
+	<section class="col col-xs-0 col-lg-4"></section>
 </div>					
 <div class="row">	
-	<section class="col col-lg-6 col-xs-12">
-			<label class="label">Description:</label>
-			<label class="input">
-				<textarea id="description-textarea" rows="1"><%= destination.description %></textarea>			
-			</label>
+	<section class="col col-xs-12 col-lg-8">
+		<label class="label">Description:</label>
+		<label class="input">
+			<textarea id="description-textarea" rows="1"></textarea>			
+		</label>
 	</section>
-	<section class="col col-lg-6 col-xs-12"></section>
+	<section class="col col-xs-0 col-lg-4"></section>
 </div>					
 </fieldset>
 
@@ -112,13 +108,13 @@
 		<section class="col col-lg-3 col-md-6 col-xs-12">
 				<label class="label">Address Line 1:</label>
 				<label class="input">
-					<input type="text">
+					<input type="text" ng-model="destination.address.address_line1"/>
 				</label>
 		</section>
 		<section class="col col-lg-3 col-md-6 col-xs-12">
 				<label class="label">Address Line 2:</label>
 				<label class="input">
-					<input type="text">
+					<input type="text" ng-model="destination.address.address_line2"/>
 				</label>
 		</section>
 		<section class="col col-lg-6 col-md-0"></section>
@@ -126,15 +122,25 @@
 
 	<div class="row">	
 		<section class="col col-lg-3 col-md-6 col-xs-12">
-				<label class="label">State/Province:</label>
+				<label class="label">City:</label>
 				<label class="input">
-					<input type="text">
+					<input type="text" ng-model="destination.address.city" />
 				</label>
 		</section>
 		<section class="col col-lg-3 col-md-6 col-xs-12">
+				<label class="label">State/Province:</label>
+				<label class="input">
+					<input type="text" ng-model="destination.address.province" />
+				</label>
+		</section>
+		<section class="col col-lg-6 col-md-0"></section>
+	</div>					
+
+	<div class="row">	
+		<section class="col col-lg-3 col-md-6 col-xs-12">
 				<label class="label">Postal Code:</label>
 				<label class="input">
-					<input type="text">
+					<input type="text" ng-model="destination.address.postal_code"/>
 				</label>
 		</section>
 		<section class="col col-lg-6 col-md-0"></section>
@@ -198,16 +204,16 @@
 <label class="label">Visibility settings:</label>	
 	<div class="row">
 		<section class="col col-12">
-			<label class="checkbox"><input type="checkbox" name="is_visible" checked><i></i>Is visible</label>
-			<label class="checkbox"><input type="checkbox" name="is_approved" checked><i></i>Is approved</label>
+			<label class="checkbox"><input type="checkbox" ng-model="destination.is_visible" ><i></i>Is visible</label>
+			<label class="checkbox"><input type="checkbox" ng-model="destination.is_approved" ><i></i>Is approved</label>
 		</section>
 	</div>
 </fieldset>
 
 
 <footer>
-	<button type="submit" class="btn-u .btn-lg">Apply</button>
-	<button type="submit" class="btn-u .btn-lg">Cancel</button>
+	<button type="submit" class="btn btn-primary">Apply</button>
+	<button class="btn">Cancel</button>
 
 </footer>
 
@@ -215,11 +221,10 @@
 
 <div class="margin-bottom-20"></div>
 
-</div>
+
+</div> <!-- row -->
 </div> <!-- container -->
+</div> <!-- ng-controller -->
 
-
-
-</div> <!-- container -->
 
 <% include partials/footer.ejs %>

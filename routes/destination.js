@@ -31,4 +31,15 @@ router.get('/destination/:iso_code2/:name',
   });
 });
 
+
+router.get('/api/destination/:iso_code2/:name', 
+     function(req, res, next) {
+  destinationsProv.findOneByIsoCode2AndName(req.params.iso_code2, req.params.name).then(function(destination){        
+    res.setHeader('Content-Type', 'application/json');
+    res.json(destination); 
+    res.end();
+  });
+});
+ 
+
 module.exports = router;

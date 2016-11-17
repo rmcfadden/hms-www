@@ -17,15 +17,18 @@ var authorizationProvider  = function(){
 				redirectUrl = '/admin/login';
 			}
 
+console.log("ME");
+console.log(req.me);
+
+
 			if(!req.me){
 				return res.redirect(redirectUrl);			
 			}
 
-			var roles = req.me.roles;
+			var roles = req.me.roles.map(function(role) { return role.name; });
 
 console.log("ROLES");
-console.log(req.me.roles);
-
+console.log(roles);
 
 			if(demandAuth.isInAnyRoles(roles, ['admin'])){
 				return next();

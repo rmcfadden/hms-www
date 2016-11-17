@@ -4,7 +4,7 @@ var models  = require('../models')
 
 router.get('/api/countries', function(req, res, next) {
   
-  models.countries.findAll({}).then(function(countries){
+  models.countries.findAll({ order : ['name']}).then(function(countries){
     res.setHeader('Content-Type', 'application/json');
     res.json(countries);
     res.end();

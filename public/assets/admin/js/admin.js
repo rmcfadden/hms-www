@@ -3,6 +3,9 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+var app = angular.module("hms", ['ngRoute']);
+
+
 $( document ).ready(function() {
     $('#side-menu').metisMenu();
 });

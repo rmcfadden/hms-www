@@ -5,21 +5,32 @@ var models  = require('../models');
 
 var sessionsMiddleware = function (req, res, next){ 
 
-  if(req.cookies['session-token']){
-    sessionsProv.findByToken(req.cookies['session-token']).then(function(session){
+  var sessionToken = req.cookies['session-token'];
+  var redirectUrl = '/admin/login'
+
+  if(sessionToken){
+    sessionsProv.findByToken(sessionToken).then(function(session){
       if(!session){
-        return null;
-      }else{
+        return null;     
+      }else if(sessionsProv.isExpired(session)){
+        return null;     
+      }
+      else{
         return models.users.findById(session.user_id);
       }
     }).then(function(user){
-
       if(user){
         req.user = user;
-        req.sessionToken = req.cookies['session-token'];
+        req.sessionToken = sessionToken;
+        return sessionsProv.refresh(sessionToken);
       }
 
+      return null;
+
+    }).then(function(results){
+
       return next();
+
     }).catch(function(error){
       return next(error);
     });
